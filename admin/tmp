@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../end_user/css/reset.css" />
+    <link rel="stylesheet" href="./admin.css" />
+    <title>Admin</title>
+  </head>
+  <body>
+    <div class="admin-body">
+      <!-- sidebar -->
+      <aside class="sidebar">
+        <header>
+          <div class="logo-box">
+            <a href="#" class="logo">
+              <img src="../assets/1760878542405.png" alt="logo" />
+            </a>
+            <h2 class="text">Goes<span>Up</span></h2>
+          </div>
+          <span class="material-icons-sharp toggle">arrow_forward_ios</span>
+        </header>
+
+        <ul class="menu">
+          <!-- Dashboard -->
+          <li class="menu-item active">
+            <a href="#">
+              <span class="material-icons-sharp">dashboard</span>
+              <span class="text">Bảng điều khiển</span>
+            </a>
+          </li>
+
+          <!-- Người dùng & Khách hàng -->
+          <li class="menu-item has-dropdown">
+            <button class="menu-title">
+              <span class="material-icons-sharp">group</span>
+              <span class="text">Người dùng</span>
+              <span class="material-icons-sharp dropdown-icon"
+                >expand_more</span
+              >
+            </button>
+            <ul class="submenu">
+              <div>
+                <li><a href="#">Danh sách khách hàng</a></li>
+                <li><a href="#">Reset mật khẩu</a></li>
+                <li><a href="#">Khóa / Mở khóa tài khoản</a></li>
+              </div>
+            </ul>
+          </li>
+
+          <!-- Sản phẩm -->
+          <li class="menu-item has-dropdown">
+            <button class="menu-title">
+              <span class="material-icons-sharp">inventory_2</span>
+              <span class="text">Sản phẩm</span>
+              <span class="material-icons-sharp dropdown-icon"
+                >expand_more</span
+              >
+            </button>
+            <ul class="submenu">
+              <div>
+                <li><a href="#">Loại sản phẩm</a></li>
+                <li><a href="#">Danh mục sản phẩm</a></li>
+                <li><a href="#">Danh sách sản phẩm</a></li>
+              </div>
+            </ul>
+          </li>
+
+          <!-- Kho hàng / Nhập hàng -->
+          <li class="menu-item has-dropdown">
+            <button class="menu-title">
+              <span class="material-icons-sharp">local_shipping</span>
+              <span class="text">Kho hàng</span>
+              <span class="material-icons-sharp dropdown-icon"
+                >expand_more</span
+              >
+            </button>
+            <ul class="submenu">
+              <div>
+                <li><a href="#">Phiếu nhập hàng</a></li>
+                <li><a href="#">Tạo phiếu nhập</a></li>
+                <li><a href="#">Sửa / Hoàn thành phiếu</a></li>
+              </div>
+            </ul>
+          </li>
+
+          <!-- Giá bán -->
+          <li class="menu-item has-dropdown">
+            <button class="menu-title">
+              <span class="material-icons-sharp">attach_money</span>
+              <span class="text">Giá bán</span>
+              <span class="material-icons-sharp dropdown-icon"
+                >expand_more</span
+              >
+            </button>
+            <ul class="submenu">
+              <div>
+                <li><a href="#">Tỷ lệ lợi nhuận</a></li>
+                <li><a href="#">Tra cứu giá vốn</a></li>
+                <li><a href="#">Giá bán theo sản phẩm</a></li>
+              </div>
+            </ul>
+          </li>
+
+          <!-- Đơn hàng -->
+          <li class="menu-item has-dropdown">
+            <button class="menu-title">
+              <span class="material-icons-sharp">receipt_long</span>
+              <span class="text">Đơn hàng</span>
+              <span class="material-icons-sharp dropdown-icon"
+                >expand_more</span
+              >
+            </button>
+            <ul class="submenu">
+              <div>
+                <li><a href="#">Danh sách đơn hàng</a></li>
+                <li><a href="#">Theo tình trạng đơn</a></li>
+                <li><a href="#">Theo ngày đặt</a></li>
+              </div>
+            </ul>
+          </li>
+
+          <!-- Tồn kho -->
+          <li class="menu-item has-dropdown">
+            <button class="menu-title">
+              <span class="material-icons-sharp">inventory</span>
+              <span class="text">Tồn kho</span>
+              <span class="material-icons-sharp dropdown-icon"
+                >expand_more</span
+              >
+            </button>
+            <ul class="submenu">
+              <div>
+                <li><a href="#">Tra cứu tồn</a></li>
+                <li><a href="#">Sản phẩm sắp hết hàng</a></li>
+                <li><a href="#">Báo cáo nhập – xuất – tồn</a></li>
+              </div>
+            </ul>
+          </li>
+
+          <!-- Thống kê -->
+          <li class="menu-item has-dropdown">
+            <button class="menu-title">
+              <span class="material-icons-sharp">bar_chart</span>
+              <span class="text">Thống kê</span>
+              <span class="material-icons-sharp dropdown-icon"
+                >expand_more</span
+              >
+            </button>
+            <ul class="submenu">
+              <div>
+                <li><a href="#">Doanh thu tháng</a></li>
+                <li><a href="#">Sản phẩm bán chạy</a></li>
+                <li><a href="#">Khách hàng thân thiết</a></li>
+              </div>
+            </ul>
+          </li>
+
+          <!-- Đăng xuất -->
+          <li class="menu-item log-out">
+            <a href="#">
+              <span class="material-icons-sharp">logout</span>
+              <span class="text">Đăng xuất</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <main class="main">
+        <div class="admin-header">
+          <h1>Bảng điều khiển</h1>
+          <div class="header-actions">
+            <input type="text" placeholder="Tìm kiếm..." />
+            <div class="icons">
+              <span class="material-icons-sharp">notifications</span>
+              <span class="material-icons-sharp">settings</span>
+              <img
+                src="./assets/avatar.jpg"
+                alt="Admin Avatar"
+                class="avatar"
+              />
+            </div>
+          </div>
+        </div>
+        <section id="dashboard" class="page active dashboard">
+          <!-- Cards thống kê -->
+          <section class="stats-cards">
+            <div class="card">
+              <div class="card-info">
+                <h3>Doanh thu tháng</h3>
+                <p>75,000,000₫</p>
+              </div>
+              <span class="material-icons-sharp">attach_money</span>
+            </div>
+
+            <div class="card">
+              <div class="card-info">
+                <h3>Đơn hàng mới</h3>
+                <p>124</p>
+              </div>
+              <span class="material-icons-sharp">receipt_long</span>
+            </div>
+
+            <div class="card">
+              <div class="card-info">
+                <h3>Khách hàng</h3>
+                <p>980</p>
+              </div>
+              <span class="material-icons-sharp">group</span>
+            </div>
+
+            <div class="card">
+              <div class="card-info">
+                <h3>Sản phẩm tồn</h3>
+                <p>245</p>
+              </div>
+              <span class="material-icons-sharp">inventory_2</span>
+            </div>
+          </section>
+
+          <!-- Biểu đồ -->
+          <section class="charts procgress-bar">
+            <div class="chart">
+              <h2>Doanh thu theo tháng</h2>
+              <div class="progress-item">
+                <span>Tháng 1</span>
+                <div class="bar"><div style="width: 65%"></div></div>
+                <span class="percent">65 triệu ₫</span>
+              </div>
+              <div class="progress-item">
+                <span>Tháng 2</span>
+                <div class="bar"><div style="width: 80%"></div></div>
+                <span class="percent">80 triệu ₫</span>
+              </div>
+              <div class="progress-item">
+                <span>Tháng 3</span>
+                <div class="bar"><div style="width: 90%"></div></div>
+                <span class="percent">90 triệu ₫</span>
+              </div>
+            </div>
+
+            <div class="chart">
+              <h2>Tỷ lệ sản phẩm bán</h2>
+              <div class="progress-item">
+                <span>Áo</span>
+                <div class="bar"><div style="width: 45%"></div></div>
+                <span class="percent">45%</span>
+              </div>
+              <div class="progress-item">
+                <span>Quần</span>
+                <div class="bar"><div style="width: 35%"></div></div>
+                <span class="percent">35%</span>
+              </div>
+              <div class="progress-item">
+                <span>Phụ kiện</span>
+                <div class="bar"><div style="width: 20%"></div></div>
+                <span class="percent">20%</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Sparkline Charts -->
+          <section class="charts sparkline-section">
+            <div class="sparkline-card">
+              <h2>Doanh thu theo quý</h2>
+              <div class="sparkline">
+                <div style="height: 60%"></div>
+                <div style="height: 80%"></div>
+                <div style="height: 90%"></div>
+                <div style="height: 70%"></div>
+              </div>
+              <div class="labels">
+                <span>Q1</span><span>Q2</span><span>Q3</span><span>Q4</span>
+              </div>
+              <p class="chart-note">
+                Tổng doanh thu năm nay: <b>320 triệu VND</b>
+              </p>
+            </div>
+
+            <div class="sparkline-card">
+              <h2>Lượt Truy Cập</h2>
+              <div class="sparkline">
+                <div style="height: 60%"></div>
+                <div style="height: 75%"></div>
+                <div style="height: 90%"></div>
+                <div style="height: 50%"></div>
+                <div style="height: 70%"></div>
+                <div style="height: 40%"></div>
+                <div style="height: 80%"></div>
+              </div>
+              <div class="labels">
+                <span>T2</span><span>T3</span><span>T4</span><span>T5</span
+                ><span>T6</span><span>T7</span><span>CN</span>
+              </div>
+            </div>
+          </section>
+        </section>
+        <section id="analysis" class="page analysis">
+          <div class="analysis-header">
+            <h2>Phân tích hoạt động</h2>
+            <select id="analysis-period">
+              <option value="week">7 ngày qua</option>
+              <option value="month">Tháng này</option>
+              <option value="year">Năm nay</option>
+            </select>
+          </div>
+
+          <div class="analysis-summary">
+            <div class="analysis-card up">
+              <h3>Doanh thu</h3>
+              <p>72.5 triệu ₫</p>
+              <span>+12% so với tuần trước</span>
+            </div>
+
+            <div class="analysis-card down">
+              <h3>Lượt truy cập</h3>
+              <p>8,430</p>
+              <span>-5% so với tuần trước</span>
+            </div>
+
+            <div class="analysis-card up">
+              <h3>Khách hàng mới</h3>
+              <p>248</p>
+              <span>+8% so với tuần trước</span>
+            </div>
+          </div>
+
+          <div class="trend-table">
+            <h3>Top danh mục bán chạy</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Danh mục</th>
+                  <th>Số lượng bán</th>
+                  <th>Doanh thu</th>
+                  <th>Tăng trưởng</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Áo sơ mi</td>
+                  <td>320</td>
+                  <td>15.2 triệu ₫</td>
+                  <td class="up">+10%</td>
+                </tr>
+                <tr>
+                  <td>Quần jeans</td>
+                  <td>280</td>
+                  <td>12.7 triệu ₫</td>
+                  <td class="up">+7%</td>
+                </tr>
+                <tr>
+                  <td>Phụ kiện</td>
+                  <td>190</td>
+                  <td>6.8 triệu ₫</td>
+                  <td class="down">-3%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- 🟨 Bảng chi tiết hoặc “insight cards” -->
+          <div class="trend-table">
+            <h3>Hiệu suất theo quý</h3>
+            <table class="trend-table">
+              <thead>
+                <tr>
+                  <th>Quý</th>
+                  <th>Doanh thu</th>
+                  <th>Tăng trưởng</th>
+                  <th>Khách hàng mới</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Q1</td>
+                  <td>180 triệu ₫</td>
+                  <td class="up">+9%</td>
+                  <td>523</td>
+                </tr>
+                <tr>
+                  <td>Q2</td>
+                  <td>195 triệu ₫</td>
+                  <td class="up">+8%</td>
+                  <td>574</td>
+                </tr>
+                <tr>
+                  <td>Q3</td>
+                  <td>215 triệu ₫</td>
+                  <td class="up">+10%</td>
+                  <td>648</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="page content category-management">
+          <div class="content-header">
+            <h1>Quản lý loại sản phẩm</h1>
+            <div class="actions">
+              <input
+                type="text"
+                id="searchType"
+                placeholder="Tìm loại sản phẩm..."
+                class="search-box"
+              />
+              <button class="btn-add type-btn-add" id="openAddType">
+                + Thêm loại
+              </button>
+            </div>
+          </div>
+
+          <section class="category-list">
+            <table id="typeTable">
+              <thead>
+                <tr>
+                  <th>Mã loại</th>
+                  <th>Tên loại</th>
+                  <th>Mô tả</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>L001</td>
+                  <td>Áo thun</td>
+                  <td>Các loại áo thun cotton, thể thao...</td>
+                  <td>
+                    <button class="btn-edit">Sửa</button>
+                    <button class="btn-delete">Xóa</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>L002</td>
+                  <td>Quần jean</td>
+                  <td>Jean nam nữ các loại...</td>
+                  <td>
+                    <button class="btn-edit">Sửa</button>
+                    <button class="btn-delete">Xóa</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </section>
+
+        <!-- Modal thêm/sửa loại -->
+        <div class="modal-overlay" id="typeModal">
+          <div class="modal">
+            <h2 id="typeModalTitle">Thêm loại sản phẩm</h2>
+            <form id="typeForm">
+              <div class="form-group">
+                <label>Mã loại</label>
+                <input type="text" id="typeCode" required />
+              </div>
+              <div class="form-group">
+                <label>Tên loại</label>
+                <input type="text" id="typeName" required />
+              </div>
+              <div class="form-group">
+                <label>Mô tả</label>
+                <textarea id="typeDesc" rows="3"></textarea>
+              </div>
+              <div class="modal-actions">
+                <button type="button" class="btn-cancel" id="typeCancel">
+                  Hủy
+                </button>
+                <button type="submit" class="btn-save">Lưu</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <section id="product" class="page content">
+          <div class="content-header">
+            <h1>Quản lý sản phẩm</h1>
+            <div class="actions">
+              <input
+                type="text"
+                placeholder="Tìm kiếm sản phẩm..."
+                class="search-box"
+                id="searchProduct"
+              />
+              <select class="filter" id="filterType">
+                <option value="">Tất cả loại</option>
+                <option value="Áo thun">Áo thun</option>
+                <option value="Quần jean">Quần jean</option>
+                <option value="Phụ kiện">Phụ kiện</option>
+              </select>
+              <button class="btn btn-add product-add-btn" id="openAddProduct">
+                + Thêm sản phẩm
+              </button>
+            </div>
+          </div>
+
+          <section class="product-list">
+            <table id="productTable">
+              <thead>
+                <tr>
+                  <th>Ảnh</th>
+                  <th>Tên sản phẩm</th>
+                  <th>Loại</th>
+                  <th>Giá vốn</th>
+                  <th>% lợi nhuận</th>
+                  <th>Giá bán</th>
+                  <th>Tồn kho</th>
+                  <th>Trạng thái</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </section>
+
+          <section class="inventory-summary">
+            <div class="summary-card">
+              <h3>Tổng sản phẩm trong kho</h3>
+              <p id="totalProduct">0</p>
+            </div>
+            <div class="summary-card warning">
+              <h3>Sắp hết hàng</h3>
+              <p id="lowStock">0 sản phẩm</p>
+            </div>
+            <div class="summary-card danger">
+              <h3>Hết hàng</h3>
+              <p id="outStock">0 sản phẩm</p>
+            </div>
+          </section>
+        </section>
+
+        <!-- Popup thêm/sửa sản phẩm -->
+        <div class="modal-overlay" id="productModal">
+          <div class="modal">
+            <h2 id="modalTitle">Thêm sản phẩm</h2>
+            <div class="modal-box">
+              <div class="pic-group">
+                <div class="pic">
+                  <img src="" alt="" class="pic-preview" />
+                </div>
+                <input type="file" id="productImage" />
+              </div>
+
+              <form id="productForm">
+                <div class="form-group">
+                  <label>Tên sản phẩm</label>
+                  <input type="text" id="productName" required />
+                </div>
+
+                <div class="form-group">
+                  <label>Loại sản phẩm</label>
+                  <select id="productType" required>
+                    <option value="">-- Chọn loại --</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>% Lợi nhuận</label>
+                  <input type="number" id="productProfit" required />
+                </div>
+
+                <!-- <div class="form-group">
+                  <label>Giá</label>
+                  <input type="number" id="productPrice" readonly />
+                </div> -->
+
+                <div class="form-group">
+                  <label>Số lượng</label>
+                  <input type="number" id="productQuantity" min="0" required />
+                </div>
+
+                <div class="modal-actions">
+                  <button type="button" class="btn-cancel" id="cancelModal">
+                    Hủy
+                  </button>
+                  <button type="submit" class="btn-save">Lưu</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <section id="warehouse" class="page content">
+          <div class="content-header">
+            <h1>Quản lý nhập sản phẩm</h1>
+            <div class="actions">
+              <input
+                type="text"
+                placeholder="Tìm kiếm phiếu nhập..."
+                class="search-box"
+                id="searchImport"
+              />
+              <button class="btn btn-add inventory-btn-add" id="openAddImport">
+                + Thêm phiếu nhập
+              </button>
+            </div>
+          </div>
+
+          <!-- Danh sách phiếu nhập -->
+          <section class="import-list product-list">
+            <table id="importTable">
+              <thead>
+                <tr>
+                  <th>Tên Sản Phẩm</th>
+                  <th>Ngày nhập</th>
+                  <th>Giá Nhập</th>
+                  <th>Số Lượng</th>
+                  <th>Tổng giá trị</th>
+                  <th>Trạng thái</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- JS render -->
+              </tbody>
+            </table>
+          </section>
+        </section>
+
+        <!-- Popup thêm/sửa phiếu nhập -->
+        <div class="modal-overlay" id="importModal">
+          <div class="modal" style="animation: slideUp 0.25s ease">
+            <h2 id="importModalTitle">Thêm phiếu nhập</h2>
+            <form id="importForm">
+              <div class="form-group">
+                <label for="importDate">Ngày nhập:</label>
+                <input type="date" id="importDate" required />
+              </div>
+
+              <div id="productImportList" class="form-group">
+                <!-- <div class="import-product-item">
+                  <select class="import-product"></select>
+                  <input
+                    type="number"
+                    placeholder="Số lượng"
+                    class="import-quantity"
+                    min="1"
+                  />
+                  <input
+                    type="number"
+                    placeholder="Giá nhập"
+                    class="import-price"
+                    min="0"
+                  />
+                </div> -->
+              </div>
+
+              <div class="modal-actions">
+                <button type="button" id="cancelImport" class="btn-cancel">
+                  Hủy
+                </button>
+                <button type="submit" class="btn-save">Lưu phiếu nhập</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Popup xác nhận xoá -->
+        <div class="confirm-overlay" id="confirmDelete">
+          <div class="confirm-box" style="animation: slideUp 0.25s ease">
+            <h3>Xác nhận xóa</h3>
+            <p>Bạn có chắc chắn muốn xóa phiếu nhập này không?</p>
+            <div class="confirm-actions">
+              <button class="btn-cancel" id="cancelDelete">Hủy</button>
+              <button class="btn-save" id="confirmDeleteBtn">Xóa</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div class="confirm-overlay" id="confirmOverlay">
+      <div class="confirm-box">
+        <h3>Xác nhận</h3>
+        <p>Bạn có chắc muốn xóa sản phẩm này?</p>
+        <div class="confirm-actions">
+          <button id="confirmCancel" class="btn-cancel">Hủy</button>
+          <button id="confirmOk" class="btn-save">Xóa</button>
+        </div>
+      </div>
+    </div>
+    <!-- <script src="./../end_user/js/data.js"></script> -->
+    <script src="./../end_user/js/data.js"></script>
+    <script src="./admin.js"></script>
+    <script></script>
+  </body>
+</html>
+
+// localStorage.clear(); // ==================== SIDEBAR ====================
+const sidebar = document.querySelector(".sidebar"); const toggle =
+document.querySelector(".toggle"); const dropdownMenus =
+document.querySelectorAll(".menu-item.has-dropdown");
+toggle.addEventListener("click", () => { const collapsed =
+sidebar.classList.toggle("collapsed"); if (collapsed) closeAllSubmenus(); });
+dropdownMenus.forEach((menu) => { const title =
+menu.querySelector(".menu-title"); const submenu =
+menu.querySelector(".submenu"); const icon =
+menu.querySelector(".dropdown-icon"); title.addEventListener("click", () => { if
+(sidebar.classList.contains("collapsed")) {
+sidebar.classList.remove("collapsed"); openSubmenu(submenu, icon); return; }
+const isOpen = submenu.classList.contains("show"); closeAllSubmenus(); if
+(!isOpen) openSubmenu(submenu, icon); }); }); function closeAllSubmenus() {
+dropdownMenus.forEach((menu) => { const submenu =
+menu.querySelector(".submenu"); const icon =
+menu.querySelector(".dropdown-icon"); submenu.classList.remove("show");
+icon.classList.remove("rotate"); }); } function openSubmenu(submenu, icon) {
+submenu.classList.add("show"); icon.classList.add("rotate"); } //
+==================== QUẢN LÝ LOẠI SẢN PHẨM ==================== const typeModal
+= document.getElementById("typeModal"); const typeForm =
+document.getElementById("typeForm"); const typeTable =
+document.querySelector("#typeTable tbody"); const btnAdd =
+document.getElementById("openAddType"); const btnCancel =
+document.getElementById("typeCancel"); const modalTitle =
+document.getElementById("typeModalTitle"); const searchBox =
+document.getElementById("searchType"); let editIndex = -1; // Lấy và lưu dữ liệu
+localStorage const getTypes = () =>
+JSON.parse(localStorage.getItem("productTypes")) || []; const saveTypes = (data)
+=> localStorage.setItem("productTypes", JSON.stringify(data)); // Mở modal thêm
+btnAdd.onclick = () => { modalTitle.textContent = "Thêm loại sản phẩm";
+typeForm.reset(); editIndex = -1; typeModal.style.display = "flex"; }; // Hủy
+btnCancel.onclick = () => { typeModal.style.display = "none"; }; // Lưu
+typeForm.onsubmit = (e) => { e.preventDefault(); const code =
+document.getElementById("typeCode").value.trim(); const name =
+document.getElementById("typeName").value.trim(); const desc =
+document.getElementById("typeDesc").value.trim(); if (!code || !name) return
+alert("Vui lòng nhập mã và tên loại!"); let typeList = getTypes(); const data =
+{ code, name, desc }; if (editIndex === -1) typeList.push(data); else
+typeList[editIndex] = data; saveTypes(typeList); renderTypeTable();
+typeModal.style.display = "none"; loadTypeOptions(); }; // Hiển thị bảng
+function renderTypeTable(list = getTypes()) { typeTable.innerHTML = "";
+list.forEach((t, i) => { const tr = document.createElement("tr"); tr.innerHTML =
+`
+<td>${t.code}</td>
+<td>${t.name}</td>
+<td>${t.desc || ""}</td>
+<td>
+  <button class="btn-edit" data-index="${i}">Sửa</button>
+  <button class="btn-delete" data-index="${i}">Xóa</button>
+</td>
+`; typeTable.appendChild(tr); }); // Sửa
+document.querySelectorAll(".btn-edit").forEach((btn) => { btn.onclick = () => {
+const typeList = getTypes(); editIndex = btn.dataset.index; const t =
+typeList[editIndex]; document.getElementById("typeCode").value = t.code;
+document.getElementById("typeName").value = t.name;
+document.getElementById("typeDesc").value = t.desc; modalTitle.textContent =
+"Sửa loại sản phẩm"; typeModal.style.display = "flex"; }; }); // Xóa
+document.querySelectorAll(".btn-delete").forEach((btn) => { btn.onclick = () =>
+{ const i = btn.dataset.index; if (confirm("Bạn có chắc muốn xóa loại này
+không?")) { const typeList = getTypes(); typeList.splice(i, 1);
+saveTypes(typeList); renderTypeTable(); loadTypeOptions(); } }; }); } // Tìm
+kiếm realtime searchBox.addEventListener("input", () => { const keyword =
+searchBox.value.toLowerCase(); const typeList = getTypes(); const filtered =
+typeList.filter( (t) => t.name.toLowerCase().includes(keyword) ||
+t.code.toLowerCase().includes(keyword) ); renderTypeTable(filtered); }); //
+==================== QUẢN LÝ SẢN PHẨM ==================== const getProducts =
+() => JSON.parse(localStorage.getItem("products")) || []; const saveProducts =
+(data) => localStorage.setItem("products", JSON.stringify(data)); const
+productTable = document.querySelector("#productTable tbody"); const productModal
+= document.querySelector("#productModal"); const openAddBtn =
+document.querySelector("#openAddProduct"); const cancelModalBtn =
+document.querySelector("#cancelModal"); const productForm =
+document.querySelector("#productForm"); const picPreview =
+document.querySelector(".pic-preview"); const imageInput =
+document.querySelector("#productImage"); const typeSelect =
+document.querySelector("#productType"); let editingId = null; // Load danh sách
+loại cho select function loadTypeOptions() { const types = getTypes();
+typeSelect.innerHTML = `
+<option value="">-- Chọn loại --</option>
+` + types.map((t) => `
+<option value="${t.name}">${t.name}</option>
+`).join(""); } // Render bảng sản phẩm function renderProducts(list =
+getProducts()) { productTable.innerHTML = ""; list.forEach((p) => { const
+statusClass = p.quantity === 0 ? "danger" : p.quantity < 5 ? "low" : "ok"; const
+statusText = p.quantity === 0 ? "Hết hàng" : p.quantity < 5 ? "Gần hết" : "Còn
+hàng"; const row = document.createElement("tr"); row.innerHTML = `
+<td><img src="${p.image}" alt="${p.name}" /></td>
+<td>${p.name}</td>
+<td>${p.type}</td>
+<td>${p.costPrice.toLocaleString("vi-VN")} đ</td>
+<td>${p.profitPercent}%</td>
+<td>${p.price.toLocaleString("vi-VN")} đ</td>
+<td>${p.quantity}</td>
+<td><span class="status ${statusClass}">${statusText}</span></td>
+<td>
+  <button class="btn-edit" data-id="${p.id}">Sửa</button>
+  <button class="btn-delete" data-id="${p.id}">Xóa</button>
+</td>
+`; productTable.appendChild(row); }); updateSummary(); } // Cập nhật thống kê
+function updateSummary() { const products = getProducts(); const total =
+products.length; const low = products.filter((p) => p.quantity > 0 && p.quantity
+< 5).length; const out = products.filter((p) => p.quantity === 0).length;
+document.querySelector("#totalProduct").textContent = total;
+document.querySelector("#lowStock").textContent = `${low} sản phẩm`;
+document.querySelector("#outStock").textContent = `${out} sản phẩm`; } // Mở
+modal function openModal(editId = null) { editingId = editId;
+productModal.style.display = "flex"; document.body.style.overflow = "hidden"; if
+(editId) { const product = getProducts().find((p) => p.id === editId);
+document.querySelector("#modalTitle").textContent = "Sửa sản phẩm";
+document.querySelector("#productName").value = product.name;
+document.querySelector("#productProfit").value = product.profitPercent;
+document.querySelector("#productQuantity").value = product.quantity;
+document.querySelector("#productType").value = product.type; picPreview.src =
+product.image; } else { document.querySelector("#modalTitle").textContent =
+"Thêm sản phẩm"; productForm.reset(); picPreview.src = ""; } } function
+closeModal() { productModal.style.display = "none"; document.body.style.overflow
+= "auto"; editingId = null; } // Ảnh preview
+imageInput.addEventListener("change", (e) => { const file = e.target.files[0];
+if (file) { const reader = new FileReader(); reader.onload = () =>
+(picPreview.src = reader.result); reader.readAsDataURL(file); } }); // Lưu sản
+phẩm productForm.addEventListener("submit", (e) => { e.preventDefault(); const
+name = document.querySelector("#productName").value.trim(); const type =
+document.querySelector("#productType").value; const costPrice = "-"; const
+profitPercent = +document.querySelector("#productProfit").value; const price =
+"-"; const quantity = +document.querySelector("#productQuantity").value; const
+image = picPreview.src || "img/noimg.png"; let products = getProducts(); if
+(editingId) { const idx = products.findIndex((p) => p.id === editingId);
+products[idx] = { ...products[idx], name, type, costPrice, profitPercent, price,
+quantity, image, }; } else { products.push({ id: Date.now(), name, type,
+costPrice, profitPercent, price, quantity, image, }); } saveProducts(products);
+renderProducts(); closeModal(); }); // Các sự kiện click
+openAddBtn.addEventListener("click", () => openModal());
+cancelModalBtn.addEventListener("click", closeModal);
+productTable.addEventListener("click", (e) => { const id =
+Number(e.target.dataset.id); if (e.target.classList.contains("btn-edit")) {
+openModal(id); } else if (e.target.classList.contains("btn-delete")) { if
+(confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) { const products =
+getProducts().filter((p) => p.id !== id); saveProducts(products);
+renderProducts(); } } }); // Lọc và tìm kiếm
+document.querySelector("#searchProduct").addEventListener("input", () => { const
+keyword = document.querySelector("#searchProduct").value.toLowerCase(); const
+typeFilter = document.querySelector("#filterType").value; const products =
+getProducts().filter((p) => { const matchKeyword =
+p.name.toLowerCase().includes(keyword); const matchType = typeFilter ? p.type
+=== typeFilter : true; return matchKeyword && matchType; });
+renderProducts(products); }); // === KHỞI TẠO DỮ LIỆU MẪU === //
+localStorage.removeItem("products"); // === KHỞI ĐỘNG === renderTypeTable();
+loadTypeOptions(); renderProducts(); // ============= kho =============== //
+====== KHỞI TẠO DỮ LIỆU MẪU ====== // ======= KHỞI TẠO DỮ LIỆU ========= if
+(!localStorage.getItem("imports")) localStorage.setItem("imports",
+JSON.stringify([])); if (!localStorage.getItem("products"))
+localStorage.setItem("products", JSON.stringify([])); const getData = (key) =>
+JSON.parse(localStorage.getItem(key)) || []; const setData = (key, data) =>
+localStorage.setItem(key, JSON.stringify(data)); const importTable =
+document.querySelector("#importTable tbody"); const importModal =
+document.getElementById("importModal"); const importForm =
+document.getElementById("importForm"); const importModalTitle =
+document.getElementById("importModalTitle"); const addImportProductBtn =
+document.getElementById("addImportProduct"); const productImportList =
+document.getElementById("productImportList"); let editingImportId = null; //
+====== HIỂN THỊ DANH SÁCH PHIẾU NHẬP ====== function renderImports(list =
+getData("imports")) { importTable.innerHTML = list .map( (imp) => `
+<tr>
+  <td>${imp.productName}</td>
+  <td>${imp.date}</td>
+  <td>${imp.price.toLocaleString()} đ</td>
+  <td>${imp.quantity}</td>
+  <td>${(imp.total || 0).toLocaleString()} đ</td>
+  <td>${imp.status}</td>
+  <td>
+    ${ imp.status === "Chưa hoàn thành" ? `<button
+      class="btn-save"
+      onclick="completeImport('${imp.id}')"
+    >
+      Hoàn thành
+    </button>
+    <button class="btn-cancel" onclick="deleteImport('${imp.id}')">Xóa</button>`
+    : `<button class="btn-cancel" disabled>Hoàn tất</button>` }
+  </td>
+</tr>
+` ) .join(""); } renderImports(); // ====== MỞ POPUP THÊM PHIẾU NHẬP ======
+document.getElementById("openAddImport").addEventListener("click", () => {
+editingImportId = null; importForm.reset(); productImportList.innerHTML = "";
+const products = getData("products"); const selectOptions = products .map((p) =>
+`
+<option value="${p.id}">${p.name} (${p.type})</option>
+`) .join(""); const row = document.createElement("div");
+row.classList.add("import-product-item"); row.innerHTML = `
+<select class="import-product">
+  ${selectOptions}
+</select>
+<input
+  type="number"
+  placeholder="Số lượng"
+  class="import-quantity"
+  min="1"
+  value="1"
+/>
+<input
+  type="number"
+  placeholder="Giá nhập"
+  class="import-price"
+  min="0"
+  value="0"
+/>
+<button type="button" class="btn-remove">X</button>
+`; row .querySelector(".btn-remove") .addEventListener("click", () =>
+row.remove()); productImportList.appendChild(row);
+document.getElementById("importDate").value = new Date() .toISOString()
+.split("T")[0]; importModalTitle.textContent = "Thêm phiếu nhập";
+importModal.style.display = "flex"; }); // ====== HỦY ======
+document.getElementById("cancelImport").addEventListener("click", () => {
+importModal.style.display = "none"; }); // ====== LƯU PHIẾU NHẬP ======
+importForm.addEventListener("submit", (e) => { e.preventDefault(); const imports
+= getData("imports"); const products = getData("products"); const date =
+document.getElementById("importDate").value; const rows =
+Array.from(document.querySelectorAll(".import-product-item")); if (rows.length
+=== 0) { alert("Vui lòng thêm ít nhất 1 sản phẩm."); return; }
+rows.forEach((row) => { const productId =
+Number(row.querySelector(".import-product").value); const quantity =
+Number(row.querySelector(".import-quantity").value); const price =
+Number(row.querySelector(".import-price").value); const product =
+products.find((p) => p.id === productId); const productName = product ?
+product.name : "Không rõ"; const total = quantity * price; const newImport = {
+id: "I" + Date.now() + Math.floor(Math.random() * 100), productId, productName,
+date, quantity, price, total, status: "Chưa hoàn thành", };
+imports.push(newImport); }); setData("imports", imports);
+importModal.style.display = "none"; renderImports(); }); // ====== XOÁ PHIẾU
+NHẬP ====== function deleteImport(id) { if (!confirm("Bạn có chắc muốn xoá phiếu
+nhập này?")) return; let imports = getData("imports").filter((i) => i.id !==
+id); setData("imports", imports); renderImports(); } // ====== HOÀN THÀNH PHIẾU
+NHẬP ====== function completeImport(id) { const imports = getData("imports");
+const products = getData("products"); const imp = imports.find((i) => i.id ===
+id); if (!imp || imp.status === "Đã hoàn thành") return; const prod =
+products.find((p) => p.id === imp.productId); if (prod) { prod.quantity =
+(prod.quantity || 0) + imp.quantity; prod.costPrice = imp.price; prod.price =
+imp.price * (1 + prod.profitPercent / 100); } imp.status = "Đã hoàn thành";
+setData("imports", imports); setData("products", products); renderImports();
+renderProducts(); renderTypeTable(); updateSummary(); } // ====== TÌM KIẾM
+REALTIME ======
+document.getElementById("searchImport").addEventListener("input", () => { const
+keyword = document.getElementById("searchImport").value.toLowerCase(); const
+filtered = getData("imports").filter((i) =>
+i.productName.toLowerCase().includes(keyword) ); renderImports(filtered); });
+
+<section id="analysis" class="page analysis">
+  <div class="analysis-header">
+    <h2>Phân tích hoạt động</h2>
+    <select id="analysis-period">
+      <option value="week">7 ngày qua</option>
+      <option value="month">Tháng này</option>
+      <option value="year">Năm nay</option>
+    </select>
+  </div>
+
+  <div class="analysis-summary">
+    <div class="analysis-card up">
+      <h3>Doanh thu</h3>
+      <p>72.5 triệu ₫</p>
+      <span>+12% so với tuần trước</span>
+    </div>
+
+    <div class="analysis-card down">
+      <h3>Lượt truy cập</h3>
+      <p>8,430</p>
+      <span>-5% so với tuần trước</span>
+    </div>
+
+    <div class="analysis-card up">
+      <h3>Khách hàng mới</h3>
+      <p>248</p>
+      <span>+8% so với tuần trước</span>
+    </div>
+  </div>
+
+  <div class="trend-table">
+    <h3>Top danh mục bán chạy</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Danh mục</th>
+          <th>Số lượng bán</th>
+          <th>Doanh thu</th>
+          <th>Tăng trưởng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Áo sơ mi</td>
+          <td>320</td>
+          <td>15.2 triệu ₫</td>
+          <td class="up">+10%</td>
+        </tr>
+        <tr>
+          <td>Quần jeans</td>
+          <td>280</td>
+          <td>12.7 triệu ₫</td>
+          <td class="up">+7%</td>
+        </tr>
+        <tr>
+          <td>Phụ kiện</td>
+          <td>190</td>
+          <td>6.8 triệu ₫</td>
+          <td class="down">-3%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- 🟨 Bảng chi tiết hoặc “insight cards” -->
+  <div class="trend-table">
+    <h3>Hiệu suất theo quý</h3>
+    <table class="trend-table">
+      <thead>
+        <tr>
+          <th>Quý</th>
+          <th>Doanh thu</th>
+          <th>Tăng trưởng</th>
+          <th>Khách hàng mới</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Q1</td>
+          <td>180 triệu ₫</td>
+          <td class="up">+9%</td>
+          <td>523</td>
+        </tr>
+        <tr>
+          <td>Q2</td>
+          <td>195 triệu ₫</td>
+          <td class="up">+8%</td>
+          <td>574</td>
+        </tr>
+        <tr>
+          <td>Q3</td>
+          <td>215 triệu ₫</td>
+          <td class="up">+10%</td>
+          <td>648</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

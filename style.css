@@ -1,0 +1,89 @@
+/* Reset cơ bản */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: sans-serif;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 250px 1fr; /* sidebar cố định 250px */
+  height: 100vh;
+  overflow: hidden; /* tránh scroll ngoài container */
+}
+
+/* Sidebar */
+.sidebar {
+  background: #1f1f1f;
+  color: #fff;
+  padding: 1rem;
+  overflow-y: auto; /* scroll nếu menu dài */
+}
+
+/* Main */
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Header */
+.main-header {
+  flex: 0 0 auto;
+  background: #fff;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Content */
+.content {
+  flex: 1 1 auto; /* chiếm toàn bộ chiều cao còn lại */
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: #f5f5f5;
+}
+
+/* Table wrapper scroll */
+.table-wrapper {
+  flex: 1 1 auto; /* chiếm hết phần content còn lại */
+  overflow-y: auto; /* scroll table */
+  margin: 0.5rem 0;
+}
+
+/* Table style */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #eee;
+  position: sticky;
+  top: 0; /* header table luôn nhìn thấy */
+  z-index: 5;
+}
+
+th,
+td {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Footer luôn hiển thị */
+.content > span {
+  flex: 0 0 auto;
+  padding: 0.5rem;
+  background: #ccc;
+  text-align: center;
+}
