@@ -57,7 +57,7 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, adipisci.",
       quantity: 10,
-      image: "/assets/20240827_99qstqYiE1.png",
+      image: "../assets/20240827_99qstqYiE1.png",
     },
     {
       id: "P002",
@@ -69,7 +69,7 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, adipisci.",
       quantity: 5,
-      image: "/assets/default.webp",
+      image: "../assets/default.webp",
     },
     {
       id: "P003",
@@ -81,7 +81,7 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, adipisci.",
       quantity: 8,
-      image: "img/quan1.jpg",
+      image: "..img/quan1.jpg",
     },
     {
       id: "P004",
@@ -93,7 +93,7 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, adipisci.",
       quantity: 20,
-      image: "img/mu1.jpg",
+      image: "..img/mu1.jpg",
     },
   ];
   localStorage.setItem("products", JSON.stringify(sampleProducts));
