@@ -1,3 +1,12 @@
+const app_version = "1.0.3";
+
+const savedVersion = localStorage.getItem("appversion");
+if (savedVersion !== app_version) {
+  localStorage.clear();
+  localStorage.setItem("appversion", app_version);
+  console.log("da cap nhat data");
+}
+
 if (!localStorage.getItem("users")) {
   const users = [
     {
@@ -81,7 +90,7 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, adipisci.",
       quantity: 8,
-      image: "..img/quan1.jpg",
+      image: "../assets/ao1.avif",
     },
     {
       id: "P004",
