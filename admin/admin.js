@@ -1,53 +1,12 @@
-// localStorage.clear();
-// localStorage.removeItem("users");
-// localStorage.removeItem("productTypes");
-// localStorage.removeItem("products");
-// localStorage.removeItem("imports");
-// localStorage.removeItem("orders");
-
-// console.log("Đã xóa tất cả dữ liệu cũ");
-
 // ==================== SIDEBAR ====================
 const sidebar = document.querySelector(".sidebar");
 const toggle = document.querySelector(".toggle");
-const dropdownMenus = document.querySelectorAll(".menu-item.has-dropdown");
+// const dropdownMenus = document.querySelectorAll(".menu-item.has-dropdown");
 
 toggle.addEventListener("click", () => {
   const collapsed = sidebar.classList.toggle("collapsed");
   if (collapsed) closeAllSubmenus();
 });
-
-dropdownMenus.forEach((menu) => {
-  const title = menu.querySelector(".menu-title");
-  const submenu = menu.querySelector(".submenu");
-  const icon = menu.querySelector(".dropdown-icon");
-
-  title.addEventListener("click", () => {
-    if (sidebar.classList.contains("collapsed")) {
-      sidebar.classList.remove("collapsed");
-      openSubmenu(submenu, icon);
-      return;
-    }
-
-    const isOpen = submenu.classList.contains("show");
-    closeAllSubmenus();
-    if (!isOpen) openSubmenu(submenu, icon);
-  });
-});
-
-function closeAllSubmenus() {
-  dropdownMenus.forEach((menu) => {
-    const submenu = menu.querySelector(".submenu");
-    const icon = menu.querySelector(".dropdown-icon");
-    submenu.classList.remove("show");
-    icon.classList.remove("rotate");
-  });
-}
-
-function openSubmenu(submenu, icon) {
-  submenu.classList.add("show");
-  icon.classList.add("rotate");
-}
 
 // open page
 function showPage(pageId, btn) {
@@ -57,7 +16,8 @@ function showPage(pageId, btn) {
     .querySelectorAll(".menu li")
     .forEach((b) => b.classList.remove("active"));
   btn.classList.add("active");
-  close_repo();
+  // close_repo();
+  document.querySelector(".sidebar").classList.toggle("open");
 }
 
 document.querySelectorAll(".logo-box").forEach((b) => {
@@ -70,6 +30,26 @@ document.querySelectorAll(".logo-box").forEach((b) => {
 // ==================== QUẢN LÝ LOẠI SẢN PHẨM ====================
 
 // ============== DOM Dashboard =================
+const cardrevenue = document.querySelector(".revenue p");
+const CardnewOrder = document.querySelector(".newOrder p");
+const client = document.querySelector(".client p");
+const Cardinven = document.querySelector(".invento p");
+
+// ===================== DOM user ==================
+const userTableBody = document.querySelector("#userTable tbody");
+const searchUserInput = document.getElementById("searchUser");
+const filteruser = document.getElementById("filterUser");
+
+const confirmModal = document.getElementById("confirmModal");
+const confirmTitle = document.getElementById("confirmTitle");
+const confirmMessage = document.getElementById("confirmMessage");
+const confirmCancel = document.getElementById("confirmCancel");
+const confirmOk = document.getElementById("confirmOk");
+
+const userModal = document.getElementById("userModal");
+const userModalTitle = document.getElementById("userModalTitle");
+const userForm = document.getElementById("userForm");
+const userCancel = document.getElementById("userCancel");
 
 // ============== DOM type products =================
 const typeModal = document.getElementById("typeModal");
@@ -115,19 +95,29 @@ const productImportList = document.getElementById("productImportList");
 
 let editingImportId = null;
 
-// let del = null;
-const formDel = document.querySelector("#confirmDelete");
-const cancelDel = document.querySelector("#cancelDelete");
-const confirmDel = document.querySelector("#confirmDeleteBtn");
-function del() {
-  formDel.style.display = "flex";
+// state for confirm action
+let confirmCallback = null;
+let editUsername = null;
+
+// Helpers: open/close modals
+function openConfirm(title, message, onOk) {
+  confirmTitle.textContent = title;
+  confirmMessage.textContent = message;
+  confirmModal.style.display = "flex";
+  confirmCallback = onOk;
 }
-function closeDel() {
-  formDel.style.display = "none";
+function closeConfirm() {
+  confirmModal.style.display = "none";
+  confirmCallback = null;
 }
-cancelDel.addEventListener("click", () => {
-  closeDel();
+
+// EVENTS: confirm modal
+confirmCancel.addEventListener("click", closeConfirm);
+confirmOk.addEventListener("click", () => {
+  if (typeof confirmCallback === "function") confirmCallback();
+  closeConfirm();
 });
+
 // =========== get set ================
 // type
 const getTypes = () => JSON.parse(localStorage.getItem("productTypes")) || [];
@@ -166,10 +156,6 @@ function saveKho(imports) {
 // dashboard
 
 // --- Hàm render toàn bộ số liệu ---
-const cardrevenue = document.querySelector(".revenue p");
-const CardnewOrder = document.querySelector(".newOrder p");
-const client = document.querySelector(".client p");
-const Cardinven = document.querySelector(".invento p");
 function renderDashboard() {
   // Tính doanh thu tháng này
   const now = new Date();
@@ -215,7 +201,50 @@ function renderDashboard() {
     close_repo();
   });
 }
-renderDashboard();
+
+// RENDER USERS
+function renderUsers(filter = "", select = "all") {
+  const users = getUsers();
+  const filtered = users.filter((u) => {
+    const f = filter.toLowerCase();
+    const searchtext =
+      (u.username || "").toLowerCase().includes(f) ||
+      (u.name || "").toLowerCase().includes(f) ||
+      (u.email || "").toLowerCase().includes(f) ||
+      (u.phoneNumber || "").toLowerCase().includes(f);
+    const status =
+      select === "all" ? true : select === "active" ? !u.locked : u.locked;
+    return searchtext && status;
+  });
+
+  userTableBody.innerHTML = filtered
+    .map((u) => {
+      const statusHtml = u.locked
+        ? `<span class="status-locked"style="color: red;">Đã khoá</span>`
+        : `<span class="status-active" style="color: green;">Hoạt động</span>`;
+      return `
+      <tr data-username="${u.username}">
+        <td>${u.username}</td>
+        <td>${u.name || "-"}</td>
+        <td>${u.email || "-"}</td>
+        <td>${u.phoneNumber || "-"}</td>
+        <td>${statusHtml}</td>
+        <td class="btn-box">
+          <button class="btn-edit" data-username="${u.username}">Sửa</button>
+          <div>
+          <button class="btn-reset btn" data-username="${
+            u.username
+          }">Reset</button>
+          <button class="btn-toggle-lock btn" data-username="${u.username}">${
+        u.locked ? "Mở khoá" : "Khoá"
+      }</button>
+          </div>
+        </td>
+      </tr>
+    `;
+    })
+    .join("");
+}
 
 // type
 function renderTypeTable(list = getTypes()) {
@@ -288,22 +317,25 @@ function renderTypeTable(list = getTypes()) {
   document.querySelectorAll(".btn-delete").forEach((btn) => {
     btn.onclick = () => {
       const i = btn.dataset.index;
-      // if (confirm("Bạn có chắc muốn xóa loại này không?")) {
-      //   const typeList = getTypes();
-      //   typeList.splice(i, 1);
-      //   saveTypes(typeList);
-      //   renderTypeTable();
-      //   loadTypeOptions();
-      // }
-      del();
-      confirmDel.addEventListener("click", () => {
-        const typeList = getTypes();
-        typeList.splice(i, 1);
-        saveTypes(typeList);
-        renderTypeTable();
-        loadTypeOptions();
-        closeDel();
-      });
+      const typeList = getTypes();
+      openConfirm(
+        "Delete products type",
+        `you wnat delete ${typeList[i].name}`,
+        () => {
+          let products = getProducts();
+          products.forEach((p) => {
+            if (p.type === typeList[i].name) {
+              p.type = "";
+            }
+          });
+          saveProducts(products);
+          renderProducts();
+          typeList.splice(i, 1);
+          saveTypes(typeList);
+          renderTypeTable();
+          loadTypeOptions();
+        }
+      );
     };
   });
 }
@@ -325,6 +357,7 @@ function renderProducts(list = getProducts(), filter = "all") {
       p.quantity === 0 ? "danger" : p.quantity < 5 ? "low" : "ok";
     const statusText =
       p.quantity === 0 ? "Hết hàng" : p.quantity < 5 ? "Gần hết" : "Còn hàng";
+    const type = p.type === "" ? "none" : p.type;
 
     const card = document.createElement("div");
     card.className = "item-card";
@@ -335,7 +368,7 @@ function renderProducts(list = getProducts(), filter = "all") {
       <div class="content-card">
         <div class="card-title">
           <h3 class="name">${p.name}</h3>
-          <span class="type">${p.type}</span>
+          <span class="type">${type}</span>
         </div>
         <div class="card-price">
           <div class="price">${p.price.toLocaleString("vi-VN")}đ</div>
@@ -705,6 +738,14 @@ productForm.addEventListener("submit", (e) => {
   let productDesc = document.querySelector("#productDesc").value.trim();
   let quantity = 0;
   let image = picPreview.src;
+  let file = imageInput.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => (image = reader.result);
+    reader.readAsDataURL(file);
+  } else {
+    image = "../assets/default.webp";
+  }
 
   let products = getProducts();
 
@@ -757,13 +798,6 @@ productTable.addEventListener("click", (e) => {
   if (btn.classList.contains("btn-edit")) {
     openModal(id);
   } else if (btn.classList.contains("btn-delete")) {
-    // del();
-    // confirmDel.addEventListener("click", () => {
-    //   const products = getProducts().filter((p) => p.id !== id);
-    //   saveProducts(products);
-    //   renderProducts();
-    //   closeDel();
-    // });
     const products = getProducts().filter((p) => p.id === id);
     openConfirm("Delete product", `you want delete ${products.name}`, () => {
       const products = getProducts().filter((p) => p.id !== id);
@@ -816,16 +850,11 @@ importForm.addEventListener("submit", (e) => {
 
 //  XOÁ PHIẾU NHẬP
 function deleteImport(id) {
-  // if (!confirm("Bạn có chắc muốn xoá phiếu nhập này?")) return;
-  // let imports = getData("imports").filter((i) => i.id !== id);
-  // setData("imports", imports);
-  // renderImports();
-  del();
-  confirmDel.addEventListener("click", () => {
+  let imports = getData("imports").filter((i) => i.id === id);
+  openConfirm("Delete import", `you want delete ${imports.productName}`, () => {
     let imports = getData("imports").filter((i) => i.id !== id);
     setData("imports", imports);
     renderImports();
-    closeDel();
   });
 }
 
@@ -1009,80 +1038,6 @@ function attachAddMoreEvents() {
 
 // USERS MANAGEMENT JS
 
-// DOM refs
-const userTableBody = document.querySelector("#userTable tbody");
-const searchUserInput = document.getElementById("searchUser");
-// const btnNewUser = document.getElementById("btnNewUser");
-
-const confirmModal = document.getElementById("confirmModal");
-const confirmTitle = document.getElementById("confirmTitle");
-const confirmMessage = document.getElementById("confirmMessage");
-const confirmCancel = document.getElementById("confirmCancel");
-const confirmOk = document.getElementById("confirmOk");
-
-const userModal = document.getElementById("userModal");
-const userModalTitle = document.getElementById("userModalTitle");
-const userForm = document.getElementById("userForm");
-const userCancel = document.getElementById("userCancel");
-
-// state for confirm action
-let confirmCallback = null;
-let editUsername = null;
-
-// RENDER USERS
-function renderUsers(filter = "") {
-  const users = getUsers();
-  const filtered = users.filter((u) => {
-    if (!filter) return true;
-    const f = filter.toLowerCase();
-    return (
-      (u.username || "").toLowerCase().includes(f) ||
-      (u.name || "").toLowerCase().includes(f) ||
-      (u.email || "").toLowerCase().includes(f)
-    );
-  });
-
-  userTableBody.innerHTML = filtered
-    .map((u) => {
-      const statusHtml = u.locked
-        ? `<span class="status-locked"style="color: red;">Đã khoá</span>`
-        : `<span class="status-active" style="color: green;">Hoạt động</span>`;
-      return `
-      <tr data-username="${u.username}">
-        <td>${u.username}</td>
-        <td>${u.name || "-"}</td>
-        <td>${u.email || "-"}</td>
-        <td>${u.phoneNumber || "-"}</td>
-        <td>${statusHtml}</td>
-        <td class="btn-box">
-          <button class="btn-edit" data-username="${u.username}">Sửa</button>
-          <div>
-          <button class="btn-reset btn" data-username="${
-            u.username
-          }">Reset</button>
-          <button class="btn-toggle-lock btn" data-username="${u.username}">${
-        u.locked ? "Mở khoá" : "Khoá"
-      }</button>
-          </div>
-        </td>
-      </tr>
-    `;
-    })
-    .join("");
-}
-
-// Helpers: open/close modals
-function openConfirm(title, message, onOk) {
-  confirmTitle.textContent = title;
-  confirmMessage.textContent = message;
-  confirmModal.style.display = "flex";
-  confirmCallback = onOk;
-}
-function closeConfirm() {
-  confirmModal.style.display = "none";
-  confirmCallback = null;
-}
-
 function openUserModal(user = null) {
   userModalTitle.textContent = "edit user";
   userModal.style.display = "flex";
@@ -1102,18 +1057,15 @@ function closeUserModal() {
   userForm.reset();
 }
 
-// EVENTS: confirm modal
-confirmCancel.addEventListener("click", closeConfirm);
-confirmOk.addEventListener("click", () => {
-  if (typeof confirmCallback === "function") confirmCallback();
-  closeConfirm();
-});
-
 // EVENT: search
-searchUserInput.addEventListener("input", (e) => renderUsers(e.target.value));
-
-// EVENT: new user
-// btnNewUser.addEventListener("click", () => openUserModal("add"));
+if (searchUserInput && filteruser) {
+  searchUserInput.addEventListener("input", () => {
+    renderUsers(searchUserInput.value, filteruser.value);
+  });
+  filteruser.addEventListener("change", () => {
+    renderUsers(searchUserInput.value, filteruser.value);
+  });
+}
 
 userCancel.addEventListener("click", () => closeUserModal());
 
@@ -1223,9 +1175,8 @@ document.querySelector(".close-repo").addEventListener("click", () => {
 });
 
 // init render
+renderDashboard();
 renderUsers();
-
-// load
 renderTypeTable();
 loadTypeOptions();
 renderProducts();

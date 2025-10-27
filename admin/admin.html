@@ -310,6 +310,11 @@
                 placeholder="Tìm theo tên, email, username..."
                 class="search-box"
               />
+              <select class="filter" id="filterUser">
+                <option value="all">Status</option>
+                <option value="active">active</option>
+                <option value="locked">locked</option>
+              </select>
             </div>
           </div>
 
@@ -811,18 +816,6 @@
               >
                 Cập nhật
               </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Popup xác nhận xoá -->
-        <div class="confirm-overlay" id="confirmDelete">
-          <div class="confirm-box" style="animation: slideUp 0.25s ease">
-            <h3>Xác nhận xóa</h3>
-            <p>Bạn có chắc chắn muốn xóa không?</p>
-            <div class="confirm-actions">
-              <button class="btn-cancel" id="cancelDelete">Hủy</button>
-              <button class="btn-save" id="confirmDeleteBtn">Xóa</button>
             </div>
           </div>
         </div>

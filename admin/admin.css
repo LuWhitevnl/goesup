@@ -667,6 +667,7 @@ td:last-child {
   border-radius: 8px;
   /* color: var(--color-text-primary); */
   color: #000;
+  height: 100%;
   padding: 6px 10px;
   cursor: pointer;
   transition: 0.3s;
@@ -1174,11 +1175,12 @@ td:last-child {
 }
 
 .item-card .img-box {
-  /* width: 250px; */
-  height: 300px;
-  /* height: 380px; */
+  /* width: 200px; */
+  /* min-height: 200px; */
+  height: 250px;
   overflow: hidden;
   text-align: center;
+  margin: 0 auto;
 }
 
 .item-card .img-box img {
@@ -1599,7 +1601,7 @@ td:last-child {
 }
 
 @media (max-width: 992px) {
-  .content-header p {
+  .header-top p {
     display: none;
   }
   .sidebar {
