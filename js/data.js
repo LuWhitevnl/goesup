@@ -1,4 +1,4 @@
-const app_version = "1.0.1";
+const app_version = "1.0.8";
 
 const savedVersion = localStorage.getItem("appversion");
 if (savedVersion !== app_version) {
