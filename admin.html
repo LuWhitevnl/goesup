@@ -11,8 +11,8 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
     />
-    <link rel="stylesheet" href="./../css/reset.css" />
-    <link rel="stylesheet" href="./admin.css" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/admin.css" />
     <title>Admin</title>
   </head>
   <body>
@@ -440,6 +440,9 @@
                 <option value="Quần jean">Quần jean</option>
                 <option value="Phụ kiện">Phụ kiện</option>
               </select>
+              <button class="refresh resetproduct">
+                <span class="material-symbols-outlined"> refresh </span>
+              </button>
             </div>
           </div>
 
@@ -480,6 +483,7 @@
               </div>
             </div>
           </div>
+          <div class="pagination" id="pagination"></div>
         </section>
 
         <!-- Popup thêm/sửa sản phẩm -->
@@ -489,9 +493,16 @@
             <div class="modal-box">
               <div class="pic-group">
                 <div class="pic">
-                  <img src="/assets/default.webp" alt="" class="pic-preview" />
+                  <img
+                    src="./../assets/default.webp"
+                    alt=""
+                    class="pic-preview"
+                  />
                 </div>
-                <input type="file" id="productImage" />
+                <label class="product-image">
+                  <input type="file" id="productImage" />
+                  Choice Image
+                </label>
               </div>
 
               <form id="productForm">
@@ -500,8 +511,8 @@
                   <input type="text" id="productName" required />
                 </div>
 
-                <div class="form-group">
-                  <label>Loại sản phẩm</label>
+                <div class="form-group product-type">
+                  <label>Choice type</label>
                   <select id="productType" required>
                     <option value="">-- Chọn loại --</option>
                   </select>
@@ -675,8 +686,10 @@
               </div>
             </div>
             <div class="actions order-actions">
-              <label>Ngày từ: <input type="date" id="fromDate" /></label>
-              <label>Đến: <input type="date" id="toDate" /></label>
+              <div class="order-date">
+                <label>Ngày từ: <input type="date" id="fromDate" /></label>
+                <label>Đến: <input type="date" id="toDate" /></label>
+              </div>
               <select id="statusFilter">
                 <option value="">Tất cả trạng thái</option>
                 <option value="Mới đặt">Mới đặt</option>
@@ -689,6 +702,9 @@
                 id="searchOrder"
                 placeholder="Tìm kiếm khách hàng hoặc sản phẩm..."
               />
+              <button class="refresh resetorder">
+                <span class="material-symbols-outlined"> refresh </span>
+              </button>
             </div>
           </div>
 
@@ -821,34 +837,7 @@
         </div>
       </main>
     </div>
-    <!-- <script src="./../end_user/js/data.js"></script> -->
-    <script src="./../js/data.js"></script>
-    <script src="./admin.js"></script>
-    <script>
-      // // Lấy tất cả các item trong sidebar
-      // const menuItems = document.querySelectorAll(".menu li");
-
-      // // Lấy tất cả các section
-      // const sections = document.querySelectorAll(
-      //   "#dashboard, .category-management, #product, #warehouse, #orders"
-      // );
-
-      // // Hàm ẩn tất cả section
-      // function hideAllSections() {
-      //   sections.forEach((section) => (section.style.display = "none"));
-      // }
-
-      // // Gắn sự kiện click cho từng menu item
-      // menuItems.forEach((item) => {
-      //   item.addEventListener("click", () => {
-      //     hideAllSections(); // Ẩn hết section
-      //     const targetId = item.dataset.target; // Lấy id section cần hiển thị
-      //     const targetSection =
-      //       document.getElementById(targetId) ||
-      //       document.querySelector(`.${targetId}`);
-      //     if (targetSection) targetSection.style.display = "block";
-      //   });
-      // });
-    </script>
+    <script src="./js/data.js"></script>
+    <script src="./js/admin.js"></script>
   </body>
 </html>

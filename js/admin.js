@@ -256,8 +256,10 @@ function renderTypeTable(list = getTypes()) {
       <td>${t.name}</td>
       <td>${t.desc || ""}</td>
       <td>
+          <div class="card-btn">
         <button class="btn-edit" data-index="${i}">Sửa</button>
         <button class="btn-delete" data-index="${i}">Xóa</button>
+          </div>
       </td>
     `;
     typeTable.appendChild(tr);
@@ -347,64 +349,6 @@ function renderfilter() {
     types.map((t) => `<option value="${t.name}">${t.name}</option>`).join("");
 }
 
-// Render sản phẩm
-function renderProducts(list = getProducts(), filter = "all") {
-  productTable.innerHTML = "";
-  list = filter === "all" ? list : list.filter((p) => p.type === filter);
-  console.log(list);
-  list.forEach((p) => {
-    const statusClass =
-      p.quantity === 0 ? "danger" : p.quantity < 5 ? "low" : "ok";
-    const statusText =
-      p.quantity === 0 ? "Hết hàng" : p.quantity < 5 ? "Gần hết" : "Còn hàng";
-    const type = p.type === "" ? "none" : p.type;
-
-    const card = document.createElement("div");
-    card.className = "item-card";
-    card.innerHTML = `
-      <div class="img-box">
-        <img src="${p.image}" alt="${p.name}" />
-      </div>
-      <div class="content-card">
-        <div class="card-title">
-          <h3 class="name">${p.name}</h3>
-          <span class="type">${type}</span>
-        </div>
-        <div class="card-price">
-          <div class="price">${p.price.toLocaleString("vi-VN")}đ</div>
-          <div class="status ${statusClass}">${statusText}</div>
-        </div>
-                <div class="card-desc card-more_info">
-                  <span>Desc: ${p.productDesc}</span>
-                </div>
-        <div class="card-more_info">
-          <div>
-            <span>Giá vốn</span>
-            <div class="cost-price">${p.costPrice.toLocaleString(
-              "vi-VN"
-            )}đ</div>
-          </div>
-          <div>
-            <span>Lợi nhuận</span>
-            <div class="profit-precent">${p.profitPercent}%</div>
-          </div>
-        </div>
-        <div class="card-btn-box">
-          <span>Stock: ${p.quantity}</span>
-          <div class="card-btn">
-            <button class="btn-edit" data-id="${p.id}">Sửa</button>
-            <button class="btn-delete" data-id="${p.id}">Xóa</button>
-          </div>
-        </div>
-      </div>
-    `;
-    productTable.appendChild(card);
-  });
-
-  updateSummary();
-}
-
-// Render danh sách đơn hàng
 function renderOrders(list = getOrders()) {
   orderTable.innerHTML = "";
   list.forEach((order) => {
@@ -481,9 +425,15 @@ function renderInventory() {
 
     const stock = prod.quantity ?? 0;
 
-    let status = "Còn hàng";
-    if (stock === 0) status = "Hết hàng";
-    else if (stock < 5) status = "Sắp hết";
+    let status = "Còn hàng",
+      statusColor = "";
+    if (stock === 0) {
+      status = "Hết hàng";
+      statusColor = "#ff5252";
+    } else if (stock < 5) {
+      status = "Sắp hết";
+      statusColor = "#ff9340";
+    }
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
@@ -503,7 +453,7 @@ function renderInventory() {
       <td>
         <button class="btn-addmore btn-cancel" data-id="${
           prod.id
-        }">+ Nhập thêm</button>
+        }" style="color: ${statusColor};">+ Nhập thêm</button>
       </td>
     `;
     tbody.appendChild(tr);
@@ -530,7 +480,7 @@ function openModal(editId = null) {
   } else {
     document.querySelector("#modalTitle").textContent = "Thêm sản phẩm";
     productForm.reset();
-    picPreview.src = "";
+    picPreview.src = "../assets/blank-image.png";
   }
 }
 
@@ -567,7 +517,7 @@ orderTable.addEventListener("click", (e) => {
   let itemsHTML = "";
 
   order.items.forEach((item) => {
-    const total = item.price * item.quantity;
+    const total = order.items.reduce((sum, i) => sum + i.price * i.quantity, 0);
     itemsHTML += `
       <tr>
         <td>${item.name}</td>
@@ -673,7 +623,11 @@ closeModalBtn.addEventListener("click", () => {
   editingOrderId = null;
 });
 
-orderModal.addEventListener("click", () => closeOrderDetail());
+orderModal.addEventListener("click", (e) => {
+  if (e.target === orderModal) {
+    closeOrderDetail();
+  }
+});
 
 // mo popup import
 function openAddImport(productId = null) {
@@ -744,7 +698,7 @@ productForm.addEventListener("submit", (e) => {
     reader.onload = () => (image = reader.result);
     reader.readAsDataURL(file);
   } else {
-    image = "../assets/default.webp";
+    image = "../assets/blank-image.png";
   }
 
   let products = getProducts();
@@ -897,6 +851,155 @@ searchBox.addEventListener("input", () => {
 });
 
 // ==================== QUẢN LÝ SẢN PHẨM ====================
+let currentPage = 1;
+const itemsPerPage = 3;
+let filteredProducts = getProducts();
+
+// ====== 1 HIỂN THỊ SẢN PHẨM ======
+function renderProducts(products = filteredProducts, page = 1) {
+  const productTable = document.querySelector(".item-list");
+  productTable.innerHTML = "";
+
+  // Giới hạn sản phẩm theo trang
+  const start = (page - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  const pageItems = products.slice(start, end);
+
+  if (pageItems.length === 0) {
+    productTable.innerHTML = `<p class="no-data">Không có sản phẩm nào.</p>`;
+    return;
+  }
+
+  pageItems.forEach((p) => {
+    const statusClass =
+      p.quantity === 0 ? "danger" : p.quantity < 5 ? "low" : "ok";
+    const statusText =
+      p.quantity === 0 ? "Hết hàng" : p.quantity < 5 ? "Sắp hết" : "Còn hàng";
+
+    const card = document.createElement("div");
+    card.className = "item-card";
+    card.innerHTML = `
+      <div class="img-box">
+        <img src="${p.image || "./assets/default.webp"}" alt="${p.name}" />
+      </div>
+      <div class="content-card">
+        <div class="card-title">
+          <h3 class="name">${p.name}</h3>
+          <span class="type">${p.type || "Không có"}</span>
+        </div>
+        <div class="card-price">
+          <div class="price">${p.price.toLocaleString("vi-VN")}đ</div>
+          <div class="status ${statusClass}">${statusText}</div>
+        </div>
+        <div class="card-desc card-more_info">
+          <span>Mô tả: ${p.productDesc || "Không có mô tả"}</span>
+        </div>
+        <div class="card-more_info">
+          <div>
+            <span>Giá vốn</span>
+            <div class="cost-price">${p.costPrice.toLocaleString(
+              "vi-VN"
+            )}đ</div>
+          </div>
+          <div>
+            <span>Lợi nhuận</span>
+            <div class="profit-precent">${p.profitPercent}%</div>
+          </div>
+        </div>
+        <div class="card-btn-box">
+          <span>Stock: ${p.quantity}</span>
+          <div class="card-btn">
+            <button class="btn-edit" data-id="${p.id}">Sửa</button>
+            <button class="btn-delete" data-id="${p.id}">Xóa</button>
+          </div>
+        </div>
+      </div>
+    `;
+    productTable.appendChild(card);
+  });
+
+  renderPagination(products);
+}
+
+// ====== 2 PHÂN TRANG ======
+function renderPagination(products = filteredProducts) {
+  const pagination = document.getElementById("pagination");
+  if (!pagination) return;
+
+  pagination.innerHTML = "";
+  const totalPages = Math.ceil(products.length / itemsPerPage);
+  if (totalPages <= 1) return;
+
+  const createBtn = (text, disabled, onClick) => {
+    const btn = document.createElement("button");
+    btn.textContent = text;
+    btn.disabled = disabled;
+    if (!disabled) btn.onclick = onClick;
+    return btn;
+  };
+
+  pagination.appendChild(
+    createBtn("«", currentPage === 1, () => {
+      currentPage--;
+      renderProducts(products, currentPage);
+    })
+  );
+
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement("button");
+    btn.textContent = i;
+    btn.classList.toggle("active", i === currentPage);
+    btn.onclick = () => {
+      currentPage = i;
+      renderProducts(products, currentPage);
+    };
+    pagination.appendChild(btn);
+  }
+
+  pagination.appendChild(
+    createBtn("»", currentPage === totalPages, () => {
+      currentPage++;
+      renderProducts(products, currentPage);
+    })
+  );
+}
+
+// ====== 3 LỌC & TÌM KIẾM ======
+function filterProducts() {
+  const keyword = document.querySelector("#searchProduct").value.toLowerCase();
+  const type = document.querySelector("#filterType").value;
+
+  let products = getProducts();
+
+  if (keyword) {
+    products = products.filter((p) => p.name.toLowerCase().includes(keyword));
+  }
+
+  if (type && type !== "all") {
+    products = products.filter((p) => p.type === type);
+  }
+
+  filteredProducts = products; // Cập nhật danh sách sau khi lọc
+  currentPage = 1; // Quay về trang đầu
+  renderProducts(filteredProducts, currentPage);
+}
+
+// ====== 4 SỰ KIỆN ======
+document
+  .querySelector("#searchProduct")
+  .addEventListener("input", filterProducts);
+document
+  .querySelector("#filterType")
+  .addEventListener("change", filterProducts);
+
+// Nút reset filter
+document.querySelector(".resetproduct").addEventListener("click", () => {
+  document.querySelector("#searchProduct").value = "";
+  document.querySelector("#filterType").value = "all";
+  filteredProducts = getProducts();
+  currentPage = 1;
+  renderProducts(filteredProducts, currentPage);
+});
 
 // Load danh sách loại cho select
 function loadTypeOptions() {
@@ -905,6 +1008,16 @@ function loadTypeOptions() {
     `<option value="">-- Chọn loại --</option>` +
     types.map((t) => `<option value="${t.name}">${t.name}</option>`).join("");
 }
+// Ảnh preview
+imageInput.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => (picPreview.src = reader.result);
+    reader.readAsDataURL(file);
+    picPreview.style.opacity = 1;
+  }
+});
 
 // Cập nhật thống kê
 function updateSummary() {
@@ -919,33 +1032,6 @@ function updateSummary() {
   document.querySelector("#lowStock").textContent = `${low} sản phẩm`;
   document.querySelector("#outStock").textContent = `${out} sản phẩm`;
 }
-
-// Ảnh preview
-imageInput.addEventListener("change", (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = () => (picPreview.src = reader.result);
-    reader.readAsDataURL(file);
-    picPreview.style.opacity = 1;
-  }
-});
-
-// Lọc và tìm kiếm
-document.querySelector("#searchProduct").addEventListener("input", () => {
-  const keyword = document.querySelector("#searchProduct").value.toLowerCase();
-  const typeFilter = document.querySelector("#filterType").value;
-  const products = getProducts().filter((p) => {
-    const matchKeyword = p.name.toLowerCase().includes(keyword);
-    const matchType = typeFilter ? p.type === typeFilter : true;
-    return matchKeyword && matchType;
-  });
-  renderProducts(products);
-});
-
-filterProductsType.addEventListener("change", (e) => {
-  renderProducts(getProducts(), e.target.value);
-});
 
 // ======== Cập nhật trạng thái đơn ========
 updateStatusBtn.addEventListener("click", () => {
@@ -1011,6 +1097,15 @@ document
   .getElementById("statusFilter")
   .addEventListener("change", filterOrders);
 document.getElementById("searchOrder").addEventListener("input", filterOrders);
+
+document.querySelector(".resetorder").addEventListener("click", () => {
+  document.getElementById("fromDate").value = "";
+  document.getElementById("toDate").value = "";
+  document.getElementById("statusFilter").value = "";
+  document.getElementById("searchOrder").value = "";
+
+  renderOrders(getOrders());
+});
 
 // ====== TÌM KIẾM REALTIME ======
 document.getElementById("searchImport").addEventListener("input", () => {
@@ -1184,3 +1279,4 @@ renderfilter();
 renderOrders();
 renderImports();
 renderInventory();
+updateSummary();

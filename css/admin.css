@@ -536,8 +536,15 @@ body {
   border-radius: 15px;
   border: 1px solid #0000001d;
   box-shadow: 0 0 5px #0000002a;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: start;
 }
+
+.order-date {
+  display: flex;
+  gap: 10px;
+}
+
 .search-box,
 .filter,
 .btn-add {
@@ -563,6 +570,7 @@ body {
   border: none;
   outline: none;
 }
+
 .btn-add {
   /* background: var(--color-linear-gradian-card); */
   background: linear-gradient(145deg, #110e2b, #030213);
@@ -628,6 +636,33 @@ td:last-child {
   border-radius: 6px;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.pagination button {
+  border: 1px solid #ccc;
+  background: #4d4d4d;
+  color: #fff;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.pagination button.active {
+  background: #030213;
+  color: #fff;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* Status */
 .status {
   padding: 5px 10px;
@@ -639,8 +674,8 @@ td:last-child {
   color: #00d600;
 }
 .status.low {
-  background: rgba(255, 200, 0, 0.2);
-  color: #ffd740;
+  background: #ff934036;
+  color: #ff7409;
 }
 .status.out {
   background: rgba(255, 0, 0, 0.2);
@@ -668,6 +703,7 @@ td:last-child {
   /* color: var(--color-text-primary); */
   color: #000;
   height: 100%;
+  width: 100%;
   padding: 6px 10px;
   cursor: pointer;
   transition: 0.3s;
@@ -708,7 +744,7 @@ td:last-child {
   font-weight: bold;
 }
 .summary-card.warning {
-  border-left: 5px solid #ffd740;
+  border-left: 5px solid #ff9340;
 }
 .summary-card.danger {
   border-left: 5px solid #ff5252;
@@ -719,13 +755,13 @@ td:last-child {
 /* 🟡 Overlay phủ nền */
 .modal-overlay {
   position: fixed;
-  /* inset: 0; */
+  inset: 0;
   background: rgba(0, 0, 0, 0.55);
   display: none;
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(5px);
-  z-index: 2000;
+  z-index: 1000;
   transition: opacity 0.3s ease;
 }
 .modal-overlay.active {
@@ -744,29 +780,20 @@ td:last-child {
 /* 🟡 Khung popup */
 
 /* 🟡 Modal Overlay */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: none; /* bật bằng JS */
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
 
 /* 🟡 Modal Box */
 .modal {
-  /* background: var(--color-sidebar-bg); */
   background: #fff;
   border-radius: 14px;
   padding: 25px 28px;
   width: 700px;
   max-width: 95%;
-  /* color: var(--color-text-primary); */
   color: #000;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
   /* border: 1px solid var(--color-border); */
   animation: slideUp 0.3s ease;
+  position: relative;
+  z-index: 1001;
 }
 
 /* 🟡 Slide up animation */
@@ -816,6 +843,36 @@ td:last-child {
   object-fit: cover;
   /* opacity: 0; */
   transition: opacity 0.3s ease;
+}
+
+.product-image input {
+  display: none;
+}
+
+.product-image {
+  display: inline-block;
+  outline: none;
+  border: 1px solid #7e7e7e;
+  padding: 8px 14px;
+  border-radius: 10px;
+  color: #000;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.product-type {
+  display: flex;
+  text-align: center;
+  gap: 10px;
+}
+
+.product-type label {
+  text-wrap: nowrap;
+  align-self: center;
+}
+
+#productType {
+  width: auto;
 }
 
 /* 🟡 Form bên phải */
@@ -1086,7 +1143,8 @@ td:last-child {
 
 /* Input date, search box, select */
 #orders .content-header .actions input,
-#orders .content-header .actions select {
+#orders .content-header .actions select,
+.refresh {
   padding: 6px 10px;
   border: none;
   outline: none;
@@ -1103,6 +1161,15 @@ td:last-child {
   padding: 8px 12px;
   border-radius: 8px;
   font-size: 1rem;
+}
+
+.refresh {
+  padding: 5px 10px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 /* Input text search */
@@ -1157,7 +1224,7 @@ td:last-child {
 
 .item-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 20px;
   justify-content: start;
   transition: 0.3s ease;
@@ -1263,6 +1330,11 @@ td:last-child {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.card-btn {
+  display: flex;
+  gap: 5px;
 }
 
 .card-btn button {
@@ -1600,6 +1672,9 @@ td:last-child {
   width: 50px;
 }
 
+@media (max-width: 1200px) {
+}
+
 @media (max-width: 992px) {
   .header-top p {
     display: none;
@@ -1727,5 +1802,12 @@ td:last-child {
 
   .product-list td:last-child button {
     margin-right: 10px;
+  }
+
+  .order-date {
+    display: flex;
+  }
+
+  .order-date label {
   }
 }
