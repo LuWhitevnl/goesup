@@ -1,4 +1,4 @@
-const app_version = "1.0.5";
+const app_version = "1.0.1";
 
 const savedVersion = localStorage.getItem("appversion");
 if (savedVersion !== app_version) {
@@ -66,7 +66,7 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, adipisci.",
       quantity: 10,
-      image: "../assets/20240827_99qstqYiE1.png",
+      image: "./assets/20240827_99qstqYiE1.png",
     },
     {
       id: "P002",
@@ -78,7 +78,7 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, adipisci.",
       quantity: 5,
-      image: "../assets/blank-image.png",
+      image: "./assets/blank-image.png",
     },
     {
       id: "P003",
@@ -90,7 +90,7 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, adipisci.",
       quantity: 8,
-      image: "../assets/ao1.avif",
+      image: "./assets/ao1.avif",
     },
     {
       id: "P004",
@@ -102,7 +102,7 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, adipisci.",
       quantity: 20,
-      image: "../assets/blank-image.png",
+      image: "./assets/blank-image.png",
     },
   ];
   localStorage.setItem("products", JSON.stringify(sampleProducts));
