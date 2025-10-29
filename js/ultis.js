@@ -73,31 +73,12 @@ overlay?.addEventListener("click", (e) => {
 /**
  * kiem tra click nut next hoac prev de them item vao slider
  */
-const moveSlider = (direction) => {
-  // tao bien trong ham de moi lan chay ham se goi list slider moi
-  const slider = document.querySelector(".slider");
-  const items = document.querySelectorAll(".slider .item");
-  if (items.length === 0 || !slider) return;
-
-  if (direction === "next") {
-    slider.appendChild(items[0]);
-  } else if (direction === "prev") {
-    slider.prepend(items[items.length - 1]);
-  }
-};
-
-nextBtn?.addEventListener("click", () => moveSlider("next"));
-prevBtn?.addEventListener("click", () => moveSlider("prev"));
-
-// slider di chuyen theo thoi gian
-let autoSilder = setInterval(() => moveSlider("next"), 5000);
 
 /**
  *dong mo popup dang nhap dang ky khi click bien tuong user
  */
 function openLogForm() {
   if (JSON.parse(localStorage.getItem("logined"))) {
-    window.location.href = "account.html";
     return;
   }
   toggleActive(formWrapper, true);
@@ -150,5 +131,23 @@ registerBtn?.addEventListener("click", () => {
 
 // cart
 cart.addEventListener("click", () => {
-  openLogForm();
+  const currentUser = JSON.parse(localStorage.getItem("logined"));
+  if (currentUser) {
+    window.location.href = "cart.html";
+  } else {
+    openLogForm();
+  }
 });
+
+function loadCartHeader() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  console.log(cart.length);
+  if (cart.length !== 0) {
+    document.querySelector(".product-cart").classList.add("empty");
+    document.querySelector(".product-cart").textContent = cart.length;
+  } else {
+    document.querySelector(".product-cart").classList.remove("empty");
+  }
+}
+
+loadCartHeader();

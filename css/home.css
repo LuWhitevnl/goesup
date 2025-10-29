@@ -856,3 +856,23 @@ h1 {
   top: 50%;
   transform: translateY(-50%);
 }
+
+.product-cart {
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  top: 0;
+  right: -10px;
+  z-index: -1;
+  border-radius: 50%;
+  color: #ffffff;
+  background: transparent;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+.product-cart.empty {
+  opacity: 1;
+  pointer-events: all;
+}

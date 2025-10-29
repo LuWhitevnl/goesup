@@ -168,7 +168,7 @@ function renderDashboard() {
   const monthlyRevenue = orders
     .filter(
       (o) =>
-        o.status === "Đã giao" &&
+        o.status === "Completed" &&
         new Date(o.date).getMonth() === currentMonth &&
         new Date(o.date).getFullYear() === currentYear
     )
@@ -178,7 +178,7 @@ function renderDashboard() {
   const clientCount = customer.filter((c) => !c.locked).length;
 
   // Đếm đơn hàng mới (chưa giao)
-  const newOrder = orders.filter((o) => o.status === "Mới đặt").length;
+  const newOrder = orders.filter((o) => o.status === "New").length;
   console.log(newOrder);
   //  Tổng số sản phẩm tồn
   const totalStock = products.reduce((sum, p) => sum + (p.quantity || 0), 0);
@@ -387,7 +387,7 @@ function renderImports(list = getData("imports")) {
         <td>${imp.status}</td>
         <td>
           ${
-            imp.status === "Chưa hoàn thành"
+            imp.status === "Pending"
               ? `<button class="btn-save" onclick="completeImport('${imp.id}')">Hoàn thành</button>
                  <button class="btn-cancel" onclick="deleteImport('${imp.id}')">Xóa</button>`
               : `<button class="btn-cancel" disabled>Hoàn tất</button>`
@@ -414,11 +414,11 @@ function renderInventory() {
 
   products.forEach((prod) => {
     const importedQty = imports
-      .filter((i) => i.productId === prod.id && i.status === "Đã hoàn thành")
+      .filter((i) => i.productId === prod.id && i.status === "Completed")
       .reduce((sum, i) => sum + i.quantity, 0);
 
     const exportedQty = orders
-      .filter((o) => o.status === "Đã giao")
+      .filter((o) => o.status === "Completed")
       .flatMap((o) => o.items)
       .filter((item) => item.productId === prod.id)
       .reduce((sum, item) => sum + item.quantity, 0);
@@ -508,8 +508,8 @@ orderTable.addEventListener("click", (e) => {
   const order = getOrders().find((o) => o.id.toString() === id.toString());
   if (!order) return;
 
-  // Không cho xem nếu đã giao (tuỳ mục đích bạn)
-  if (order.status === "Đã giao") return;
+  // Không cho xem nếu Completed (tuỳ mục đích bạn)
+  if (order.status === "Completed") return;
 
   editingOrderId = id;
 
@@ -791,7 +791,7 @@ importForm.addEventListener("submit", (e) => {
       quantity,
       price,
       total,
-      status: "Chưa hoàn thành",
+      status: "Pending",
     };
     imports.push(newImport);
   });
@@ -818,7 +818,7 @@ function completeImport(id) {
   const products = getData("products");
 
   const imp = imports.find((i) => i.id === id);
-  if (!imp || imp.status === "Đã hoàn thành") return;
+  if (!imp || imp.status === "Completed") return;
 
   const prod = products.find((p) => p.id === imp.productId);
   if (prod) {
@@ -828,7 +828,7 @@ function completeImport(id) {
     prod.price = imp.price * (1 + prod.profitPercent / 100);
   }
 
-  imp.status = "Đã hoàn thành";
+  imp.status = "Completed";
   setData("imports", imports);
   setData("products", products);
   renderImports();
@@ -1043,8 +1043,8 @@ updateStatusBtn.addEventListener("click", () => {
     (o) => o.id.toString() === editingOrderId.toString()
   );
   if (!order) return;
-  // Nếu chuyển sang "Đã giao" và chưa trừ kho
-  if (order.status !== "Đã giao" && newStatus === "Đã giao") {
+  // Nếu chuyển sang "Completed" và chưa trừ kho
+  if (order.status !== "Completed" && newStatus === "Completed") {
     const products = getProducts();
     const ware = getKho();
     order.items.forEach((item) => {

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/ultis.css" />
+    <link rel="stylesheet" href="./css/cart.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="header">
+      <div id="logo"></div>
+      <ul class="root">
+        <li>
+          <a href="./index.html"><i class="fas fa-home"></i><b>Home</b></a>
+        </li>
+        <li>
+          <a href=""
+            ><b><i class="fas fa-layer-group"></i>Collection</b></a
+          >
+        </li>
+        <li>
+          <a href="./product.html?gender=men"
+            ><b><i class="fas fa-mars"></i>Man's fashion</b></a
+          >
+        </li>
+        <li>
+          <a href="./product.html?gender=women"
+            ><i class="fas fa-venus"></i><b>Women's fashion</b></a
+          >
+        </li>
+        <li>
+          <a href="./product.html"
+            ><i class="fas fa-shopping-bag"></i><b>Accessories</b></a
+          >
+        </li>
+      </ul>
+      <div class="action-bar">
+        <div class="search-content">
+          <!-- <div class="search-bar">
+            <button type="button" class="search-btn" aria-label="search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <input
+              type="search"
+              placeholder="Search"
+              aria-label="search"
+              autocomplete="new-password"
+            />
+          </div> -->
+
+          <form action="" class="search-bar" role="search" aria-label="search">
+            <button type="button" class="search-btn" aria-label="search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <input
+              type="search"
+              placeholder="search"
+              aria-label="search"
+              autocomplete="new-password"
+            />
+          </form>
+        </div>
+
+        <button type="button" class="payment-user cart">
+          <i class="fas fa-cart-shopping item1"></i>
+          <div class="product-cart">0</div>
+        </button>
+        <button type="button" class="payment-user user">
+          <i class="fas fa-user item2"></i>
+        </button>
+        <!-- <div class="payment-user"></div> -->
+      </div>
+    </div>
+    <!-- tim kiem mo rong -->
+    <div class="overlay">
+      <div class="search-ex" id="search-ex">
+        <div class="search-box">
+          <div class="logo-box">
+            <a href="" class="logo">
+              <img src="../assets/1760878542405.png" alt="logo" />
+            </a>
+            <h2>Goes<span>Up</span></h2>
+          </div>
+          <form action="" class="searchBox" id="searchBox">
+            <button type="submit" class="search-btn" aria-label="search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <input
+              id="search-input"
+              type="search"
+              placeholder="search"
+              autocomplete="off"
+              autofocus
+            />
+          </form>
+          <button id="close-search" class="close-btn">Cancel</button>
+        </div>
+        <div class="search-dropdown" id="search-dropdown">
+          <div class="section suggest">
+            <h3>Gợi Ý</h3>
+            <ul id="suggestList">
+              <li>goi y 1</li>
+              <li>goi y 2</li>
+              <li>goi y 3</li>
+              <li>goi y 1</li>
+              <li>goi y 2</li>
+              <li>goi y 3</li>
+              <li>goi y 1</li>
+              <li>goi y 2</li>
+              <li>goi y 3</li>
+              <li>goi y 1</li>
+              <li>goi y 2</li>
+              <li>goi y 3</li>
+              <li>goi y 1</li>
+              <li>goi y 2</li>
+              <li>goi y 3</li>
+            </ul>
+          </div>
+          <div class="section recent">
+            <h3>Lịch sử tìm kiếm</h3>
+            <ul id="recentList">
+              <li>lich su 1</li>
+              <li>lich su 2</li>
+              <li>lich su 3</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="cart-container">
+      <!-- Giỏ hàng -->
+      <section class="cart-bag">
+        <h2>Your Bag</h2>
+        <div class="cart-items">
+          <!-- JS render các sản phẩm -->
+          <div class="cart-item">
+            <img src="./assets/ao1.avif" alt="" />
+            <div class="cart-item-info">
+              <h3>Ao thun</h3>
+              <p>ao nu</p>
+              <p>color: black</p>
+              <p>size L</p>
+              <p><b>10000</b></p>
+            </div>
+            <div class="cart-item-actions">
+              <button class="remove-btn" data-id="${item.id}" title="Remove">
+                <span class="material-symbols-outlined"> delete </span>
+              </button>
+              <div class="quantity-control">
+                <button class="decrease" data-id="${item.id}">-</button>
+                <span class="quantity">${item.quantity}</span>
+                <button class="increase" data-id="${item.id}">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Thanh toán -->
+      <aside class="cart-summary">
+        <h2>Summary</h2>
+        <div class="summary-details">
+          <p><span>Subtotal:</span> <span id="subtotal">0₫</span></p>
+          <p><span>Shipping:</span> <span id="shipping">Miễn phí</span></p>
+          <hr />
+          <p class="total"><span>Total:</span> <span id="total">0₫</span></p>
+        </div>
+        <button id="checkout-btn">Proceed to Payment</button>
+      </aside>
+    </section>
+    <!-- account -->
+
+    <!-- popup -->
+    <!-- Payment Popup -->
+    <div class="payment-popup-overlay" id="paymentPopup">
+      <div class="payment-popup">
+        <h2>Payment Information</h2>
+        <form id="paymentForm">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input
+              type="text"
+              id="fullname"
+              placeholder="Enter your name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input
+              type="tel"
+              id="phone"
+              placeholder="Enter your phone number"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Address</label>
+            <input
+              type="text"
+              id="address"
+              placeholder="Enter delivery address"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Payment Method</label>
+            <div class="payment-methods">
+              <label
+                ><input type="radio" name="method" value="COD" /> Cash on
+                Delivery</label
+              >
+              <label
+                ><input type="radio" name="method" value="Momo" /> Momo</label
+              >
+              <label
+                ><input type="radio" name="method" value="Visa" /> Visa /
+                MasterCard</label
+              >
+            </div>
+          </div>
+          <div class="popup-actions">
+            <button type="submit" class="confirm-btn">Confirm Payment</button>
+            <button type="button" class="cancel-btn" id="closePopup">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="formWapper">
+      <div class="popupBox">
+        <div class="tool">
+          <div class="tab-btn">
+            <button id="loginBtn" class="active">Đăng nhập</button>
+            <button id="registerBtn">Đăng ký</button>
+            <div class="switch-bg"></div>
+          </div>
+          <button class="close-form">X</button>
+        </div>
+        <div class="form-slide">
+          <!-- form dang nhap -->
+          <form action="" id="loginForm" class="active">
+            <h2>Login</h2>
+            <div class="form-group">
+              <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Nhap username"
+                tabindex="1"
+                autofocus
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="password"
+                id="loginPass"
+                name="password"
+                placeholder="Nhap Password"
+                tabindex="2"
+                required
+              />
+              <small class="error-msg"></small>
+            </div>
+            <div class="more-tool">
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  name="remeberme"
+                  id="remeberme"
+                  tabindex="4"
+                />
+                <label for="remeberme">Remeber me</label>
+              </div>
+              <div class="fogotPass" tabindex="5">
+                <a href="">Fogot Password?</a>
+              </div>
+            </div>
+            <button type="submit" class="signin_btn sign-btn" tabindex="3">
+              <span>Sign in</span>
+            </button>
+          </form>
+          <!-- form dang ki -->
+          <form action="" id="registerForm">
+            <h2>Create an account</h2>
+            <div class="form-group hoTen">
+              <input
+                type="text"
+                id="Ho"
+                name="Ho"
+                placeholder="Nhap Ho"
+                required
+              />
+              <input
+                type="text"
+                id="ten"
+                name="ten"
+                placeholder="Nhap ten"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                id="Email"
+                name="Email"
+                placeholder="Nhap Email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="password"
+                name="password"
+                placeholder="Nhap Password"
+                required
+              />
+            </div>
+            <button type="submit" class="signup-btn sign-btn">
+              <span>Create an account</span>
+            </button>
+            <h3 class="signin-with">or sign in with</h3>
+            <div class="more-signin">
+              <button id="Google">
+                <img src="../assets/Google__G__logo.svg.png" alt="Google" />
+              </button>
+              <button id="Apple">
+                <img src="../assets/apple-logo-svgrepo-com.svg" alt="Apple" />
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="./js/data.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/ultis.js"></script>
+    <script src="./js/cart.js"></script>
+  </body>
+</html>

@@ -569,7 +569,118 @@
         </div>
       </div>
     </main>
+    <!-- popup -->
+
+    <div class="formWapper">
+      <div class="popupBox">
+        <div class="tool">
+          <div class="tab-btn">
+            <button id="loginBtn" class="active">Đăng nhập</button>
+            <button id="registerBtn">Đăng ký</button>
+            <div class="switch-bg"></div>
+          </div>
+          <button class="close-form">X</button>
+        </div>
+        <div class="form-slide">
+          <!-- form dang nhap -->
+          <form action="" id="loginForm" class="active">
+            <h2>Login</h2>
+            <div class="form-group">
+              <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Nhap username"
+                tabindex="1"
+                autofocus
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="password"
+                id="loginPass"
+                name="password"
+                placeholder="Nhap Password"
+                tabindex="2"
+                required
+              />
+              <small class="error-msg"></small>
+            </div>
+            <div class="more-tool">
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  name="remeberme"
+                  id="remeberme"
+                  tabindex="4"
+                />
+                <label for="remeberme">Remeber me</label>
+              </div>
+              <div class="fogotPass" tabindex="5">
+                <a href="">Fogot Password?</a>
+              </div>
+            </div>
+            <button type="submit" class="signin_btn sign-btn" tabindex="3">
+              <span>Sign in</span>
+            </button>
+          </form>
+          <!-- form dang ki -->
+          <form action="" id="registerForm">
+            <h2>Create an account</h2>
+            <div class="form-group hoTen">
+              <input
+                type="text"
+                id="Ho"
+                name="Ho"
+                placeholder="Nhap Ho"
+                required
+              />
+              <input
+                type="text"
+                id="ten"
+                name="ten"
+                placeholder="Nhap ten"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                id="Email"
+                name="Email"
+                placeholder="Nhap Email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="password"
+                name="password"
+                placeholder="Nhap Password"
+                required
+              />
+            </div>
+            <button type="submit" class="signup-btn sign-btn">
+              <span>Create an account</span>
+            </button>
+            <h3 class="signin-with">or sign in with</h3>
+            <div class="more-signin">
+              <button id="Google">
+                <img src="../assets/Google__G__logo.svg.png" alt="Google" />
+              </button>
+              <button id="Apple">
+                <img src="../assets/apple-logo-svgrepo-com.svg" alt="Apple" />
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <script src="./js/data.js"></script>
+    <script src="./js/auth.js"></script>
     <script src="./js/ultis.js"></script>
     <script src="./js/product.js"></script>
   </body>

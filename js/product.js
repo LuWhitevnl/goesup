@@ -60,6 +60,7 @@ function renderProducts(list = filteredProducts, page = 1) {
     });
   });
   renderPagination(list);
+  // sortProducts();
   loadCartHeader();
 }
 
@@ -182,6 +183,7 @@ document.querySelector(".reset-filter").addEventListener("click", () => {
   });
   filteredProducts = getProducts();
   currentPage = 1;
+  // sortProducts();
   renderProducts(filteredProducts, currentPage);
 });
 
