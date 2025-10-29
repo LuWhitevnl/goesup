@@ -1,215 +1,225 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/reset.css" />
+    <title>Document</title>
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="./css/indexStyle.css" />
-    <title>SGU - Style Goes Up</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/home.css" />
   </head>
   <body>
-    <header id="header">
-      <div class="logo-box">
-        <a href="" class="logo">
-          <img src="../assets/1760878542405.png" alt="logo" />
-        </a>
-        <h2>Goes<span>Up</span></h2>
-      </div>
-      <div id="menu">
-        <div class="item">
-          <a href="#"> Trang chủ </a>
-        </div>
-        <div class="item">
-          <a href="">Đồ Nam</a>
-        </div>
-        <div class="item">
-          <a href="">Đồ Nữ</a>
-        </div>
-        <div class="item">
-          <a href="">Trẻ Em</a>
-        </div>
-      </div>
-      <div id="action">
-        <div class="item">
-          <form action="" id="search-btn" role="search" aria-label="search">
-            <button type="button" class="search-btn" aria-label="search">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-            <input
-              type="search"
-              placeholder="search"
+    <section id="intro-container">
+      <div id="header">
+        <div id="logo"></div>
+        <ul class="root">
+          <li>
+            <a href="#intro-container"
+              ><i class="fas fa-home"></i><b>Home</b></a
+            >
+          </li>
+          <li>
+            <a href=""
+              ><b><i class="fas fa-layer-group"></i>Collection</b></a
+            >
+          </li>
+          <li>
+            <a href="./product.html?gender=men"
+              ><b><i class="fas fa-mars"></i>Man's fashion</b></a
+            >
+          </li>
+          <li>
+            <a href="./product.html?gender=women"
+              ><i class="fas fa-venus"></i><b>Women's fashion</b></a
+            >
+          </li>
+          <li>
+            <a href="./product.html"
+              ><i class="fas fa-shopping-bag"></i><b>Accessories</b></a
+            >
+          </li>
+        </ul>
+        <div class="action-bar">
+          <div class="item">
+            <!-- <div class="search-bar">
+              <button type="button" class="search-btn" aria-label="search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+              <input
+                type="search"
+                placeholder="Search"
+                aria-label="search"
+                autocomplete="new-password"
+              />
+            </div> -->
+
+            <form
+              action=""
+              class="search-bar"
+              role="search"
               aria-label="search"
-              autocomplete="new-password"
-            />
-          </form>
-
-          <!-- tim kiem mo rong -->
-          <div class="overlay">
-            <div class="search-ex" id="search-ex">
-              <div class="search-box">
-                <div class="logo-box">
-                  <a href="" class="logo">
-                    <img src="../assets/1760878542405.png" alt="logo" />
-                  </a>
-                  <h2>Goes<span>Up</span></h2>
-                </div>
-                <form action="" class="searchBox" id="searchBox">
-                  <button type="submit" class="search-btn" aria-label="search">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                  </button>
-                  <input
-                    id="search-input"
-                    type="search"
-                    placeholder="search"
-                    autocomplete="off"
-                    autofocus
-                  />
-                </form>
-                <button id="close-search" class="close-btn">Cancel</button>
-              </div>
-              <div class="search-dropdown" id="search-dropdown">
-                <div class="section suggest">
-                  <h3>Gợi Ý</h3>
-                  <ul id="suggestList">
-                    <li>goi y 1</li>
-                    <li>goi y 2</li>
-                    <li>goi y 3</li>
-                    <li>goi y 1</li>
-                    <li>goi y 2</li>
-                    <li>goi y 3</li>
-                    <li>goi y 1</li>
-                    <li>goi y 2</li>
-                    <li>goi y 3</li>
-                    <li>goi y 1</li>
-                    <li>goi y 2</li>
-                    <li>goi y 3</li>
-                    <li>goi y 1</li>
-                    <li>goi y 2</li>
-                    <li>goi y 3</li>
-                  </ul>
-                </div>
-                <div class="section recent">
-                  <h3>Lịch sử tìm kiếm</h3>
-                  <ul id="recentList">
-                    <li>lich su 1</li>
-                    <li>lich su 2</li>
-                    <li>lich su 3</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            >
+              <button type="button" class="search-btn" aria-label="search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+              <input
+                type="search"
+                placeholder="search"
+                aria-label="search"
+                autocomplete="new-password"
+              />
+            </form>
           </div>
-        </div>
-        <div class="item cart">
-          <i class="fa-solid fa-cart-shopping"></i>
-        </div>
-        <div class="item user">
-          <i class="fa-solid fa-circle-user"></i>
+          <button type="button" class="payment-user cart">
+            <i class="fas fa-cart-shopping item1"></i>
+            <div class="product-cart">1</div>
+          </button>
+          <button type="button" class="payment-user user">
+            <i class="fas fa-user item2"></i>
+          </button>
+          <!-- <div class="payment-user"></div> -->
         </div>
       </div>
-    </header>
-
-    <main id="main">
-      <div class="main-top">
-        <div class="container">
-          <div class="slider">
-            <div
-              class="item"
-              style="background-image: url(../assets/banner1.webp)"
-            >
-              <div class="content">
-                <div class="name">ACBD</div>
-                <div class="des">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Fugit, nisi?
-                </div>
-                <button>See more</button>
-              </div>
+      <!-- tim kiem mo rong -->
+      <div class="overlay">
+        <div class="search-ex" id="search-ex">
+          <div class="search-box">
+            <div class="logo-box">
+              <a href="" class="logo">
+                <img src="../assets/1760878542405.png" alt="logo" />
+              </a>
+              <h2>Goes<span>Up</span></h2>
             </div>
-            <div
-              class="item"
-              style="background-image: url(../assets/banner2.webp)"
-            >
-              <div class="content">
-                <div class="name">ACBD</div>
-                <div class="des">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Fugit, nisi?
-                </div>
-                <button>See more</button>
-              </div>
-            </div>
-            <div
-              class="item"
-              style="background-image: url(../assets/banner3.jpg)"
-            >
-              <div class="content">
-                <div class="name">ACBD</div>
-                <div class="des">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Fugit, nisi?
-                </div>
-                <button>See more</button>
-              </div>
-            </div>
-            <div
-              class="item"
-              style="background-image: url(../assets/banner4.webp)"
-            >
-              <div class="content">
-                <div class="name">ACBD</div>
-                <div class="des">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Fugit, nisi?
-                </div>
-                <button>See more</button>
-              </div>
-            </div>
-            <div
-              class="item"
-              style="background-image: url(../assets/banner5.webp)"
-            >
-              <div class="content">
-                <div class="name">ACBD</div>
-                <div class="des">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Fugit, nisi?
-                </div>
-                <button>See more</button>
-              </div>
-            </div>
-            <div
-              class="item"
-              style="background-image: url(../assets/banner6.webp)"
-            >
-              <div class="content">
-                <div class="name">ACBD</div>
-                <div class="des">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Fugit, nisi?
-                </div>
-                <button>See more</button>
-              </div>
-            </div>
+            <form action="" class="searchBox" id="searchBox">
+              <button type="submit" class="search-btn" aria-label="search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+              <input
+                id="search-input"
+                type="search"
+                placeholder="search"
+                autocomplete="off"
+                autofocus
+              />
+            </form>
+            <button id="close-search" class="close-btn">Cancel</button>
           </div>
-          <div class="button">
-            <button class="prev">
-              <i class="fa-solid fa-arrow-left"></i>
-            </button>
-            <button class="next">
-              <i class="fa-solid fa-arrow-right"></i>
-            </button>
+          <div class="search-dropdown" id="search-dropdown">
+            <div class="section suggest">
+              <h3>Gợi Ý</h3>
+              <ul id="suggestList">
+                <li>goi y 1</li>
+                <li>goi y 2</li>
+                <li>goi y 3</li>
+                <li>goi y 1</li>
+                <li>goi y 2</li>
+                <li>goi y 3</li>
+                <li>goi y 1</li>
+                <li>goi y 2</li>
+                <li>goi y 3</li>
+                <li>goi y 1</li>
+                <li>goi y 2</li>
+                <li>goi y 3</li>
+                <li>goi y 1</li>
+                <li>goi y 2</li>
+                <li>goi y 3</li>
+              </ul>
+            </div>
+            <div class="section recent">
+              <h3>Lịch sử tìm kiếm</h3>
+              <ul id="recentList">
+                <li>lich su 1</li>
+                <li>lich su 2</li>
+                <li>lich su 3</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-    </main>
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        src="./assets/video/intro.vid.mp4"
+        id="bg-video"
+        type="video/mp4"
+      ></video>
+      <div class="text">
+        <div id="txt">
+          <h1>WELCOME TO QVD</h1>
+          <p>Fashion is a way to express your personality without speaking.</p>
+          <p>
+            Everyone has their own style — whether it’s simple, elegant, or
+            unique
+          </p>
+          <p>
+            For me, fashion is not just about clothes, but also about confidence
+            and attitude.
+          </p>
+          <p style="font-size: 18px; margin-top: 3px">
+            As Coco Chanel once said: <i>“Fashion fades, but style remains.</i>”
+          </p>
+        </div>
+        <div id="txt-2">
+          <p class="txt-2">
+            <i>QVD (quatre-vingt-deux</i>) is a modern and stylish fashion store
+          </p>
+          <p class="txt-2">
+            where you can find outfits for every occasion — from school
+          </p>
+          <p class="txt-2">
+            and work to casual streetwear. <i>QVD</i> focuses on minimal,
+            easy-to-style
+          </p>
+          <p class="txt-2">
+            pieces that help you express your unique taste effortlessly.
+          </p>
+          <p class="txt-2"><i>QVD</i> – Keep it simple. Make it stand out.</p>
+        </div>
+      </div>
+      <a href="#none">
+        <button class="shop-btn">
+          <i class="fas fa-shopping-bag"></i><b>SHOP NOW</b>
+        </button>
+      </a>
+      <a href="">
+        <button class="contact-btn">
+          <i class="fas fa-paper-plane"></i>
+          <b>CONTACT US</b>
+        </button>
+      </a>
+    </section>
+    <div id="none"></div>
+    <div id="content">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, ex harum
+      modi assumenda laudantium itaque aspernatur commodi minima maxime vitae at
+      voluptas. Deleniti expedita totam porro nesciunt suscipit iusto sed. Cum
+      ex est culpa ipsum dignissimos saepe animi, id nobis similique, veritatis
+      fugit? Laboriosam suscipit obcaecati facere, veritatis, eius non hic
+      explicabo, deleniti molestias ducimus labore blanditiis ea corrupti
+      aliquam. Voluptatibus similique iusto mollitia dolor repudiandae maxime,
+      nostrum voluptas non minus dolorem ipsam omnis quibusdam accusamus labore
+      tempora. A neque expedita dolores quas nihil rem facilis maxime corporis
+      reiciendis quod? Rerum velit, consequatur quam quos nemo iusto atque
+      tenetur, aliquid, autem similique at? Ab mollitia vel commodi sit
+      voluptatum, modi, sunt ex a deleniti dolorem nesciunt, debitis asperiores
+      eum aperiam. Error perferendis eligendi quam modi, fugiat inventore cumque
+      quod, assumenda provident nam at labore quo deserunt minima praesentium
+      accusamus qui hic sint, nihil illum repellat rerum est. Velit, aut
+      laboriosam!
+    </div>
+
+    <!-- popup -->
+
     <div class="formWapper">
       <div class="popupBox">
         <div class="tool">
@@ -318,8 +328,6 @@
         </div>
       </div>
     </div>
-    <script src="./js/data.js"></script>
-    <script src="./js/auth.js"></script>
-    <script src="./js/app.js"></script>
+    <script src="./js/home.js"></script>
   </body>
 </html>

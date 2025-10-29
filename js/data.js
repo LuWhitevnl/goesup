@@ -1,4 +1,4 @@
-const app_version = "1.0.8";
+const app_version = "1.0.1";
 
 const savedVersion = localStorage.getItem("appversion");
 if (savedVersion !== app_version) {
@@ -63,6 +63,9 @@ if (!localStorage.getItem("products")) {
       costPrice: 200000,
       profitPercent: 25,
       price: 250000,
+      color: "black",
+      gender: "men",
+      size: "L",
       productDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, adipisci.",
       quantity: 10,
@@ -75,6 +78,9 @@ if (!localStorage.getItem("products")) {
       costPrice: 180000,
       profitPercent: 30,
       price: 234000,
+      color: "red",
+      gender: "women",
+      size: "XL",
       productDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, adipisci.",
       quantity: 5,
@@ -87,6 +93,9 @@ if (!localStorage.getItem("products")) {
       costPrice: 280000,
       profitPercent: 25,
       price: 350000,
+      color: "black",
+      gender: "men",
+      size: "L",
       productDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, adipisci.",
       quantity: 8,
@@ -99,6 +108,9 @@ if (!localStorage.getItem("products")) {
       costPrice: 100000,
       profitPercent: 50,
       price: 150000,
+      color: "red",
+      gender: "unisex",
+      size: "M",
       productDesc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, adipisci.",
       quantity: 20,
@@ -240,4 +252,22 @@ if (!localStorage.getItem("orders")) {
   console.log("Dữ liệu đơn hàng đã tồn tại");
 }
 
+if (!localStorage.getItem("cart")) {
+  const sampleCart = [
+    {
+      id: "P003",
+      name: "Quần jean xanh",
+      type: "Quần jean",
+      price: 350000,
+      productDesc:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, adipisci.",
+      quantity: 1,
+      color: "black",
+      gender: "men",
+      image: "./assets/ao1.avif",
+    },
+  ];
+  localStorage.setItem("cart", JSON.stringify(sampleCart));
+  console.log("da tao gio hang");
+}
 // localStorage.clear();

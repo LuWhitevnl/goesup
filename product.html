@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/product.css" />
+  </head>
+  <body>
+    <div id="header">
+      <div id="logo"></div>
+      <ul class="root">
+        <li>
+          <a href="./index.html"><i class="fas fa-home"></i><b>Home</b></a>
+        </li>
+        <li>
+          <a href=""
+            ><b><i class="fas fa-layer-group"></i>Collection</b></a
+          >
+        </li>
+        <li>
+          <a href="./product.html?gender=men"
+            ><b><i class="fas fa-mars"></i>Man's fashion</b></a
+          >
+        </li>
+        <li>
+          <a href="./product.html?gender=women"
+            ><i class="fas fa-venus"></i><b>Women's fashion</b></a
+          >
+        </li>
+        <li>
+          <a href="./product.html"
+            ><i class="fas fa-shopping-bag"></i><b>Accessories</b></a
+          >
+        </li>
+      </ul>
+      <div class="action-bar">
+        <div class="search-content">
+          <!-- <div class="search-bar">
+            <button type="button" class="search-btn" aria-label="search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <input
+              type="search"
+              placeholder="Search"
+              aria-label="search"
+              autocomplete="new-password"
+            />
+          </div> -->
+
+          <form action="" class="search-bar" role="search" aria-label="search">
+            <button type="button" class="search-btn" aria-label="search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <input
+              type="search"
+              placeholder="search"
+              aria-label="search"
+              autocomplete="new-password"
+            />
+          </form>
+        </div>
+
+        <button type="button" class="payment-user cart">
+          <i class="fas fa-cart-shopping item1"></i>
+          <div class="product-cart">0</div>
+        </button>
+        <button type="button" class="payment-user user">
+          <i class="fas fa-user item2"></i>
+        </button>
+        <!-- <div class="payment-user"></div> -->
+      </div>
+    </div>
+    <!-- tim kiem mo rong -->
+    <div class="overlay">
+      <div class="search-ex" id="search-ex">
+        <div class="search-box">
+          <div class="logo-box">
+            <a href="" class="logo">
+              <img src="../assets/1760878542405.png" alt="logo" />
+            </a>
+            <h2>Goes<span>Up</span></h2>
+          </div>
+          <form action="" class="searchBox" id="searchBox">
+            <button type="submit" class="search-btn" aria-label="search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <input
+              id="search-input"
+              type="search"
+              placeholder="search"
+              autocomplete="off"
+              autofocus
+            />
+          </form>
+          <button id="close-search" class="close-btn">Cancel</button>
+        </div>
+        <div class="search-dropdown" id="search-dropdown">
+          <div class="section suggest">
+            <h3>Gợi Ý</h3>
+            <ul id="suggestList">
+              <li>goi y 1</li>
+              <li>goi y 2</li>
+              <li>goi y 3</li>
+              <li>goi y 1</li>
+              <li>goi y 2</li>
+              <li>goi y 3</li>
+              <li>goi y 1</li>
+              <li>goi y 2</li>
+              <li>goi y 3</li>
+              <li>goi y 1</li>
+              <li>goi y 2</li>
+              <li>goi y 3</li>
+              <li>goi y 1</li>
+              <li>goi y 2</li>
+              <li>goi y 3</li>
+            </ul>
+          </div>
+          <div class="section recent">
+            <h3>Lịch sử tìm kiếm</h3>
+            <ul id="recentList">
+              <li>lich su 1</li>
+              <li>lich su 2</li>
+              <li>lich su 3</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div id="filter">
+      <div class="filter-content"></div>
+      <div class="filter-action">
+        <button class="filter filter-btn" onclick="openFilter()">
+          <span id="txt-filter">Hide Filter</span
+          ><i class="fa-solid fa-sliders"></i>
+        </button>
+        <button class="filter sort-btn" onclick="sortOpen(this)">
+          Sort By<i class="fa-solid fa-chevron-down"></i>
+          <div id="sort-list">
+            <ul class="sort-item">
+              <li>
+                <a href="">Feartured</a>
+              </li>
+              <li>
+                <a href="">Newest</a>
+              </li>
+              <li>
+                <a href="">Price: High-Low</a>
+              </li>
+              <li>
+                <a href="">Price: Low-High</a>
+              </li>
+            </ul>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div id="content">
+      <div id="filter-content"></div>
+      <div id="main-content">
+        <div id="scroll-wrapper">
+          <a href="">
+            <div class="item">
+              <img
+                src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                alt=""
+              />
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+          </a>
+          <a href="">
+            <div class="item">
+              <img
+                src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                alt=""
+              />
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+          </a>
+          <a href="">
+            <div class="item">
+              <img
+                src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                alt=""
+              />
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+          </a>
+          <a href="">
+            <div class="item">
+              <img
+                src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                alt=""
+              />
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+          </a>
+          <a href="">
+            <div class="item">
+              <img
+                src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                alt=""
+              />
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+          </a>
+          <a href="">
+            <div class="item">
+              <img
+                src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                alt=""
+              />
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+          </a>
+          <a href="">
+            <div class="item">
+              <img
+                src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                alt=""
+              />
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+          </a>
+          <a href="">
+            <div class="item">
+              <img
+                src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                alt=""
+              />
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+          </a>
+          <a href="">
+            <div class="item">
+              <img
+                src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                alt=""
+              />
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+          </a>
+          <a href="">
+            <div class="item">
+              <img
+                src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                alt=""
+              />
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+          </a>
+          <a href="">
+            <div class="item">
+              <img
+                src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                alt=""
+              />
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+          </a>
+          <a href="">
+            <div class="item">
+              <img
+                src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                alt=""
+              />
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+          </a>
+          <a href="">
+            <div class="item">
+              <img
+                src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                alt=""
+              />
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+          </a>
+          <a href="">
+            <div class="item">
+              <img
+                src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                alt=""
+              />
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+          </a>
+          <a href="">
+            <div class="item">
+              <img
+                src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                alt=""
+              />
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div> -->
+
+    <main class="main">
+      <div class="main-top">
+        <div class="main-top__type-lenght">
+          <span>men's jackets <strong class="count-item"></strong></span>
+        </div>
+        <div class="action">
+          <div class="hide-filter-btn">
+            <span filter-hide-text>hide filter</span>
+            <span class="material-symbols-outlined"> page_info </span>
+          </div>
+          <div class="sort-btn">
+            <select name="sort-products" id="sort-products">
+              <option value="price-High-Low">price: High-Low</option>
+              <option value="price-Low-High">price: Low-high</option>
+              <option value="name-az">name: a-z</option>
+              <option value="name-za">name: z-a</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="main-body">
+        <div class="filter-sidebar">
+          <h3 class="filter-title">Filter</h3>
+
+          <!-- cate -->
+          <div class="filter-group caategory">
+            <p>t-shirt</p>
+            <p>t-shirt</p>
+            <p>t-shirt</p>
+            <p>t-shirt</p>
+            <p>t-shirt</p>
+            <p>t-shirt</p>
+            <p>t-shirt</p>
+            <p>t-shirt</p>
+            <p>t-shirt</p>
+            <p>t-shirt</p>
+            <p>t-shirt</p>
+            <p>t-shirt</p>
+            <p>t-shirt</p>
+            <p>t-shirt</p>
+            <p>t-shirt</p>
+            <p>t-shirt</p>
+          </div>
+          <!-- Gender -->
+          <div class="filter-group">
+            <button class="filter-toggle">Gender <span>+</span></button>
+            <div class="filter-options gender">
+              <label
+                ><input type="checkbox" name="gender" value="men" /> Men</label
+              >
+              <label
+                ><input type="checkbox" name="gender" value="women" />
+                Women</label
+              >
+              <label
+                ><input type="checkbox" name="gender" value="unisex" />
+                Unisex</label
+              >
+            </div>
+          </div>
+
+          <!-- Price -->
+          <div class="filter-group">
+            <button class="filter-toggle">Price <span>+</span></button>
+            <div class="filter-options filter-price">
+              <label
+                ><input type="radio" name="price" value="0-500" /> 0 -
+                500k</label
+              >
+              <label
+                ><input type="radio" name="price" value="500-1000" /> 500k -
+                1tr</label
+              >
+              <label
+                ><input type="radio" name="price" value="1000-2000" /> 1tr -
+                2tr</label
+              >
+              <label
+                ><input type="radio" name="price" value="2000+" /> > 2tr</label
+              >
+            </div>
+          </div>
+
+          <!-- Color -->
+          <div class="filter-group">
+            <button class="filter-toggle">Color <span>+</span></button>
+            <div class="filter-options colors">
+              <label
+                ><input type="checkbox" value="black" /><span
+                  class="color-box black"
+                ></span>
+                Black</label
+              >
+              <label
+                ><input type="checkbox" value="white" /><span
+                  class="color-box white"
+                ></span>
+                White</label
+              >
+              <label
+                ><input type="checkbox" value="red" /><span
+                  class="color-box red"
+                ></span>
+                Red</label
+              >
+              <label
+                ><input type="checkbox" value="blue" /><span
+                  class="color-box blue"
+                ></span>
+                Blue</label
+              >
+              <label
+                ><input type="checkbox" value="green" /><span
+                  class="color-box green"
+                ></span>
+                Green</label
+              >
+              <label
+                ><input type="checkbox" value="other" /><span
+                  class="color-box gray"
+                ></span>
+                Other</label
+              >
+            </div>
+          </div>
+
+          <button class="reset-filter">Reset Filters</button>
+        </div>
+        <div class="main-content">
+          <div class="product-list-item">
+            <div class="item">
+              <div class="item-img">
+                <img src="./assets/ao1.avif" alt="" />
+              </div>
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+              <button class="add-cart-btn">add to cart</button>
+            </div>
+            <div class="item">
+              <div class="item-img">
+                <img
+                  src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                  alt=""
+                />
+              </div>
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-img">
+                <img
+                  src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                  alt=""
+                />
+              </div>
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-img">
+                <img
+                  src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                  alt=""
+                />
+              </div>
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-img">
+                <img
+                  src="/assect/img/Ảnh chụp màn hình 2025-09-04 220101.png"
+                  alt=""
+                />
+              </div>
+              <div class="detail">
+                <p><b>Name Product</b></p>
+                <p style="color: grey">Brand</p>
+                <p><b>Price</b></p>
+              </div>
+            </div>
+          </div>
+          <div class="pagination"></div>
+        </div>
+      </div>
+    </main>
+    <script src="./js/data.js"></script>
+    <script src="./js/ultis.js"></script>
+    <script src="./js/product.js"></script>
+  </body>
+</html>
