@@ -844,6 +844,57 @@ ul.root li a i {
   overflow: hidden;
 }
 
+.category {
+  /* border-bottom: 1px solid #000000; */
+}
+
+.category h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  cursor: pointer;
+}
+
+.cate {
+  margin-right: 10px;
+  /* margin-bottom: 10px; */
+  overflow: hidden;
+}
+
+.cate .filter-toggle {
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.cate ul {
+  margin-top: 10px;
+  padding-left: 10px;
+  display: flex;
+  height: 0;
+  pointer-events: none;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cate ul li {
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.cate ul li:hover {
+  color: #000;
+}
+
+.cate.active ul {
+  height: auto;
+  pointer-events: all;
+}
+
 .filter-toggle {
   width: 100%;
   background: none;
@@ -967,6 +1018,7 @@ ul.root li a i {
   transition: 0.3s ease;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .product-list-item.hide .item {
@@ -1013,6 +1065,7 @@ ul.root li a i {
   font-weight: 600;
   pointer-events: none;
   opacity: 0;
+  /* z-index: 1; */
   transform: translateY(100%);
   transition: 0.3s ease;
 }
@@ -1049,4 +1102,8 @@ ul.root li a i {
 
 .pagination button:hover:not(.active) {
   background: #ccc;
+}
+
+.product-detail-page {
+  display: none;
 }

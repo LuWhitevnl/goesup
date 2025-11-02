@@ -19,9 +19,6 @@ const switchBg = document.querySelector(".switch-bg");
 const loginForm = document.querySelector("#loginForm");
 const registerForm = document.querySelector("#registerForm");
 
-// bien nut gio hang
-const cart = document.querySelector(".cart");
-
 /**
  *ham tien ich tai su dung
  *togleActive dung toggle() 2 tham so them xoa class
@@ -129,10 +126,23 @@ registerBtn?.addEventListener("click", () => {
   setTimeout(() => focusInput("Ho"), 100);
 });
 
+// bien nut gio hang
+const cart = document.querySelector(".cart");
+const user = document.querySelector(".user");
 // cart
 cart.addEventListener("click", () => {
   const currentUser = JSON.parse(localStorage.getItem("logined"));
   if (currentUser) {
+    localStorage.setItem("cartView", "cart");
+    window.location.href = "cart.html";
+  } else {
+    openLogForm();
+  }
+});
+user.addEventListener("click", () => {
+  const currentUser = JSON.parse(localStorage.getItem("logined"));
+  if (currentUser) {
+    localStorage.setItem("cartView", "account");
     window.location.href = "cart.html";
   } else {
     openLogForm();
@@ -141,13 +151,24 @@ cart.addEventListener("click", () => {
 
 function loadCartHeader() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  console.log(cart.length);
-  if (cart.length !== 0) {
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+  const carts = cart.filter((c) => c.user === user.username);
+  if (carts.length !== 0) {
     document.querySelector(".product-cart").classList.add("empty");
-    document.querySelector(".product-cart").textContent = cart.length;
+    document.querySelector(".product-cart").textContent = carts.length;
   } else {
     document.querySelector(".product-cart").classList.remove("empty");
   }
 }
 
 loadCartHeader();
+
+function message(text) {
+  const msg = document.createElement("div");
+  msg.textContent = text;
+  msg.classList.add("toast");
+  msg.style.cssText =
+    "position:fixed;top:100px;right:20px;background:#000;color:#fff;padding:8px 16px;border-radius:8px;opacity:0.9;z-index:9999;";
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 1500);
+}

@@ -1,4 +1,4 @@
-const app_version = "1.0.1";
+const app_version = "1.0.22";
 
 const savedVersion = localStorage.getItem("appversion");
 if (savedVersion !== app_version) {
@@ -13,7 +13,7 @@ if (!localStorage.getItem("users")) {
     {
       username: "user1",
       password: "123",
-      locked: true,
+      locked: false,
       name: "Luan Vo",
       email: "luanvo@gmail.com",
       phoneNumber: "099912322",
@@ -40,11 +40,39 @@ if (!localStorage.getItem("users")) {
 // ================= PRODUCT TYPES =================
 if (!localStorage.getItem("productTypes")) {
   const productTypes = [
-    { code: "T001", name: "T-shirt", desc: "Casual and sport cotton shirts" },
-    { code: "T002", name: "Jeans", desc: "Denim pants for men and women" },
+    { code: "T001", name: "Women", desc: "Casual and sport cotton shirts" },
+    { code: "T002", name: "Men", desc: "Denim pants for men and women" },
     { code: "T003", name: "Accessories", desc: "Caps, belts, socks, bags..." },
   ];
   localStorage.setItem("productTypes", JSON.stringify(productTypes));
+}
+
+if (!localStorage.getItem("category")) {
+  const category = [
+    { type: "Women", cate: "Dresses" },
+    { type: "Women", cate: "Tops & Blouses" },
+    { type: "Women", cate: "Bottoms" },
+    { type: "Women", cate: "Outerwear" },
+    { type: "Women", cate: "Activewear" },
+    { type: "Women", cate: "Knitwear" },
+    { type: "Men", cate: "T-shirts & polos" },
+    { type: "Men", cate: "Shirts" },
+    { type: "Men", cate: "Pants & Trousers" },
+    { type: "Men", cate: "Shorts" },
+    { type: "Men", cate: "Outerwear" },
+    { type: "Men", cate: "Sweaters " },
+    { type: "Men", cate: "Activewear " },
+    { type: "Men", cate: "Outerwear" },
+    { type: "Accessories", cate: "Accessories" },
+    { type: "Accessories", cate: "Bags & Purses" },
+    { type: "Accessories", cate: "Jewelry " },
+    { type: "Accessories", cate: "Scarves & Shawls " },
+    { type: "Accessories", cate: "Hair Accessories " },
+    { type: "Accessories", cate: "Watches " },
+    { type: "Accessories", cate: "Hats & Caps  " },
+    { type: "Accessories", cate: "Belts" },
+  ];
+  localStorage.setItem("category", JSON.stringify(category));
 }
 
 // ================= PRODUCTS =================
@@ -53,62 +81,86 @@ if (!localStorage.getItem("products")) {
     {
       id: "P001",
       name: "Blue Cotton T-shirt",
-      type: "T-shirt",
+      type: "Men",
+      cate: "T-shirts & polos",
       costPrice: 200000,
       profitPercent: 25,
       price: 250000,
-      color: "blue",
-      gender: "men",
-      size: "L",
+      color: ["blue", "black"],
       productDesc:
         "Soft cotton T-shirt suitable for daily wear or light workouts.",
+      images: [
+        "./assets/20240827_99qstqYiE1.png",
+        "./assets/20240827_99qstqYiE2.png",
+        "./assets/20240827_99qstqYiE3.png",
+      ],
+      sizes: ["M", "L", "XL"],
       quantity: 10,
-      image: "./assets/20240827_99qstqYiE1.png",
+      hidden: false,
     },
     {
       id: "P002",
       name: "White Cotton T-shirt",
-      type: "T-shirt",
+      type: "Men",
+      cate: "T-shirts & polos",
       costPrice: 180000,
       profitPercent: 30,
       price: 234000,
-      color: "white",
-      gender: "women",
-      size: "XL",
+      color: ["white", "black"],
       productDesc: "Comfortable white T-shirt made from premium cotton fabric.",
-      quantity: 5,
-      image: "./assets/blank-image.png",
+      images: [
+        "./assets/blank-image.png",
+        "./assets/white-shirt-side.png",
+        "./assets/white-shirt-back.png",
+      ],
+      sizes: ["M", "L", "XL"],
+      quantity: 10,
+      hidden: false,
     },
     {
       id: "P003",
       name: "Blue Denim Jeans",
-      type: "Jeans",
+      type: "Women",
+      cate: "Dresses",
       costPrice: 280000,
       profitPercent: 25,
       price: 350000,
-      color: "blue",
-      gender: "men",
-      size: "L",
+      color: ["blue", "white"],
       productDesc: "Durable and stylish blue jeans for everyday use.",
+      images: [
+        "./assets/ao1.avif",
+        "./assets/jeans-back.avif",
+        "./assets/jeans-detail.avif",
+      ],
+      sizes: ["M", "L", "XL"],
       quantity: 8,
-      image: "./assets/ao1.avif",
+      hidden: false,
     },
     {
       id: "P004",
       name: "Men’s Baseball Cap",
       type: "Accessories",
+      cate: "Belts",
       costPrice: 100000,
       profitPercent: 50,
       price: 150000,
-      color: "black",
-      gender: "unisex",
-      size: "M",
+      color: ["blue"],
       productDesc: "Classic black baseball cap suitable for casual outfits.",
-      quantity: 20,
-      image: "./assets/blank-image.png",
+      images: [
+        "./assets/blank-image.png",
+        "./assets/cap-detail.png",
+        "./assets/cap-top.png",
+      ],
+      sizes: ["M", "L"],
+      quantity: 11,
+      hidden: false,
     },
   ];
+
   localStorage.setItem("products", JSON.stringify(products));
+  console.log(
+    "Product data with multiple images and sizes has been initialized."
+  );
 }
 
 // ================= IMPORT ORDERS =================
@@ -152,88 +204,27 @@ if (!localStorage.getItem("imports")) {
 if (!localStorage.getItem("orders")) {
   const orders = [
     {
-      id: "O001",
-      customer: "Luan Vo",
+      id: "O005",
+      customer: "Võ Nhựt Luân",
       username: "user1",
-      customerPhone: "092841242",
-      customerAddress: "Saigon University, District 5",
-      date: "2025-10-23",
+      customerPhone: "0395166079",
+      customerAddress: "dhsg quan 5",
+      date: "2025-11-02",
       items: [
         {
           productId: "P001",
           name: "Blue Cotton T-shirt",
-          quantity: 2,
+          type: "Men",
+          color: "blue",
+          size: "M",
+          quantity: 1,
+          image: "./assets/20240827_99qstqYiE1.png",
           price: 250000,
         },
-        {
-          productId: "P004",
-          name: "Men’s Baseball Cap",
-          quantity: 1,
-          price: 150000,
-        },
       ],
-      total: 650000,
+      total: 250000,
+      paymentMethod: "COD",
       status: "New",
-    },
-    {
-      id: "O002",
-      customer: "Vo Luan",
-      username: "user2",
-      customerPhone: "0193749823",
-      customerAddress: "Saigon University, District 5",
-      date: "2025-10-22",
-      items: [
-        {
-          productId: "P003",
-          name: "Blue Denim Jeans",
-          quantity: 1,
-          price: 350000,
-        },
-      ],
-      total: 350000,
-      status: "Shipping",
-    },
-    {
-      id: "O003",
-      customer: "Luan Vo",
-      username: "user1",
-      customerPhone: "09849274",
-      customerAddress: "Saigon University, District 3",
-      date: "2025-10-21",
-      items: [
-        {
-          productId: "P002",
-          name: "White Cotton T-shirt",
-          quantity: 3,
-          price: 234000,
-        },
-        {
-          productId: "P003",
-          name: "Blue Denim Jeans",
-          quantity: 2,
-          price: 350000,
-        },
-      ],
-      total: 1412000,
-      status: "Completed",
-    },
-    {
-      id: "O004",
-      customer: "Vo Luan",
-      username: "user2",
-      customerPhone: "018747279",
-      customerAddress: "Saigon University, Campus 1",
-      date: "2025-10-20",
-      items: [
-        {
-          productId: "P004",
-          name: "Men’s Baseball Cap",
-          quantity: 5,
-          price: 150000,
-        },
-      ],
-      total: 750000,
-      status: "Cancelled",
     },
   ];
   localStorage.setItem("orders", JSON.stringify(orders));
@@ -245,12 +236,14 @@ if (!localStorage.getItem("cart")) {
   const sampleCart = [
     {
       id: "P003",
+      user: user1,
       name: "Blue Denim Jeans",
       type: "Jeans",
       price: 350000,
       productDesc: "Durable and stylish blue jeans for everyday use.",
       quantity: 1,
       color: "blue",
+      size: "M",
       gender: "men",
       image: "./assets/ao1.avif",
     },

@@ -62,6 +62,12 @@
               <span class="text">Products</span>
             </button>
           </li>
+          <li onclick="showPage('store', this)" class="menu-item user-btn">
+            <button class="menu-title">
+              <span class="material-symbols-outlined"> storefront </span>
+              <span class="text">Store</span>
+            </button>
+          </li>
           <li
             onclick="showPage('warehouse', this)"
             class="menu-item warehouse-btn"
@@ -449,37 +455,60 @@
           <div class="item-list">
             <div class="item-card">
               <div class="img-box">
-                <img src="" alt="" />
+                <img src="./assets/ao1.avif" alt="" />
               </div>
               <div class="content-card">
-                <div class="card-title">
-                  <h3 class="name">afkdsa</h3>
-                  <span class="type">afdaf</span>
+                <h3>Blue cotton t-shirt</h3>
+                <p><b>type:</b>T-shirt</p>
+                <p class="desc">Lorem ipsum dolor sit amet.</p>
+                <div class="stock-info">
+                  <p><b>sizes:</b></p>
+                  <ul>
+                    <li>M - 5</li>
+                    <li>L - 3</li>
+                    <li>XL - 2</li>
+                  </ul>
                 </div>
-                <div class="card-price">
-                  <div class="price">1000d</div>
-                  <div class="status">afaf</div>
-                </div>
-                <div class="card-desc card-more_info">
-                  <span>Desc: Lorem ipsum dolor sit amet.</span>
-                </div>
-                <div class="card-more_info">
-                  <div>
-                    <span>Giá vốn</span>
-                    <div class="cost-price">afaf</div>
-                  </div>
-                  <div>
-                    <span>Lợi nhuận</span>
-                    <div class="profit-precent">afaf</div>
+                <div class="color-info">
+                  <p><b>Color:</b></p>
+                  <div class="color-dots">
+                    <span class="color-dot" style="background: blue"></span>
+                    <span class="color-dot" style="background: black"></span>
                   </div>
                 </div>
-                <div class="card-btn-box">
-                  <span>Stock: afaf</span>
-                  <div class="card-btn">
-                    <button class="btn-edit" data-id="">Sửa</button>
-                    <button class="btn-delete" data-id="">Xóa</button>
+              </div>
+              <div class="card-btn">
+                <button class="btn-edit" data-id="">Sửa</button>
+                <button class="btn-delete" data-id="">Xóa</button>
+              </div>
+            </div>
+            <div class="item-card">
+              <div class="img-box">
+                <img src="./assets/ao1.avif" alt="" />
+              </div>
+              <div class="content-card">
+                <h3>Blue cotton t-shirt</h3>
+                <p><b>type:</b>T-shirt</p>
+                <p class="desc">Lorem ipsum dolor sit amet.</p>
+                <div class="stock-info">
+                  <p><b>sizes:</b></p>
+                  <ul>
+                    <li>M - 5</li>
+                    <li>L - 3</li>
+                    <li>XL - 2</li>
+                  </ul>
+                </div>
+                <div class="color-info">
+                  <p><b>Color:</b></p>
+                  <div class="color-dots">
+                    <span class="color-dot" style="background: blue"></span>
+                    <span class="color-dot" style="background: black"></span>
                   </div>
                 </div>
+              </div>
+              <div class="card-btn">
+                <button class="btn-edit" data-id="">Sửa</button>
+                <button class="btn-delete" data-id="">Xóa</button>
               </div>
             </div>
           </div>
@@ -487,61 +516,141 @@
         </section>
 
         <!-- Popup thêm/sửa sản phẩm -->
-        <div class="modal-overlay" id="productModal">
+        <div id="productModal" class="modal-overlay">
           <div class="modal">
-            <h2 id="modalTitle">Thêm sản phẩm</h2>
-            <div class="modal-box">
-              <div class="pic-group">
-                <div class="pic">
-                  <img
-                    src="./assets/blank-image.png"
-                    alt=""
-                    class="pic-preview"
-                  />
+            <h2 id="modalTitle">Add Product</h2>
+
+            <form id="productForm">
+              <div class="form-box">
+                <div class="form-group form-img">
+                  <label>Product Images</label>
+                  <div id="imageUploadBox" class="upload-box">
+                    <input
+                      type="file"
+                      id="productImage"
+                      multiple
+                      accept="image/*"
+                    />
+                    <div id="previewContainer" class="preview-container">
+                      <span class="placeholder-text">+ Add Images</span>
+                    </div>
+                  </div>
                 </div>
-                <label class="product-image">
-                  <input type="file" id="productImage" />
-                  Choice Image
-                </label>
+                <div>
+                  <div class="form-group">
+                    <label for="productName">Product Name</label>
+                    <input type="text" id="productName" required />
+                  </div>
+
+                  <div class="form-group type-cate">
+                    <div>
+                      <label for="productType">Type</label>
+                      <select id="productType" required>
+                        <option value="T-shirt">T-shirt</option>
+                        <option value="Jeans">Jeans</option>
+                        <option value="Accessories">Accessories</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="cate">Category</label>
+                      <select id="cate" required>
+                        <option value="T-shirt">T-shirt</option>
+                        <option value="T-shirt">T-shirt</option>
+                        <option value="T-shirt">T-shirt</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="productDesc">Description</label>
+                    <input id="productDesc" rows="3" />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="productColors">Colors (comma separated)</label>
+                    <input
+                      type="text"
+                      id="productColors"
+                      placeholder="red, blue, black"
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label>Sizes</label>
+                    <input type="text" id="sizeList" placeholder="S, M, L" />
+                  </div>
+                </div>
               </div>
 
-              <form id="productForm">
-                <div class="form-group">
-                  <label>Tên sản phẩm</label>
-                  <input type="text" id="productName" required />
-                </div>
-
-                <div class="form-group product-type">
-                  <label>Choice type</label>
-                  <select id="productType" required>
-                    <option value="">-- Chọn loại --</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label>% Lợi nhuận</label>
-                  <input type="number" id="productProfit" required />
-                </div>
-                <div class="form-group">
-                  <label>Mô tả</label>
-                  <input type="text" id="productDesc" required />
-                </div>
-
-                <!-- <div class="form-group">
-                  <label>Số lượng</label>
-                  <input type="number" id="productQuantity" min="0" required />
-                </div> -->
-
-                <div class="modal-actions">
-                  <button type="button" class="btn-cancel" id="cancelModal">
-                    Cancelled
-                  </button>
-                  <button type="submit" class="btn-save">Lưu</button>
-                </div>
-              </form>
-            </div>
+              <div class="modal-buttons">
+                <button type="submit" class="btn-save">Save</button>
+                <button type="button" id="cancelModal" class="btn-cancel">
+                  Cancel
+                </button>
+              </div>
+            </form>
           </div>
         </div>
+
+        <!-- store -->
+        <section id="store" class="page content">
+          <div class="content-header">
+            <div class="header-top">
+              <div class="tilte">
+                <h2>Store</h2>
+                <p>Manage your product in store</p>
+              </div>
+            </div>
+            <!-- <h1>Quản lý sản phẩm</h1> -->
+            <div class="actions">
+              <select class="filter" id="filterStore">
+                <option value="all">tìm theo</option>
+                <option value="cost">cost</option>
+                <option value="profit">profit</option>
+                <option value="price">price</option>
+              </select>
+              <input
+                type="number"
+                placeholder="Từ"
+                class="search-box input-store"
+                id="from-store"
+              />
+              <p><b>To</b></p>
+              <input
+                type="number"
+                placeholder="Đến"
+                class="search-box input-store"
+                id="to-store"
+              />
+              <button class="refresh resetStore">
+                <span class="material-symbols-outlined"> refresh </span>
+              </button>
+            </div>
+          </div>
+
+          <div class="item-list item-store-list">
+            <div class="item-card">
+              <div class="img-box">
+                <img src="./assets/ao1.avif" alt="" />
+              </div>
+              <div class="content-card">
+                <div class="card-store">
+                  <h3>Blue cotton t-shirt</h3>
+                  <p class="cost-price"><b>Cost: </b>20000d</p>
+                  <p class="profitPercent"><b>Profit: </b>25%</p>
+                  <p class="price"><b>Price: </b>250000</p>
+                  <p class="stock"><b>Stock: </b>10</p>
+                </div>
+              </div>
+              <div class="card-btn card-btn-store">
+                <button class="btn-hide" data-id="">Hide</button>
+                <button class="btn-edit" data-id="">Sửa</button>
+                <button class="btn-delete" data-id="">Xóa</button>
+              </div>
+            </div>
+          </div>
+          <div class="pagination" id="pagination"></div>
+        </section>
 
         <section id="warehouse" class="page content">
           <div class="content-header">

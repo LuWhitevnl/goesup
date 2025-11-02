@@ -31,9 +31,6 @@ const switchBg = document.querySelector(".switch-bg");
 const loginForm = document.querySelector("#loginForm");
 const registerForm = document.querySelector("#registerForm");
 
-// bien nut gio hang
-const cart = document.querySelector(".cart");
-
 /**
  *ham tien ich tai su dung
  *togleActive dung toggle() 2 tham so them xoa class
@@ -138,10 +135,23 @@ registerBtn?.addEventListener("click", () => {
   setTimeout(() => focusInput("Ho"), 100);
 });
 
+// bien nut gio hang
+const cart = document.querySelector(".cart");
+const user = document.querySelector(".user");
 // cart
 cart.addEventListener("click", () => {
   const currentUser = JSON.parse(localStorage.getItem("logined"));
   if (currentUser) {
+    localStorage.setItem("cartView", "cart");
+    window.location.href = "cart.html";
+  } else {
+    openLogForm();
+  }
+});
+user.addEventListener("click", () => {
+  const currentUser = JSON.parse(localStorage.getItem("logined"));
+  if (currentUser) {
+    localStorage.setItem("cartView", "account");
     window.location.href = "cart.html";
   } else {
     openLogForm();
@@ -152,11 +162,12 @@ const getCart = () => JSON.parse(localStorage.getItem("cart")) || [];
 const saveCart = (data) => localStorage.setItem("cart", JSON.stringify(data));
 
 function loadCartHeader() {
-  const cart = getCart();
-  console.log(cart.length);
-  if (cart.length !== 0) {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+  const carts = cart.filter((c) => c.user === user.username);
+  if (carts.length !== 0) {
     document.querySelector(".product-cart").classList.add("empty");
-    document.querySelector(".product-cart").textContent = cart.length;
+    document.querySelector(".product-cart").textContent = carts.length;
   } else {
     document.querySelector(".product-cart").classList.remove("empty");
   }

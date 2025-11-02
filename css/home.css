@@ -65,7 +65,7 @@ body {
   color: #000000;
   width: 99%;
   padding: 0 20px;
-  background: rgba(177, 177, 177, 0.464);
+  background: rgba(255, 255, 255, 0.464);
   border: 1.5px solid rgba(178, 178, 178, 0.18);
   box-shadow: 0 0 25px rgba(139, 139, 139, 0.37);
 }

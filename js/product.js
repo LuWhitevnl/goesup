@@ -24,7 +24,8 @@ const saveProducts = (data) =>
 const getCart = () => JSON.parse(localStorage.getItem("cart")) || [];
 const saveCart = (data) => localStorage.setItem("cart", JSON.stringify(data));
 
-let filteredProducts = getProducts();
+const store = getProducts().filter((e) => !e.hidden);
+let filteredProducts = store;
 let currentPage = 1;
 const itemPerPage = 2;
 
@@ -37,14 +38,16 @@ function renderProducts(list = filteredProducts, page = 1) {
   productsList.innerHTML = "";
   pageProducts.forEach((p) => {
     const card = document.createElement("div");
+    const image = p.images[0];
     card.classList.add("item");
+    card.setAttribute("data-id", p.id);
     card.innerHTML = `
               <div class="item-img">
-                <img src="${p.image}" alt="${p.name}" />
+                <img src="${image}" alt="${p.name}" />
               </div>
               <div class="detail">
                 <p><b>${p.name}</b></p>
-                <p style="color: grey">${p.type}</p>
+                <p style="color: grey">${p.cate}</p>
                 <p><b>${p.price.toLocaleString("vi-VN")} đ</b></p>
               </div>
               <button class="add-cart-btn" data-id="${
@@ -53,11 +56,18 @@ function renderProducts(list = filteredProducts, page = 1) {
     `;
     productsList.appendChild(card);
   });
-  document.querySelectorAll(".add-cart-btn").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      const id = e.target.dataset.id;
-      addToCart(id);
-    });
+  productsList.addEventListener("click", (e) => {
+    const btn = e.target.closest(".add-cart-btn");
+    if (btn) {
+      e.stopPropagation();
+      addToCart(btn.dataset.id);
+      return;
+    }
+
+    const item = e.target.closest(".item");
+    if (item) {
+      openProductDetail(item.dataset.id);
+    }
   });
   renderPagination(list);
   // sortProducts();
@@ -110,14 +120,14 @@ function filterProducts() {
   const color = Array.from(
     document.querySelectorAll(`.colors input[type="checkbox"]:checked`)
   ).map((c) => c.value);
-  const gender = Array.from(
+  const type = Array.from(
     document.querySelectorAll(`.gender input[type="checkbox"]:checked`)
   ).map((c) => c.value);
-  console.log(color);
-  filteredProducts = getProducts().filter((p) => {
+  console.log(type);
+  filteredProducts = store.filter((p) => {
     let matchPrice = true;
     let matchColor = true;
-    let matchGender = true;
+    let matchType = true;
     let price = parseFloat(p.price);
     if (priceRange === "0-500") matchPrice = price < 500000;
     else if (priceRange === "500-1000")
@@ -126,13 +136,13 @@ function filterProducts() {
       matchPrice = price >= 1000000 && price <= 2000000;
     else if (priceRange === "2000+") matchPrice = price > 2000000;
 
-    if (gender.length > 0)
-      matchGender = gender.includes(p.gender?.toLowerCase());
-    if (color.length > 0) matchColor = color.includes(p.color?.toLowerCase());
-    return matchPrice && matchColor && matchGender;
+    if (type.length > 0) matchType = type.includes(p.type.toLowerCase());
+    if (color.length > 0)
+      matchColor = p.color?.some((c) => color.includes(c.toLowerCase()));
+    return matchPrice && matchColor && matchType;
   });
-  console.log(filteredProducts);
   currentPage = 1;
+  console.log(filteredProducts);
   renderProducts(filteredProducts, currentPage);
 }
 
@@ -145,13 +155,13 @@ document.querySelectorAll(`.colors input[type= "checkbox"]`).forEach((i) => {
   i.addEventListener("change", filterProducts);
 });
 const urlPara = new URLSearchParams(window.location.search);
-const genderPara = urlPara.get("gender");
+const genderPara = urlPara.get("cate");
 if (genderPara) {
-  const genderInput = document.querySelector(
-    `input[name="gender"][value="${genderPara}"]`
+  filteredProducts = store.filter(
+    (p) => p.type.toLowerCase() === genderPara.toLowerCase()
   );
-  if (genderInput) genderInput.checked = true;
-  filterProducts();
+  currentPage = 1;
+  renderProducts(filteredProducts, currentPage);
 }
 document.querySelectorAll(`.gender input[name="gender"]`).forEach((i) => {
   i.addEventListener("change", filterProducts);
@@ -164,9 +174,9 @@ document.querySelector("#sort-products").addEventListener("change", (e) => {
 
 function sortProducts(option) {
   if (option === "price-High-Low") {
-    filteredProducts.sort((a, b) => a.price - b.price);
-  } else if (option === "price-Low-High") {
     filteredProducts.sort((a, b) => b.price - a.price);
+  } else if (option === "price-Low-High") {
+    filteredProducts.sort((a, b) => a.price - b.price);
   } else if (option === "name-az") {
     filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
   } else if (option === "name-za") {
@@ -181,47 +191,226 @@ document.querySelector(".reset-filter").addEventListener("click", () => {
   document.querySelectorAll(".filter-options input").forEach((el) => {
     el.checked = false;
   });
-  filteredProducts = getProducts();
+  filteredProducts = store;
   currentPage = 1;
   // sortProducts();
   renderProducts(filteredProducts, currentPage);
 });
 
-function addToCart(id) {
-  const products = getProducts();
+function addToCart(id, color = null, size = null, quantity = 1) {
+  const products = store;
   const cart = getCart();
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+
+  if (!user || !user.username) {
+    message("Please log in before adding to cart!");
+    return;
+  }
+
   const product = products.find((p) => p.id === id);
   if (!product) return;
-  const existing = cart.find((c) => c.id === id);
+
+  const selectedColor =
+    color || (product.color && product.color[0]) || product.color || "default";
+  const selectedSize =
+    size || (product.sizes && product.sizes[0]) || product.sizes || "M";
+  const selectedImage = (product.images && product.images[0]) || product.image;
+
+  const existing = cart.find(
+    (c) => c.id === id && c.color === selectedColor && c.size === selectedSize
+  );
+
   if (existing) {
-    existing.quantity += 1;
+    existing.quantity += quantity;
   } else {
     cart.push({
       id: product.id,
+      user: user.username,
       name: product.name,
       type: product.type,
       gender: product.gender,
-      color: product.color,
+      color: selectedColor,
+      size: selectedSize,
       price: product.price,
       desc: product.productDesc,
-      quantity: 1,
-      image: product.image,
+      quantity: quantity,
+      image: selectedImage,
     });
   }
-  // alert("da them vao gio hang");
+
   saveCart(cart);
   loadCartHeader();
-}
-
-function loadCartHeader() {
-  const cart = getCart();
-  console.log(cart.length);
-  if (cart.length !== 0) {
-    document.querySelector(".product-cart").classList.add("empty");
-    document.querySelector(".product-cart").textContent = cart.length;
-  } else {
-    document.querySelector(".product-cart").classList.remove("empty");
-  }
+  message("Added to cart!");
 }
 
 renderProducts();
+
+const productsPage = document.querySelector(".products-page");
+const detailPage = document.querySelector(".product-detail-page");
+
+document.querySelector(".product-list-item").addEventListener("click", (e) => {
+  const item = e.target.closest(".item");
+  if (item && !e.target.classList.contains("add-cart-btn")) {
+    openProductDetail(item.dataset.id);
+  }
+});
+
+function renderProductDetail(product) {
+  if (!product) return;
+
+  // Hiện trang chi tiết sản phẩm (ẩn trang danh sách)
+  document.querySelector(".product-detail-page").style.display = "block";
+  document.querySelector(".product-list-section")?.classList.add("hidden");
+
+  // ==== ẢNH CHÍNH ====
+  const bigImg = document.querySelector(".Big_img img");
+  bigImg.src =
+    product.images?.[0] || product.image || "./assets/blank-image.png";
+
+  // ==== DANH SÁCH ẢNH NHỎ ====
+  const smallImgsContainer = document.querySelector(".Small_imgs");
+  smallImgsContainer.innerHTML = "";
+  const imgList = product.images?.length ? product.images : [product.image];
+
+  imgList.forEach((img, i) => {
+    const imgEl = document.createElement("img");
+    imgEl.src = img;
+    imgEl.className = "imgs_form_list";
+    if (i === 0) imgEl.classList.add("active");
+
+    // 👉 Khi click vào ảnh nhỏ thì đổi ảnh lớn
+    imgEl.addEventListener("click", () => {
+      document
+        .querySelectorAll(".imgs_form_list")
+        .forEach((el) => el.classList.remove("active"));
+      imgEl.classList.add("active");
+      bigImg.src = img;
+    });
+
+    smallImgsContainer.appendChild(imgEl);
+  });
+
+  // ==== NÚT NEXT / PREV ====
+  const nextBtn = document.querySelector(".next_button");
+  const prevBtn = document.querySelector(".prev_button");
+  let currentIndex = 0;
+
+  nextBtn.onclick = () => {
+    currentIndex = (currentIndex + 1) % imgList.length;
+    bigImg.src = imgList[currentIndex];
+    updateActiveImg(currentIndex);
+  };
+
+  prevBtn.onclick = () => {
+    currentIndex = (currentIndex - 1 + imgList.length) % imgList.length;
+    bigImg.src = imgList[currentIndex];
+    updateActiveImg(currentIndex);
+  };
+
+  function updateActiveImg(index) {
+    document
+      .querySelectorAll(".imgs_form_list")
+      .forEach((el, i) => el.classList.toggle("active", i === index));
+  }
+
+  // ==== TÊN, GIÁ, MÔ TẢ ====
+  document.querySelector("#Name_product h3").textContent = product.name;
+  document.querySelector("#price p").textContent =
+    product.price.toLocaleString("vi-VN") + "₫";
+  document.querySelector(".text_info_product").textContent =
+    product.productDesc || "No description available.";
+
+  // ==== COLOR ====
+  const colorContainer = document.querySelector(".choose_color");
+  colorContainer.innerHTML = "";
+  const colors = product.color?.length
+    ? product.color
+    : [product.color || "gray"];
+
+  colors.forEach((color, i) => {
+    const li = document.createElement("li");
+    li.innerHTML = `<img src="${
+      product.images?.[i] || product.images?.[0] || product.image
+    }" alt="${color}" />`;
+    li.dataset.color = color;
+
+    li.addEventListener("click", () => {
+      document
+        .querySelectorAll(".choose_color li")
+        .forEach((i) => i.classList.remove("selected"));
+      li.classList.add("selected");
+      // Khi chọn màu => đổi ảnh lớn theo ảnh tương ứng (nếu có)
+      if (product.images?.[i]) {
+        bigImg.src = product.images[i];
+        updateActiveImg(i);
+      }
+    });
+
+    colorContainer.appendChild(li);
+  });
+
+  // ==== SIZE ====
+  const sizeContainer = document.querySelector(".choose_size");
+  sizeContainer.innerHTML = "";
+  const sizes = product.sizes?.length ? product.sizes : [product.sizes || "M"];
+
+  sizes.forEach((s) => {
+    const li = document.createElement("li");
+    li.textContent = s;
+    li.dataset.size = s;
+    li.addEventListener("click", () => {
+      document
+        .querySelectorAll(".choose_size li")
+        .forEach((i) => i.classList.remove("selected"));
+      li.classList.add("selected");
+    });
+    sizeContainer.appendChild(li);
+  });
+
+  // ==== QUANTITY ====
+  const qtyInput = document.getElementById("quantity_number");
+  qtyInput.value = 1;
+
+  const plusBtn = document.querySelector(".quantity_plus");
+  const minusBtn = document.querySelector(".quantity_minus");
+
+  plusBtn.onclick = () => {
+    qtyInput.value = parseInt(qtyInput.value) + 1;
+  };
+
+  minusBtn.onclick = () => {
+    qtyInput.value = Math.max(1, parseInt(qtyInput.value) - 1);
+  };
+
+  // ==== ADD TO CART ====
+  document.querySelector(".addBag").onclick = () => {
+    const selectedColor = document.querySelector(".choose_color li.selected");
+    const selectedSize = document.querySelector(".choose_size li.selected");
+    const quantity = parseInt(qtyInput.value);
+
+    if (!selectedColor || !selectedSize) {
+      message("Please select color and size first!");
+      return;
+    }
+
+    addToCart(
+      product.id,
+      selectedColor.dataset.color,
+      selectedSize.dataset.size,
+      quantity
+    );
+
+    message("Added to cart successfully!");
+  };
+}
+
+function openProductDetail(productId) {
+  const products = JSON.parse(localStorage.getItem("products")) || [];
+  const product = products.find((p) => p.id === productId);
+  if (!product) return;
+
+  document.querySelector(".products-page").style.display = "none";
+  document.querySelector(".product-detail-page").style.display = "block";
+
+  renderProductDetail(product);
+}

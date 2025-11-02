@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/ultis.css" />
     <link rel="stylesheet" href="./css/cart.css" />
+    <link rel="stylesheet" href="./css/account.css" />
     <title>Document</title>
   </head>
   <body>
@@ -33,17 +34,17 @@
           >
         </li>
         <li>
-          <a href="./product.html?gender=men"
+          <a href="./product.html?cate=men"
             ><b><i class="fas fa-mars"></i>Man's fashion</b></a
           >
         </li>
         <li>
-          <a href="./product.html?gender=women"
+          <a href="./product.html?cate=women"
             ><i class="fas fa-venus"></i><b>Women's fashion</b></a
           >
         </li>
         <li>
-          <a href="./product.html"
+          <a href="./product.html?cate=accessories"
             ><i class="fas fa-shopping-bag"></i><b>Accessories</b></a
           >
         </li>
@@ -142,7 +143,7 @@
       </div>
     </div>
 
-    <section class="cart-container">
+    <section class="cart-container" id="cart-page">
       <!-- Giỏ hàng -->
       <section class="cart-bag">
         <h2>Your Bag</h2>
@@ -184,7 +185,186 @@
       </aside>
     </section>
     <!-- account -->
+    <div class="account-page" id="account-page">
+      <!-- ===== Sidebar ===== -->
+      <aside class="account-sidebar">
+        <div class="user-box">
+          <div class="avatar">
+            <img src="./assets/user.png" alt="User" id="user-avatar" />
+          </div>
+          <div class="user-info">
+            <span id="sidebar-username">User Name</span>
+            <p id="sidebar-email">user@gmail.com</p>
+          </div>
+        </div>
 
+        <nav class="sidebar-menu">
+          <a href="#" class="sidebar-item active" data-section="myaccount"
+            >My Account</a
+          >
+          <a href="#" class="sidebar-item" data-section="ordercheck"
+            >Order Checking</a
+          >
+          <a href="#" class="sidebar-item" data-section="orderhistory"
+            >Order History</a
+          >
+        </nav>
+        <a href="#" class="sidebar-item logout">Logout</a>
+      </aside>
+
+      <!-- ===== CONTENT ===== -->
+      <main class="account-content">
+        <!-- MY ACCOUNT -->
+        <section class="content-section" id="myaccount">
+          <h2>My Account</h2>
+          <p class="desc">View and update your personal information</p>
+
+          <form id="accountForm" class="account-form">
+            <div class="form-group-acc">
+              <label>Username</label>
+              <div id="username"></div>
+            </div>
+            <div class="form-group-acc">
+              <label>Full Name</label>
+              <input type="text" id="fullname-acc" readonly />
+            </div>
+            <div class="form-group-acc">
+              <label>Email</label>
+              <input type="email" id="email-acc" readonly />
+            </div>
+            <div class="form-group-acc">
+              <label>Phone</label>
+              <input type="tel" id="phone-acc" readonly />
+            </div>
+            <div class="form-group-acc">
+              <label>Address</label>
+              <input type="text" id="address-acc" readonly />
+            </div>
+            <div class="form-group-acc">
+              <div class="gender-group">
+                <label>Gender</label>
+                <label
+                  ><input
+                    type="radio"
+                    name="gender"
+                    value="men"
+                    disabled
+                  />men</label
+                >
+                <label
+                  ><input
+                    type="radio"
+                    name="gender"
+                    value="women"
+                    disabled
+                  />women</label
+                >
+              </div>
+            </div>
+            <div class="form-group-acc">
+              <div class="date-acc">
+                <label>Date</label>
+                <input type="date" />
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="button" id="editBtn" class="btn edit">Edit</button>
+              <button
+                type="submit"
+                id="saveBtn"
+                class="btn save"
+                style="display: none"
+              >
+                Save
+              </button>
+              <button
+                type="button"
+                id="cancelBtn"
+                class="btn cancel"
+                style="display: none"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ORDER CHECKING -->
+        <section class="content-section" id="ordercheck" style="display: none">
+          <h2>Orders In Progress</h2>
+
+          <!-- Tabs trạng thái -->
+          <div class="order-status-tabs">
+            <button class="status-tab active" data-status="All">All</button>
+            <button class="status-tab" data-status="New">Pending</button>
+            <button class="status-tab" data-status="Shipping">Shipping</button>
+            <button class="status-tab" data-status="Completed">
+              Delivered
+            </button>
+            <button class="status-tab" data-status="Cancelled">
+              Cancelled
+            </button>
+          </div>
+
+          <div id="ordercheck-list" class="order-list">
+            <div class="order-card">
+              <div class="status-card">
+                <div class="order-id">O001</div>
+                <div class="order-status">Pending</div>
+              </div>
+              <div class="items">
+                <div class="item">
+                  <div class="item-info">
+                    <div class="item-img">
+                      <img src="./assets/ao1.avif" alt="" />
+                    </div>
+                    <div class="item-more">
+                      <h2 class="title">ao thun color</h2>
+                      <div class="info">
+                        <div class="lable"><p>classify:</p></div>
+                        <div class="type">ao thun, nau, L</div>
+                      </div>
+                      <div class="quantity">x1</div>
+                    </div>
+                  </div>
+                  <div class="item-price">200000d</div>
+                </div>
+                <div class="item">
+                  <div class="item-info">
+                    <div class="item-img">
+                      <img src="./assets/ao1.avif" alt="" />
+                    </div>
+                    <div class="item-more">
+                      <h2 class="title">ao thun color</h2>
+                      <div class="info">
+                        <div class="lable"><p>classify:</p></div>
+                        <div class="type">ao thun, nau, L</div>
+                      </div>
+                      <div class="quantity">x1</div>
+                    </div>
+                  </div>
+                  <div class="item-price">200000d</div>
+                </div>
+              </div>
+              <div class="total">
+                Total:
+                <p>200000d</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ORDER HISTORY -->
+        <section
+          class="content-section"
+          id="orderhistory"
+          style="display: none"
+        >
+          <h2>Order History</h2>
+          <div id="orderhistory-list" class="order-list"></div>
+        </section>
+      </main>
+    </div>
     <!-- popup -->
     <!-- Payment Popup -->
     <div class="payment-popup-overlay" id="paymentPopup">
@@ -195,7 +375,7 @@
             <label>Full Name</label>
             <input
               type="text"
-              id="fullname"
+              id="fullname-pay"
               placeholder="Enter your name"
               required
             />
@@ -204,7 +384,7 @@
             <label>Email</label>
             <input
               type="email"
-              id="email"
+              id="email-pay"
               placeholder="Enter your email"
               required
             />
@@ -213,7 +393,7 @@
             <label>Phone</label>
             <input
               type="tel"
-              id="phone"
+              id="phone-pay"
               placeholder="Enter your phone number"
               required
             />
@@ -222,7 +402,7 @@
             <label>Address</label>
             <input
               type="text"
-              id="address"
+              id="address-pay"
               placeholder="Enter delivery address"
               required
             />
@@ -231,8 +411,8 @@
             <label>Payment Method</label>
             <div class="payment-methods">
               <label
-                ><input type="radio" name="method" value="COD" /> Cash on
-                Delivery</label
+                ><input type="radio" name="method" value="COD" checked /> Cash
+                on Delivery</label
               >
               <label
                 ><input type="radio" name="method" value="Momo" /> Momo</label
@@ -341,6 +521,7 @@
                 type="password"
                 class="password"
                 name="password"
+                id="res-pass"
                 placeholder="Nhap Password"
                 required
               />
@@ -365,5 +546,7 @@
     <script src="./js/auth.js"></script>
     <script src="./js/ultis.js"></script>
     <script src="./js/cart.js"></script>
+    <script src="./js/account.js"></script>
+    <!-- <script src="./js/product.js"></script> -->
   </body>
 </html>

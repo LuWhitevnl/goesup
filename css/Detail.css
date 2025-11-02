@@ -1,0 +1,350 @@
+/*========================================================================= Các tủy chỉnh chung =========================================================================*/
+/*Căn giữa cho phần thông tin*/
+.product-detail-page {
+  margin-top: 40px;
+}
+#container_detail {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  background-color: white;
+  margin: 0 auto;
+}
+
+/*Các hình ảnh sẽ bên trái*/
+#img_product {
+  float: left;
+  padding: 15px;
+  width: 50%;
+  justify-items: center;
+}
+
+/*Các danh mục tùy chọn của sản phẩm bên phải*/
+#Product_options {
+  float: left;
+  width: 40%;
+  padding: 15px;
+}
+/*========================================================================= Content Left =========================================================================*/
+
+/*----------------------------------- Hình ảnh lớn ---------------------------------*/
+/*Cho ảnh ở giữa và cố định chiều dài, rộng hiển thị*/
+.Big_img {
+  width: 380px;
+  height: 490px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+/*Chỉnh kích cỡ ảnh so với khung hình*/
+.Big_img img {
+  width: 100%;
+  height: 100%;
+
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/*----------------------------------- Danh sách ảnh sản phẩm ---------------------------------*/
+/*Căn giữa danh sách các hình ảnh*/
+.list_imgs {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+/* Điểu chỉnh 2 mũi tên */
+.list_imgs button {
+  background-color: white;
+  border: none;
+
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0 5px;
+}
+.list_imgs button:active {
+  background-color: rgba(42, 42, 42, 0.439);
+}
+.list_imgs button > img {
+  width: 15px;
+  height: auto;
+}
+
+/* Điều chỉnh độ dài của thanh cuộn dưới ảnh lớn */
+.Small_imgs {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  max-width: 300px;
+  border: solid 1px transparent;
+
+  /* Ẩn toàn bộ thanh cuộn */
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.Small_imgs > img {
+  border-radius: 3px;
+}
+/* Căn chỉnh kích cỡ ảnh */
+.imgs_form_list {
+  width: 80px;
+  height: 80px;
+
+  object-fit: cover;
+  flex-shrink: 0;
+
+  display: block;
+}
+
+/* Khi trỏ tới 1 ảnh nhỏ bất kì sẽ có viền xung quanh */
+.Small_imgs img:hover {
+  border: solid 1px;
+}
+
+.imgs_form_list.active,
+.Small_imgs img:hover {
+  border: solid 1px #2b391f;
+}
+
+/*========================================================================= Content Right =========================================================================*/
+#Product_options {
+  padding: 15px;
+}
+/* Thay đổi FONT chữ của tất cả các lớp p */
+#Product_options p {
+  font-size: 18px;
+  font-weight: 600;
+}
+/* Tăng khoảng cách giữa các div */
+#Product_options > div {
+  margin-bottom: 25px;
+}
+
+#Name_product h3 {
+  font-weight: 600;
+  font-size: 24px;
+}
+/* -------------------------------------- Lựa chọn COLOR --------------------------------- */
+
+/* Dàn hàng ngang, mỗi hàng 4 ô*/
+.choose_color {
+  display: flex;
+  /* Căn chỉnh dàn đều ra và xuống dòng nếu cần thiết */
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+}
+
+/* Tạo ra mỗi li là 1 hình vuông */
+.choose_color > li {
+  float: left;
+
+  border: solid 1px #a6a6a6;
+  width: 55px;
+  height: 55px;
+  border-radius: 4px;
+
+  overflow: hidden;
+}
+
+.choose_color img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.choose_color li:hover {
+  margin-top: -2px;
+}
+
+/* -------------------------------------- Lựa chọn SIZE --------------------------------- */
+#size * {
+  margin-bottom: 10px;
+}
+.choose_size {
+  display: flex;
+  gap: 5px;
+  padding: 0;
+  font-size: 14px;
+}
+
+/* Căn chỉnh các li của chọn SIZE */
+.choose_size li {
+  border: solid 1px rgb(215, 215, 215);
+  width: fit-content;
+  padding: 10px;
+  border-radius: 5px;
+
+  /* Cho biết đây là một nút có thể click */
+  cursor: pointer;
+  color: #2b391f;
+}
+
+/* ------------------------------------- Hiện dấu tích khi chọn SIZE và COLOR ------------------------------ */
+.choose_size li {
+  position: relative;
+}
+
+/* Cho chọn COLOR cũng được tích nếu chọn */
+.choose_color li {
+  position: relative;
+}
+
+/* Thiết kế viền cho SIZE và COLOR */
+.choose_size li.selected,
+.choose_color li.selected {
+  border: solid 1px #2b391f;
+  color: #2b391f;
+}
+
+/* Đổi màu khi Hover */
+.choose_size li:hover {
+  border: solid 1px #2b391f;
+}
+
+/* dấu tích nhỏ */
+.choose_size li.selected::after,
+.choose_color li.selected::after {
+  /* Unicode lấy dấu tích */
+  content: "\2713";
+
+  position: absolute;
+  bottom: -0.5px;
+  right: -0.5px;
+
+  width: 20px;
+  height: 20px;
+
+  background-color: #2b391f;
+  color: white;
+  font-size: 10px;
+  line-height: 30px;
+  text-indent: 8px;
+  text-align: center;
+
+  clip-path: polygon(100% 10%, 100% 100%, 10% 100%);
+
+  z-index: 10px;
+}
+
+/*------------------------------------------------ Chỉnh sửa Button ADD TO BAG -------------------------------------*/
+#btnBag {
+  display: flex;
+  justify-content: center;
+}
+
+.addBag {
+  width: 80%;
+  height: 45px;
+
+  border: none;
+  border-radius: 20px;
+  font-size: 20px;
+
+  background-color: #2b391f;
+  color: white;
+}
+
+.addBag:active {
+  background-color: #435830;
+}
+
+/* ------------------------------------------------ SỐ LƯỢNG SẢN PHẨM ------------------------------------------------ */
+/* Dàn hàng ngang */
+#Quantity {
+  display: flex;
+  align-items: center;
+}
+
+/* Cho thanh số lượng qua bên phải */
+#Quantity .quantity_selector {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  margin: 18px 5px;
+}
+
+/* Thu nhỏ lại thanh hiển thị số lượng */
+#quantity_number {
+  text-align: center;
+  width: 10%;
+  border: solid 1px rgb(167, 167, 167);
+}
+
+.quantity_selector button {
+  width: 20px;
+  background-color: white;
+  border: solid 1px rgb(167, 167, 167);
+}
+
+/* ------------------------------------------------ Thông tin sản phẩm ------------------------------------------------ */
+/* Chỉnh độ dài và cao của thẻ THÔNG TIN SẢN PHẨM (product_info) */
+#product_info {
+  width: 100%;
+  height: 20%;
+}
+
+/* Giới hạn độ cao và rộng của text thông tin */
+.text_info_product {
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+}
+
+/*============================================================= Thay đổi giao diện khi thu nhỏ màn hình =============================================================*/
+@media screen and (max-width: 950px) {
+  #container_detail {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: fit-content;
+    overflow: hidden;
+  }
+  /* Cho Img_product lên đầu */
+  #img_product {
+    float: none;
+    width: 100%;
+    padding: 15px 0;
+  }
+
+  /* Cho Product_options xuống dưới */
+  #Product_options {
+    clear: both;
+    width: 100%;
+    float: none;
+  }
+
+  /* Chỉnh lại chiều dài và rộng của ảnh lớn */
+  .Big_img {
+    width: 700px;
+    height: 850px;
+  }
+
+  /* Độ dài của danh sách ảnh nhỏ */
+  .Small_imgs {
+    max-width: 600px;
+  }
+
+  /* Chỉnh thanh tăng giảm số lượng */
+  .quantity_selector {
+    padding-right: 15px;
+  }
+}
