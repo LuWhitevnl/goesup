@@ -79,6 +79,109 @@ overlay?.addEventListener("click", (e) => {
   }
 });
 
+// === Lấy dữ liệu sản phẩm từ localStorage ===
+const getProducts = () => JSON.parse(localStorage.getItem("products")) || [];
+
+// === Mở và đóng overlay tìm kiếm ===
+const searchInput = document.getElementById("search-input");
+const suggestList = document.getElementById("suggestList");
+const recentList = document.getElementById("recentList");
+
+// === Lấy lịch sử từ localStorage ===
+function getRecentSearches() {
+  return JSON.parse(localStorage.getItem("recentSearches")) || [];
+}
+function saveRecentSearch(keyword) {
+  let history = getRecentSearches();
+  if (keyword.trim() !== "") {
+    // Không trùng
+    history = [keyword, ...history.filter((x) => x !== keyword)];
+    // Giới hạn 10 từ khóa
+    if (history.length > 10) history = history.slice(0, 10);
+    localStorage.setItem("recentSearches", JSON.stringify(history));
+  }
+}
+
+// === Hiển thị lịch sử khi mở ===
+function renderRecentSearches() {
+  const history = getRecentSearches();
+  recentList.innerHTML = history
+    .map((h) => `<li class="recent-item">${h}</li>`)
+    .join("");
+}
+renderRecentSearches();
+
+// === Khi gõ từ khóa → gợi ý realtime ===
+searchInput.addEventListener("input", (e) => {
+  const keyword = e.target.value.trim().toLowerCase();
+  const products = getProducts().filter((p) => !p.hidden);
+
+  if (!keyword) {
+    suggestList.innerHTML = "";
+    return;
+  }
+
+  const matches = products.filter(
+    (p) =>
+      p.name.toLowerCase().includes(keyword) ||
+      p.cate.toLowerCase().includes(keyword) ||
+      p.type.toLowerCase().includes(keyword) ||
+      p.collection?.toLowerCase().includes(keyword)
+  );
+
+  if (matches.length === 0) {
+    suggestList.innerHTML = `<li>Không tìm thấy sản phẩm phù hợp</li>`;
+  } else {
+    suggestList.innerHTML = matches
+      .slice(0, 6)
+      .map(
+        (p) => `
+        <li class="suggest-item" data-id="${p.id}">
+          <img src="${p.images[0]}" alt="${p.name}">
+          <span class="suggest-item__info">
+          <span>${p.name}</span>
+          <span>${p.cate}</span>
+            <span>${p.price.toLocaleString("vi-VN")}đ</span>
+          </span>
+        </li>`
+      )
+      .join("");
+  }
+});
+
+// === Khi click gợi ý → sang product detail ===
+suggestList.addEventListener("click", (e) => {
+  const item = e.target.closest(".suggest-item");
+  if (item) {
+    const id = item.dataset.id;
+    saveRecentSearch(item.querySelector("span").textContent);
+    window.location.href = `./product.html?id=${id}`;
+  }
+});
+
+// === Khi click lịch sử tìm kiếm → search lại ===
+recentList.addEventListener("click", (e) => {
+  const li = e.target.closest(".recent-item");
+  if (li) {
+    const keyword = li.textContent.trim();
+    window.location.href = `./product.html?search=${encodeURIComponent(
+      keyword
+    )}`;
+  }
+});
+
+// === Khi submit form tìm kiếm → chuyển sang trang products ===
+document.getElementById("searchBox").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const keyword = searchInput.value.trim();
+  if (keyword) {
+    saveRecentSearch(keyword);
+    window.location.href = `./product.html?search=${encodeURIComponent(
+      keyword
+    )}`;
+  }
+});
+
 /**
  *dong mo popup dang nhap dang ky khi click bien tuong user
  */

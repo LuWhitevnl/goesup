@@ -3,6 +3,53 @@ const sidebar = document.querySelector(".sidebar");
 const toggle = document.querySelector(".toggle");
 // const dropdownMenus = document.querySelectorAll(".menu-item.has-dropdown");
 
+const username = document.querySelector("#username");
+const passwordInput = document.querySelector("#loginPass");
+const loginOverlay = document.querySelector(".formWapper");
+const popup = document.querySelector(".popupBox");
+const loginForm = document.querySelector("#loginForm");
+const adminPage = document.querySelector(".admin-body");
+
+const Admin = JSON.parse(localStorage.getItem("admin")) || {};
+console.log(Admin.username);
+const logined = JSON.parse(localStorage.getItem("logined"));
+function toggleForm() {
+  username.focus();
+  loginOverlay.classList.toggle("active");
+  popup.classList.toggle("active");
+  adminPage.classList.toggle("active");
+}
+if (logined) {
+  toggleForm();
+}
+loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (
+    username.value === Admin.username &&
+    passwordInput.value === Admin.password
+  ) {
+    toggleForm();
+    localStorage.setItem("logined", true);
+  } else {
+    loginForm.reset();
+    username.focus();
+    username.placeholder = "sai mat khau hoac tai khoan";
+    passwordInput.placeholder = "sai mat khau hoac tai khoan";
+    username.classList.add("error");
+    passwordInput.classList.add("error");
+    setTimeout(() => {
+      username.placeholder = "username";
+      passwordInput.placeholder = "password";
+      username.classList.remove("error");
+      passwordInput.classList.remove("error");
+    }, 1500);
+  }
+});
+document.querySelector(".log-out").addEventListener("click", () => {
+  localStorage.setItem("logined", false);
+  toggleForm();
+});
+
 toggle.addEventListener("click", () => {
   const collapsed = sidebar.classList.toggle("collapsed");
   if (collapsed) closeAllSubmenus();
@@ -47,7 +94,6 @@ const confirmCancel = document.getElementById("confirmCancel");
 const confirmOk = document.getElementById("confirmOk");
 
 const userModal = document.getElementById("userModal");
-const userModalTitle = document.getElementById("userModalTitle");
 const userForm = document.getElementById("userForm");
 const userCancel = document.getElementById("userCancel");
 
@@ -234,7 +280,7 @@ function renderUsers(filter = "", select = "all") {
         <td>${u.phoneNumber || "-"}</td>
         <td>${statusHtml}</td>
         <td class="btn-box">
-          <button class="btn-edit" data-username="${u.username}">Sửa</button>
+          <button class="btn-edit" data-username="${u.username}">Edit</button>
           <div>
           <button class="btn-reset btn" data-username="${
             u.username
@@ -261,8 +307,8 @@ function renderTypeTable(list = getTypes()) {
       <td>${t.desc || ""}</td>
       <td>
           <div class="card-btn">
-        <button class="btn-edit" data-index="${i}">Sửa</button>
-        <button class="btn-delete" data-index="${i}">Xóa</button>
+        <button class="btn-edit" data-index="${i}">Edit</button>
+        <button class="btn-delete" data-index="${i}">Delete</button>
           </div>
       </td>
     `;
@@ -283,7 +329,7 @@ function renderTypeTable(list = getTypes()) {
     typeModal.style.display = "none";
   };
 
-  // Lưu
+  // Save
   typeForm.onsubmit = (e) => {
     e.preventDefault();
     const code = document.getElementById("typeCode").value.trim();
@@ -304,7 +350,7 @@ function renderTypeTable(list = getTypes()) {
     loadTypeOptions();
   };
 
-  // Sửa
+  // Edit
   document.querySelectorAll(".btn-edit").forEach((btn) => {
     btn.onclick = () => {
       console.log(1);
@@ -314,12 +360,12 @@ function renderTypeTable(list = getTypes()) {
       document.getElementById("typeCode").value = t.code;
       document.getElementById("typeName").value = t.name;
       document.getElementById("typeDesc").value = t.desc;
-      modalTitle.textContent = "Sửa loại sản phẩm";
+      modalTitle.textContent = "Edit loại sản phẩm";
       typeModal.style.display = "flex";
     };
   });
 
-  // Xóa
+  // Delete
   document.querySelectorAll(".btn-delete").forEach((btn) => {
     btn.onclick = () => {
       const i = btn.dataset.index;
@@ -370,7 +416,7 @@ function renderOrders(list = getOrders()) {
       <td>${total.toLocaleString()} đ</td>
       <td>${order.status}</td>
       <td>
-        <button class="btn-view btn-cancel" data-id="${order.id}">Xem</button>
+        <button class="btn-view btn-cancel" data-id="${order.id}">View</button>
       </td>
     `;
     orderTable.appendChild(row);
@@ -393,7 +439,7 @@ function renderImports(list = getData("imports")) {
           ${
             imp.status === "Pending"
               ? `<button class="btn-save" onclick="completeImport('${imp.id}')">Hoàn thành</button>
-                 <button class="btn-cancel" onclick="deleteImport('${imp.id}')">Xóa</button>`
+                 <button class="btn-cancel" onclick="deleteImport('${imp.id}')">Delete</button>`
               : `<button class="btn-cancel" disabled>Hoàn tất</button>`
           }
         </td>
@@ -782,9 +828,9 @@ function renderProducts(products = filteredProducts, page = 1) {
               </div>
               <div class="content-card">
                 <h3>${p.name}</h3>
+                <p class="desc">${p.collection}</p>
                 <p><b>type:</b>${p.type}</p>
                 <p><b>category:</b>${p.cate}</p>
-                <p class="desc">${p.productDesc}</p>
                 <div class="stock-info">
                   <p><b>sizes:</b></p>
                   <ul>${siezhtml}</ul>
@@ -796,8 +842,8 @@ function renderProducts(products = filteredProducts, page = 1) {
                 </div>
               </div>
               <div class="card-btn">
-                <button class="btn-edit" data-id="${p.id}">Sửa</button>
-                <button class="btn-delete" data-id="${p.id}">Xóa</button>
+                <button class="btn-edit" data-id="${p.id}">Edit</button>
+                <button class="btn-delete" data-id="${p.id}">Delete</button>
               </div>
     `;
     productTable.appendChild(card);
@@ -849,12 +895,14 @@ function renderPagination(products = filteredProducts) {
   );
 }
 
-// Lưu sản phẩm
+// Save sản phẩm
 productForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const name = document.querySelector("#productName").value.trim();
   const type = document.querySelector("#productType").value;
+  const cate = document.querySelector("#cate").value;
+  const collection = document.querySelector("#collection").value;
   const productDesc = document.querySelector("#productDesc").value.trim();
   const color = document
     .querySelector("#productColors")
@@ -880,6 +928,8 @@ productForm.addEventListener("submit", (e) => {
       ...products[idx],
       name,
       type,
+      cate,
+      collection,
       productDesc,
       color,
       sizes,
@@ -891,6 +941,8 @@ productForm.addEventListener("submit", (e) => {
       id,
       name,
       type,
+      cate: cate,
+      collection: collection,
       productDesc,
       color,
       sizes,
@@ -946,6 +998,12 @@ function openModal(editId = null) {
       cates.map((t) => `<option value="${t.cate}">${t.cate}</option>`).join("");
 
     document.querySelector("#cate").value = product.cate;
+    if (product.collection) {
+      document.querySelector("#collection").value = product.collection;
+    } else {
+      document.querySelector("#collection").value = "none";
+    }
+
     document.querySelector("#productColors").value = (product.color || []).join(
       ", "
     );
@@ -972,7 +1030,7 @@ function closeModal() {
   document.body.style.overflow = "auto";
   editingId = null;
 }
-// Event delegation cho nút sửa/xóa
+// Event delegation cho nút Edit/Delete
 productTable.addEventListener("click", (e) => {
   const btn = e.target.closest("button");
   if (!btn) return;
@@ -1245,7 +1303,7 @@ document.querySelector(".item-store-list").addEventListener("click", (e) => {
     // renderStore(filteredStore, currentPageStore);
   }
 
-  // === Sửa lợi nhuận ===
+  // === Edit lợi nhuận ===
   else if (btn.classList.contains("btn-edit")) {
     const card = btn.closest(".item-card");
     const profitEl = card.querySelector(".profitPercent");
@@ -1258,7 +1316,7 @@ document.querySelector(".item-store-list").addEventListener("click", (e) => {
       <button id="cancelProfitBtn" class="btn-small">X</button>
     `;
 
-    // Gắn sự kiện lưu
+    // Gắn sự kiện Save
     const input = profitEl.querySelector("#profit-store-input");
     const saveBtn = profitEl.querySelector("#saveProfitBtn");
     const cancelBtn = profitEl.querySelector("#cancelProfitBtn");
@@ -1404,11 +1462,10 @@ function attachAddMoreEvents() {
 // USERS MANAGEMENT JS
 
 function openUserModal(user = null) {
-  userModalTitle.textContent = "edit user";
   userModal.style.display = "flex";
   if (user) {
     document.getElementById("u_username").value = user.username;
-    document.getElementById("u_username").disabled = true; // không sửa username
+    document.getElementById("u_username").disabled = true; // không Edit username
     document.getElementById("u_name").value = user.name || "";
     document.getElementById("u_email").value = user.email || "";
     document.getElementById("u_phone").value = user.phoneNumber || "";
@@ -1518,11 +1575,15 @@ userTableBody.addEventListener("click", (e) => {
   } else if (btn.classList.contains("btn-edit")) {
     openUserModal(users[idx]);
   } else if (btn.classList.contains("btn-delUser")) {
-    openConfirm("Xóa người dùng", `Bạn có chắc muốn xóa ${username}?`, () => {
-      users.splice(idx, 1);
-      saveUsers(users);
-      renderUsers(searchUserInput.value);
-    });
+    openConfirm(
+      "Delete người dùng",
+      `Bạn có chắc muốn Delete ${username}?`,
+      () => {
+        users.splice(idx, 1);
+        saveUsers(users);
+        renderUsers(searchUserInput.value);
+      }
+    );
   }
 });
 

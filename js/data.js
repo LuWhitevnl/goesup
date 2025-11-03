@@ -1,10 +1,16 @@
-const app_version = "1.0.22";
+const app_version = "1.0.20";
 
 const savedVersion = localStorage.getItem("appversion");
 if (savedVersion !== app_version) {
   localStorage.clear();
   localStorage.setItem("appversion", app_version);
   console.log("Data updated to version", app_version);
+}
+
+// =========== admin =====================
+if (!localStorage.getItem("admin")) {
+  const admin = { username: "admin", password: "admin" };
+  localStorage.setItem("admin", JSON.stringify(admin));
 }
 
 // ================= USERS =================
@@ -43,6 +49,7 @@ if (!localStorage.getItem("productTypes")) {
     { code: "T001", name: "Women", desc: "Casual and sport cotton shirts" },
     { code: "T002", name: "Men", desc: "Denim pants for men and women" },
     { code: "T003", name: "Accessories", desc: "Caps, belts, socks, bags..." },
+    { code: "T004", name: "collection", desc: "New fashion collection" },
   ];
   localStorage.setItem("productTypes", JSON.stringify(productTypes));
 }
@@ -50,27 +57,29 @@ if (!localStorage.getItem("productTypes")) {
 if (!localStorage.getItem("category")) {
   const category = [
     { type: "Women", cate: "Dresses" },
-    { type: "Women", cate: "Tops & Blouses" },
+    { type: "Women", cate: "Tops-Blouses" },
     { type: "Women", cate: "Bottoms" },
     { type: "Women", cate: "Outerwear" },
     { type: "Women", cate: "Activewear" },
     { type: "Women", cate: "Knitwear" },
-    { type: "Men", cate: "T-shirts & polos" },
+    { type: "Men", cate: "T-shirts-polos" },
     { type: "Men", cate: "Shirts" },
-    { type: "Men", cate: "Pants & Trousers" },
+    { type: "Men", cate: "Pants-Trousers" },
     { type: "Men", cate: "Shorts" },
     { type: "Men", cate: "Outerwear" },
     { type: "Men", cate: "Sweaters " },
     { type: "Men", cate: "Activewear " },
     { type: "Men", cate: "Outerwear" },
     { type: "Accessories", cate: "Accessories" },
-    { type: "Accessories", cate: "Bags & Purses" },
+    { type: "Accessories", cate: "Bags-Purses" },
     { type: "Accessories", cate: "Jewelry " },
-    { type: "Accessories", cate: "Scarves & Shawls " },
+    { type: "Accessories", cate: "Scarves-Shawls " },
     { type: "Accessories", cate: "Hair Accessories " },
     { type: "Accessories", cate: "Watches " },
-    { type: "Accessories", cate: "Hats & Caps  " },
+    { type: "Accessories", cate: "Hats-Caps  " },
     { type: "Accessories", cate: "Belts" },
+    { type: "Collection", cate: "Summer-Autumn" },
+    { type: "Collection", cate: "Spring-Winter" },
   ];
   localStorage.setItem("category", JSON.stringify(category));
 }
@@ -82,7 +91,8 @@ if (!localStorage.getItem("products")) {
       id: "P001",
       name: "Blue Cotton T-shirt",
       type: "Men",
-      cate: "T-shirts & polos",
+      cate: "T-shirts-polos",
+      collection: "none",
       costPrice: 200000,
       profitPercent: 25,
       price: 250000,
@@ -102,7 +112,7 @@ if (!localStorage.getItem("products")) {
       id: "P002",
       name: "White Cotton T-shirt",
       type: "Men",
-      cate: "T-shirts & polos",
+      cate: "T-shirts-polos",
       costPrice: 180000,
       profitPercent: 30,
       price: 234000,

@@ -19,50 +19,108 @@
     <link rel="stylesheet" href="./css/ultis.css" />
     <link rel="stylesheet" href="./css/cart.css" />
     <link rel="stylesheet" href="./css/account.css" />
+    <link rel="stylesheet" href="./css/Footer.css" />
     <title>Document</title>
   </head>
   <body>
     <div id="header">
-      <div id="logo"></div>
+      <a href="./index.html" id="logo">QVD82</a>
       <ul class="root">
         <li>
           <a href="./index.html"><i class="fas fa-home"></i><b>Home</b></a>
         </li>
         <li>
-          <a href=""
+          <a href="./product.html?cate=collection"
             ><b><i class="fas fa-layer-group"></i>Collection</b></a
           >
+          <ul class="listFashion">
+            <li>
+              <a href="./product.html?cate=collection&sub=Summer-Autumn"
+                >Summer - Autumn</a
+              >
+            </li>
+            <li>
+              <a href="./product.html?cate=collection&sub=Spring-Winter"
+                >Spring - Winter</a
+              >
+            </li>
+          </ul>
         </li>
         <li>
           <a href="./product.html?cate=men"
             ><b><i class="fas fa-mars"></i>Man's fashion</b></a
           >
+          <ul class="listFashion">
+            <li>
+              <a href="./product.html?cate=men&sub=T-shirts-polos"
+                >T-Shirts & Polos
+              </a>
+            </li>
+            <li>
+              <a href="./product.html?cate=men&sub=Shirts">Shirts </a>
+            </li>
+            <li>
+              <a href="./product.html?cate=men&sub=Pants-Trousers"
+                >Pants & Trousers
+              </a>
+            </li>
+            <li>
+              <a href="./product.html?cate=men&sub=shorts">Shorts</a>
+            </li>
+            <li>
+              <a href="./product.html?cate=men&sub=outerwear">Outerwear </a>
+            </li>
+          </ul>
         </li>
         <li>
           <a href="./product.html?cate=women"
             ><i class="fas fa-venus"></i><b>Women's fashion</b></a
           >
+          <ul class="listFashion">
+            <li>
+              <a href="./product.html?cate=women&sub=dresses">Dresses </a>
+            </li>
+            <li>
+              <a href="./product.html?cate=women&sub=tops-blouses"
+                >Tops & Blouses
+              </a>
+            </li>
+            <li>
+              <a href="./product.html?cate=women&sub=bottoms">Bottoms </a>
+            </li>
+            <li>
+              <a href="./product.html?cate=women&sub=outerwear">Outerwear </a>
+            </li>
+          </ul>
         </li>
         <li>
           <a href="./product.html?cate=accessories"
             ><i class="fas fa-shopping-bag"></i><b>Accessories</b></a
           >
+          <ul class="listFashion">
+            <li>
+              <a href="./product.html?cate=accessories&sub=bags-purses"
+                >Bags & Purses
+              </a>
+            </li>
+            <li>
+              <a href="./product.html?cate=accessories&sub=hats-caps"
+                >Hats & Caps
+              </a>
+            </li>
+            <li>
+              <a href="./product.html?cate=accessories&sub=jewelry">Jewelry </a>
+            </li>
+            <li>
+              <a href="./product.html?cate=accessories&sub=sunglasses"
+                >Sun glasses
+              </a>
+            </li>
+          </ul>
         </li>
       </ul>
       <div class="action-bar">
-        <div class="search-content">
-          <!-- <div class="search-bar">
-            <button type="button" class="search-btn" aria-label="search">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-            <input
-              type="search"
-              placeholder="Search"
-              aria-label="search"
-              autocomplete="new-password"
-            />
-          </div> -->
-
+        <div class="item">
           <form action="" class="search-bar" role="search" aria-label="search">
             <button type="button" class="search-btn" aria-label="search">
               <i class="fa-solid fa-magnifying-glass"></i>
@@ -75,7 +133,6 @@
             />
           </form>
         </div>
-
         <button type="button" class="payment-user cart">
           <i class="fas fa-cart-shopping item1"></i>
           <div class="product-cart">0</div>
@@ -90,12 +147,7 @@
     <div class="overlay">
       <div class="search-ex" id="search-ex">
         <div class="search-box">
-          <div class="logo-box">
-            <a href="" class="logo">
-              <img src="../assets/1760878542405.png" alt="logo" />
-            </a>
-            <h2>Goes<span>Up</span></h2>
-          </div>
+          <a href="./index.html" id="logo">QVD82</a>
           <form action="" class="searchBox" id="searchBox">
             <button type="submit" class="search-btn" aria-label="search">
               <i class="fa-solid fa-magnifying-glass"></i>
@@ -112,32 +164,11 @@
         </div>
         <div class="search-dropdown" id="search-dropdown">
           <div class="section suggest">
-            <h3>Gợi Ý</h3>
-            <ul id="suggestList">
-              <li>goi y 1</li>
-              <li>goi y 2</li>
-              <li>goi y 3</li>
-              <li>goi y 1</li>
-              <li>goi y 2</li>
-              <li>goi y 3</li>
-              <li>goi y 1</li>
-              <li>goi y 2</li>
-              <li>goi y 3</li>
-              <li>goi y 1</li>
-              <li>goi y 2</li>
-              <li>goi y 3</li>
-              <li>goi y 1</li>
-              <li>goi y 2</li>
-              <li>goi y 3</li>
-            </ul>
+            <ul id="suggestList"></ul>
           </div>
           <div class="section recent">
             <h3>Lịch sử tìm kiếm</h3>
-            <ul id="recentList">
-              <li>lich su 1</li>
-              <li>lich su 2</li>
-              <li>lich su 3</li>
-            </ul>
+            <ul id="recentList"></ul>
           </div>
         </div>
       </div>
@@ -364,6 +395,25 @@
           <div id="orderhistory-list" class="order-list"></div>
         </section>
       </main>
+    </div>
+    <div id="Footer">
+      <div class="iconF">
+        <img src="./assets/img/img_Footer/fb.png" alt="" class="sub_icon" />
+        <img src="./assets/img/img_Footer/ig.png" alt="" class="sub_icon" />
+        <img src="./assets/img/img_Footer/tw.png" alt="" class="sub_icon" />
+        <img src="./assets/img/img_Footer/gg.png" alt="" class="sub_icon" />
+        <img src="./assets/img/img_Footer/yt.png" alt="" class="sub_icon" />
+      </div>
+
+      <div class="main_path">
+        <ul class="sub_path">
+          <li>Home</li>
+          <li>News</li>
+          <li>About</li>
+          <li>Contact Us</li>
+          <li>Our Team</li>
+        </ul>
+      </div>
     </div>
     <!-- popup -->
     <!-- Payment Popup -->

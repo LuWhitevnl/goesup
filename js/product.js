@@ -6,8 +6,14 @@ document.querySelectorAll(".filter-group").forEach((toggle) => {
   });
 });
 
+const filterBtn = document.querySelector(".hide-filter-btn");
 document.querySelector(".hide-filter-btn").addEventListener("click", () => {
   document.querySelector(".filter-sidebar").classList.toggle("hide");
+  filterBtn.innerHTML = `${
+    filterBtn.textContent.includes("Show")
+      ? `Hide Filters <span class="material-symbols-outlined"> page_info </span>`
+      : `Show Filters <span class="material-symbols-outlined"> page_info </span>`
+  }`;
   document.querySelector(".product-list-item").classList.toggle("hide");
 });
 
@@ -124,7 +130,7 @@ function filterProducts() {
     document.querySelectorAll(`.gender input[type="checkbox"]:checked`)
   ).map((c) => c.value);
   console.log(type);
-  filteredProducts = store.filter((p) => {
+  let result = filteredProducts.filter((p) => {
     let matchPrice = true;
     let matchColor = true;
     let matchType = true;
@@ -143,7 +149,7 @@ function filterProducts() {
   });
   currentPage = 1;
   console.log(filteredProducts);
-  renderProducts(filteredProducts, currentPage);
+  renderProducts(result, currentPage);
 }
 
 document.querySelectorAll(`input[name="price"]`).forEach((i) => {
@@ -156,13 +162,72 @@ document.querySelectorAll(`.colors input[type= "checkbox"]`).forEach((i) => {
 });
 const urlPara = new URLSearchParams(window.location.search);
 const genderPara = urlPara.get("cate");
-if (genderPara) {
+const subPara = urlPara.get("sub");
+const productId = urlPara.get("id");
+const searchKey = urlPara.get("search");
+
+// neu co searchKey thi loc san pham theo ten
+if (searchKey) {
   filteredProducts = store.filter(
-    (p) => p.type.toLowerCase() === genderPara.toLowerCase()
+    (p) =>
+      p.name.toLowerCase().includes(searchKey.toLowerCase()) ||
+      p.cate.toLowerCase().includes(searchKey.toLowerCase()) ||
+      p.type.toLowerCase().includes(searchKey.toLowerCase()) ||
+      p.collection?.toLowerCase().includes(searchKey.toLowerCase())
   );
+  const titleProduct = document.querySelector(".title-product");
+  if (titleProduct) {
+    titleProduct.innerHTML = `
+          <span class="title-product"
+            >Search results for "<strong>${searchKey}</strong>" <strong class="count-item">(${filteredProducts.length})</strong
+          ></span>`;
+  }
+}
+
+// neu co productId thi mo trang chi tiet sp
+if (productId) {
+  openProductDetail(productId);
+} else if (genderPara) {
+  filteredProducts = store.filter((p) => {
+    const type = (p.type || "").toLowerCase();
+    const cate = (p.cate || "").toLowerCase();
+    const collection = (p.collection || "").toLowerCase();
+
+    // genderPara neu la collection thi lay san pham co collection khac none va theo subPara
+    // lay theo type so voi genderPara va cate so voi subPara
+    if (genderPara.toLowerCase() === "collection") {
+      if (subPara) {
+        return (
+          collection !== "none" &&
+          collection.toLowerCase() === subPara.toLowerCase()
+        );
+      } else {
+        return collection !== "none";
+      }
+    } else if (genderPara) {
+      if (subPara) {
+        return (
+          type === genderPara.toLowerCase() &&
+          cate.toLowerCase() === subPara.toLowerCase()
+        );
+      } else {
+        return type === genderPara.toLowerCase();
+      }
+    }
+  });
   currentPage = 1;
   renderProducts(filteredProducts, currentPage);
+  const titleProduct = document.querySelector(".title-product");
+  if (titleProduct) {
+    titleProduct.innerHTML = `
+          <span class="title-product"
+            >${subPara ? subPara : genderPara} <strong class="count-item">(${
+      filteredProducts.length
+    })</strong
+          ></span>`;
+  }
 }
+
 document.querySelectorAll(`.gender input[name="gender"]`).forEach((i) => {
   i.addEventListener("change", filterProducts);
 });
@@ -191,7 +256,7 @@ document.querySelector(".reset-filter").addEventListener("click", () => {
   document.querySelectorAll(".filter-options input").forEach((el) => {
     el.checked = false;
   });
-  filteredProducts = store;
+  // filteredProducts = store;
   currentPage = 1;
   // sortProducts();
   renderProducts(filteredProducts, currentPage);

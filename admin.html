@@ -20,12 +20,7 @@
       <!-- sidebar -->
       <aside class="sidebar">
         <header>
-          <div class="logo-box">
-            <a href="#" class="logo">
-              <img src="./assets/1760878542405.png" alt="logo" />
-            </a>
-            <h2 class="text">Goes<span>Up</span></h2>
-          </div>
+          <div class="logo-box">QVD82</div>
           <span class="material-icons-sharp toggle">arrow_forward_ios</span>
           <button class="close-repo">X</button>
         </header>
@@ -107,19 +102,6 @@
             <button class="repo-menu">
               <span class="material-icons-sharp"> menu_open </span>
             </button>
-          </div>
-          <!-- <h1>Bảng điều khiển</h1> -->
-          <div class="header-actions">
-            <input type="text" placeholder="Tìm kiếm..." />
-            <div class="icons">
-              <span class="material-icons-sharp">notifications</span>
-              <span class="material-icons-sharp">settings</span>
-              <img
-                src="./assets/avatar.jpg"
-                alt="Admin Avatar"
-                class="avatar"
-              />
-            </div>
           </div>
         </div>
         <section id="dashboard" class="page content active dashboard">
@@ -252,7 +234,7 @@
                 <p>Manage product categories and classifications</p>
               </div>
               <button class="btn-add type-btn-add" id="openAddType">
-                + Thêm loại
+                + Add
               </button>
             </div>
             <div class="actions">
@@ -281,8 +263,8 @@
                   <td>Áo thun</td>
                   <td>Các loại áo thun cotton, thể thao...</td>
                   <td>
-                    <button class="btn-edit">Sửa</button>
-                    <button class="btn-delete">Xóa</button>
+                    <button class="btn-edit">Edit</button>
+                    <button class="btn-delete">Delete</button>
                   </td>
                 </tr>
                 <tr>
@@ -290,8 +272,8 @@
                   <td>Quần jean</td>
                   <td>Jean nam nữ các loại...</td>
                   <td>
-                    <button class="btn-edit">Sửa</button>
-                    <button class="btn-delete">Xóa</button>
+                    <button class="btn-edit">Edit</button>
+                    <button class="btn-delete">Delete</button>
                   </td>
                 </tr>
               </tbody>
@@ -358,7 +340,6 @@
         <!-- Modal: Add / Edit user -->
         <div class="modal-overlay" id="userModal" style="display: none">
           <div class="modal">
-            <h3 id="userModalTitle">Thêm người dùng</h3>
             <form id="userForm">
               <div class="form-group">
                 <label>Username</label>
@@ -388,13 +369,13 @@
                 <button type="button" id="userCancel" class="btn-cancel">
                   Cancelled
                 </button>
-                <button type="submit" class="btn-save">Lưu</button>
+                <button type="submit" class="btn-save">Save</button>
               </div>
             </form>
           </div>
         </div>
 
-        <!-- Modal thêm/sửa loại -->
+        <!-- Modal thêm/Edit loại -->
         <div class="modal-overlay" id="typeModal">
           <div class="modal">
             <h2 id="typeModalTitle">Thêm loại sản phẩm</h2>
@@ -415,7 +396,7 @@
                 <button type="button" class="btn-cancel" id="typeCancel">
                   Cancelled
                 </button>
-                <button type="submit" class="btn-save">Lưu</button>
+                <button type="submit" class="btn-save">Save</button>
               </div>
             </form>
           </div>
@@ -429,7 +410,7 @@
                 <p>Manage your product inventory and catalog</p>
               </div>
               <button class="btn btn-add product-add-btn" id="openAddProduct">
-                + Thêm sản phẩm
+                + Add
               </button>
             </div>
             <!-- <h1>Quản lý sản phẩm</h1> -->
@@ -478,8 +459,8 @@
                 </div>
               </div>
               <div class="card-btn">
-                <button class="btn-edit" data-id="">Sửa</button>
-                <button class="btn-delete" data-id="">Xóa</button>
+                <button class="btn-edit" data-id="">Edit</button>
+                <button class="btn-delete" data-id="">Delete</button>
               </div>
             </div>
             <div class="item-card">
@@ -507,15 +488,15 @@
                 </div>
               </div>
               <div class="card-btn">
-                <button class="btn-edit" data-id="">Sửa</button>
-                <button class="btn-delete" data-id="">Xóa</button>
+                <button class="btn-edit" data-id="">Edit</button>
+                <button class="btn-delete" data-id="">Delete</button>
               </div>
             </div>
           </div>
           <div class="pagination" id="pagination"></div>
         </section>
 
-        <!-- Popup thêm/sửa sản phẩm -->
+        <!-- Popup thêm/Edit sản phẩm -->
         <div id="productModal" class="modal-overlay">
           <div class="modal">
             <h2 id="modalTitle">Add Product</h2>
@@ -557,6 +538,14 @@
                         <option value="T-shirt">T-shirt</option>
                         <option value="T-shirt">T-shirt</option>
                         <option value="T-shirt">T-shirt</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="collection">Collection</label>
+                      <select id="collection" required>
+                        <option value="none">none</option>
+                        <option value="Summer-Autumn">Summer-Autumn</option>
+                        <option value="Spring-Winter">Spring-Winter</option>
                       </select>
                     </div>
                   </div>
@@ -644,8 +633,8 @@
               </div>
               <div class="card-btn card-btn-store">
                 <button class="btn-hide" data-id="">Hide</button>
-                <button class="btn-edit" data-id="">Sửa</button>
-                <button class="btn-delete" data-id="">Xóa</button>
+                <button class="btn-edit" data-id="">Edit</button>
+                <button class="btn-delete" data-id="">Delete</button>
               </div>
             </div>
           </div>
@@ -660,7 +649,7 @@
                 <p>Manage warehouse locations and inventory capacity</p>
               </div>
               <button class="btn btn-add inventory-btn-add" id="openAddImport">
-                + Thêm phiếu nhập
+                + Add
               </button>
             </div>
             <section class="inventory-summary">
@@ -748,10 +737,10 @@
           </section>
         </section>
 
-        <!-- Popup thêm/sửa phiếu nhập -->
+        <!-- Popup thêm/Edit phiếu nhập -->
         <div class="modal-overlay" id="importModal">
           <div class="modal" style="animation: slideUp 0.25s ease">
-            <h2 id="importModalTitle">Thêm phiếu nhập</h2>
+            <h2 id="importModalTitle">Add</h2>
             <form id="importForm">
               <div class="form-group">
                 <label for="importDate">Ngày nhập:</label>
@@ -780,7 +769,7 @@
                 <button type="button" id="cancelImport" class="btn-cancel">
                   Cancelled
                 </button>
-                <button type="submit" class="btn-save">Lưu phiếu nhập</button>
+                <button type="submit" class="btn-save">Save phiếu nhập</button>
               </div>
             </form>
           </div>
@@ -945,6 +934,42 @@
           </div>
         </div>
       </main>
+    </div>
+    <div class="formWapper active">
+      <div class="popupBox active">
+        <div class="form-slide">
+          <!-- form dang nhap -->
+          <form action="" id="loginForm" class="active">
+            <h2>Login</h2>
+            <div class="form-group">
+              <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Nhap username"
+                tabindex="1"
+                autofocus
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="password"
+                id="loginPass"
+                name="password"
+                placeholder="Nhap Password"
+                tabindex="2"
+                required
+              />
+              <small class="error-msg"></small>
+            </div>
+            <button type="submit" class="signin_btn sign-btn" tabindex="3">
+              <span>Sign in</span>
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
     <script src="./js/data.js"></script>
     <script src="./js/admin.js"></script>

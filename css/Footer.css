@@ -1,0 +1,133 @@
+#Footer {
+  margin: 0;
+  padding: 40px 20px;
+  background-color: #364727ad;
+  height: fit-content;
+  width: 100%;
+  cursor: pointer;
+  flex-shrink: 0; /* Không bị co lại */
+}
+/* Chỉnh IconF thành hàng ngang */
+.iconF {
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+  justify-content: center;
+  gap: 20px;
+}
+/* Cố định độ rộng và cho các hình là hình tròn */
+img.sub_icon {
+  width: 2.5%;
+  border-radius: 50%;
+  border: 4px solid white;
+  background-color: white;
+}
+
+/* Chỉnh độ rộng của Main path*/
+.main_path {
+  width: 100%;
+}
+
+/* Cho các thông tin (sub_path) thành hàng ngang */
+ul.sub_path {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.iconF img:hover {
+  box-shadow: 0 0 3px 4px rgba(255, 255, 255, 0.554);
+}
+
+/* Chỉnh cỡ chữ */
+ul.sub_path li {
+  font-size: 20px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  list-style: none;
+}
+
+/* Khi hover vào 1 trong các thông tin sẽ hiện ra thanh ngang*/
+ul.sub_path li::before {
+  content: "";
+  position: absolute;
+
+  width: 0;
+  height: 2px;
+
+  border-radius: 10px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background-color: #ffffffd0;
+
+  transition: width 0.2s ease;
+}
+
+ul.sub_path li:hover::before {
+  width: 100%;
+}
+
+/* Căn chỉnh cho nằm ở giữa */
+#coppyright {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  color: white;
+  background-color: #2b391f;
+  padding: 10px;
+}
+/* Đổi màu chữ QVD82  */
+#coppyright p:last-child {
+  color: rgb(208, 204, 204);
+  margin: 0;
+}
+
+#coppyright p {
+  margin: 0;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Responsive - Điều chỉnh cho màn hình nhỏ  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+@media only screen and (max-width: 750px) {
+  #Footer {
+    padding: 15px 10px;
+  }
+
+  .iconF {
+    gap: 15px;
+    margin-top: 15px;
+  }
+
+  img.sub_icon {
+    width: 12vw; /* Sử dụng viewport width cho kích thước linh hoạt */
+    min-width: 40px; /* Kích thước tối thiểu */
+    border-width: 3px;
+  }
+
+  ul.sub_path {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  ul.sub_path li {
+    font-size: 18px;
+    padding: 5px 0;
+  }
+
+  #coppyright {
+    flex-direction: column;
+    text-align: center;
+    gap: 5px;
+    padding: 8px;
+  }
+
+  #coppyright p {
+    font-size: 14px;
+  }
+}
