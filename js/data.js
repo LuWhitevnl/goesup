@@ -91,9 +91,9 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "A silk halter-neck dress or jumpsuit featuring a tied bow at the neck and a vibrant, graphic black-and-white print resembling swirling ribbons. The garment is designed in several tiered layers on the bodice and skirt/trousers, giving it volume and dynamic movement on the runway.",
       images: [
-        "./assets/img/WoMenFashion/Dresses/1.1.webp",
-        "./assets/img/WoMenFashion/Dresses/1.2.webp",
-        "./assets/img/WoMenFashion/Dresses/1.3.webp",
+        "./assets/img/Womenfashion/Dresses/1.1.webp",
+        "./assets/img/Womenfashion/Dresses/1.2.webp",
+        "./assets/img/Womenfashion/Dresses/1.3.webp",
       ],
       sizes: ["M", "L", "XL"],
       quantity: 10,
@@ -112,9 +112,9 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "A hallmark Dior silhouette, the mid-length dress celebrates the House's tailoring spirit. Crafted in white lightweight wool and silk shantung, it features an elegant, flared cut enhanced by a tonal belt highlighting the waist as well as by a tonal covered-button closure. Completed by piped pockets on the front, the dress will create a couture look.",
       images: [
-        "./assets/img/WoMenFashion/Dresses/2.1.webp",
-        "./assets/img/WoMenFashion/Dresses/2.2.webp",
-        "./assets/img/WoMenFashion/Dresses/2.3.webp",
+        "./assets/img/Womenfashion/Dresses/2.1.webp",
+        "./assets/img/Womenfashion/Dresses/2.2.webp",
+        "./assets/img/Womenfashion/Dresses/2.3.webp",
       ],
       sizes: ["M", "L", "XL"],
       quantity: 10,
@@ -133,8 +133,8 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "A striking contrast between outerwear and the base layer. The look features a romantic, cropped ivory jacket with voluminous sleeves and dramatic layered ruffles around the collar. The garment underneath is a black jumpsuit or co-ord set (corset/vest and wide-leg trousers) featuring a subtle jacquard pattern, cinched at the waist with a delicate ribbon bow.",
       images: [
-        "./assets/img/WoMenFashion/Dresses/3.1.webp",
-        "./assets/img/WoMenFashion/Dresses/3.2.webp",
+        "./assets/img/Womenfashion/Dresses/3.1.webp",
+        "./assets/img/Womenfashion/Dresses/3.2.webp",
       ],
       sizes: ["M", "L", "XL"],
       quantity: 8,
@@ -153,9 +153,9 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "The mid-length shirtdress showcases a multicolor Butterflies & Iris motif, showcasing a soft watercolor effect suggesting an unfinished sketch, in a nod to the artistic spirit of the collection. Made in beige cotton and silk poplin, it stands out with an elegant flared silhouette and tonal belt highlighting the waist. Completed by cap sleeves, the dress can be paired with other Butterflies & Iris creations for a signature look.",
       images: [
-        "./assets/img/WoMenFashion/Dresses/4.1.webp",
-        "./assets/img/WoMenFashion/Dresses/4.2.webp",
-        "./assets/img/WoMenFashion/Dresses/4.3.webp",
+        "./assets/img/Womenfashion/Dresses/4.1.webp",
+        "./assets/img/Womenfashion/Dresses/4.2.webp",
+        "./assets/img/Womenfashion/Dresses/4.3.webp",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -174,8 +174,8 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "The mid-length dress is a sophisticated and iconic Dior silhouette. Crafted in black silk faille, it features a flared cut enhanced by the collection's hallmark removable ruched collar, as well as ruffled cap sleeves. The dress will create a feminine and elegant look.",
       images: [
-        "./assets/img/WoMenFashion/Dresses/5.1.jpg",
-        "./assets/img/WoMenFashion/Dresses/5.2.jpg",
+        "./assets/img/Womenfashion/Dresses/5.1.jpg",
+        "./assets/img/Womenfashion/Dresses/5.2.jpg",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -193,9 +193,9 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "The mid-length dress, a hallmark Dior silhouette, is a sophisticated and modern design. Crafted in red wool and silk shantung, it features an elegant flared cut enhanced by a square neckline and a waistband adorned with a large bow in the back. The mid-length dress will create a couture look",
       images: [
-        "./assets/img/WoMenFashion/Dresses/6.1.webp",
-        "./assets/img/WoMenFashion/Dresses/6.2.webp",
-        "./assets/img/WoMenFashion/Dresses/6.3.webp",
+        "./assets/img/Womenfashion/Dresses/6.1.webp",
+        "./assets/img/Womenfashion/Dresses/6.2.webp",
+        "./assets/img/Womenfashion/Dresses/6.3.webp",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -214,9 +214,9 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "The top showcases a timeless couture look. Made in finely knit black virgin wool, it is distinguished by a regular-fit silhouette enhanced by ruffled detailing highlighting the armholes, as well as the collection's hallmark removable ruched collar. The top can be paired with any of the season's looks",
       images: [
-        "./assets/img/WoMenFashion/Tops-Blouses/1.1.webp",
-        "./assets/img/WoMenFashion/Tops-Blouses/1.2.webp",
-        "./assets/img/WoMenFashion/Tops-Blouses/1.3.webp",
+        "./assets/img/Womenfashion/Tops-Blouses/1.1.webp",
+        "./assets/img/Womenfashion/Tops-Blouses/1.2.webp",
+        "./assets/img/Womenfashion/Tops-Blouses/1.3.webp",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -235,8 +235,8 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "Fleece, a fabric with a contemporary, lifestyle character, defines this top with stand-up collar and front zipper closure. The embroidered logo and cropped fit add an iconic touch to the garment, perfect for bold combinations when mixed with classic elements.",
       images: [
-        "./assets/img/WoMenFashion/Tops-Blouses/2.1.avif",
-        "./assets/img/WoMenFashion/Tops-Blouses/2.2.avif",
+        "./assets/img/Womenfashion/Tops-Blouses/2.1.avif",
+        "./assets/img/Womenfashion/Tops-Blouses/2.2.avif",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -255,10 +255,10 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "A delicate stripe pattern and playful references to scout imagery define the spirit of this poplin top. The cropped fit and detachable scarf lend versatility and character, encouraging personal styling interpretations.",
       images: [
-        "./assets/img/WoMenFashion/Tops-Blouses/3.1.avif",
-        "./assets/img/WoMenFashion/Tops-Blouses/3.2.avif",
-        "./assets/img/WoMenFashion/Tops-Blouses/3.3.avif",
-        "./assets/img/WoMenFashion/Tops-Blouses/3.4.avif",
+        "./assets/img/Womenfashion/Tops-Blouses/3.1.avif",
+        "./assets/img/Womenfashion/Tops-Blouses/3.2.avif",
+        "./assets/img/Womenfashion/Tops-Blouses/3.3.avif",
+        "./assets/img/Womenfashion/Tops-Blouses/3.4.avif",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -277,12 +277,12 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "The classic men’s shirt is reinterpreted in this poplin version with a slightly cropped fit, enriched by detachable collar and cuffs that add character and versatility to a Miu Miu wardrobe icon.",
       images: [
-        "./assets/img/WoMenFashion/Tops-Blouses/4.1.avif",
-        "./assets/img/WoMenFashion/Tops-Blouses/4.2.webp",
-        "./assets/img/WoMenFashion/Tops-Blouses/4.3.avif",
-        "./assets/img/WoMenFashion/Tops-Blouses/4.4.avif",
-        "./assets/img/WoMenFashion/Tops-Blouses/4.5.avif",
-        "./assets/img/WoMenFashion/Tops-Blouses/4.6.avif",
+        "./assets/img/Womenfashion/Tops-Blouses/4.1.avif",
+        "./assets/img/Womenfashion/Tops-Blouses/4.2.webp",
+        "./assets/img/Womenfashion/Tops-Blouses/4.3.avif",
+        "./assets/img/Womenfashion/Tops-Blouses/4.4.avif",
+        "./assets/img/Womenfashion/Tops-Blouses/4.5.avif",
+        "./assets/img/Womenfashion/Tops-Blouses/4.6.avif",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -301,11 +301,11 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "The casual style of the polo shirt meets Miu Miu's distinctive character in this cotton piqué polo shirt. The embroidered logo completes the design.",
       images: [
-        "./assets/img/WoMenFashion/Tops-Blouses/5.1.avif",
-        "./assets/img/WoMenFashion/Tops-Blouses/5.2.avif",
-        "./assets/img/WoMenFashion/Tops-Blouses/5.3.avif",
-        "./assets/img/WoMenFashion/Tops-Blouses/5.4.avif",
-        "./assets/img/WoMenFashion/Tops-Blouses/5.5.avif",
+        "./assets/img/Womenfashion/Tops-Blouses/5.1.avif",
+        "./assets/img/Womenfashion/Tops-Blouses/5.2.avif",
+        "./assets/img/Womenfashion/Tops-Blouses/5.3.avif",
+        "./assets/img/Womenfashion/Tops-Blouses/5.4.avif",
+        "./assets/img/Womenfashion/Tops-Blouses/5.5.avif",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -323,9 +323,9 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "Cropped and relaxed for that effortless summer vibe. Featuring a sweet cherry print and bow-tie sleeves, this playful tee pairs perfectly with jeans or flowy skirts for a cute and comfy look.",
       images: [
-        "./assets/img/WoMenFashion/Tops-Blouses/6.1.webp",
-        "./assets/img/WoMenFashion/Tops-Blouses/6.2.webp",
-        "./assets/img/WoMenFashion/Tops-Blouses/6.3.webp",
+        "./assets/img/Womenfashion/Tops-Blouses/6.1.webp",
+        "./assets/img/Womenfashion/Tops-Blouses/6.2.webp",
+        "./assets/img/Womenfashion/Tops-Blouses/6.3.webp",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -344,10 +344,10 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "The sporty essence of the Miu Miu wardrobe is reinterpreted through classic fabrics. This chevron skirt stands out for its mini silhouette and soft line defined by the drawstring waist, an element of experimentation and contemporary versatility.",
       images: [
-        "./assets/img/WoMenFashion/Bottoms/1.1.avif",
-        "./assets/img/WoMenFashion/Bottoms/1.2.avif",
-        "./assets/img/WoMenFashion/Bottoms/1.3.avif",
-        "./assets/img/WoMenFashion/Bottoms/1.4.avif",
+        "./assets/img/Womenfashion/Bottoms/1.1.avif",
+        "./assets/img/Womenfashion/Bottoms/1.2.avif",
+        "./assets/img/Womenfashion/Bottoms/1.3.avif",
+        "./assets/img/Womenfashion/Bottoms/1.4.avif",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -365,9 +365,9 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "A twist on classic denim — ruffle hems bring soft femininity to everyday jeans. With a slight flare at the hem, these pants flatter your legs and elevate your casual look with a French-inspired flair.",
       images: [
-        "./assets/img/WoMenFashion/Bottoms/2.1.webp",
-        "./assets/img/WoMenFashion/Bottoms/2.2.webp",
-        "./assets/img/WoMenFashion/Bottoms/2.3.webp",
+        "./assets/img/Womenfashion/Bottoms/2.1.webp",
+        "./assets/img/Womenfashion/Bottoms/2.2.webp",
+        "./assets/img/Womenfashion/Bottoms/2.3.webp",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -386,9 +386,9 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "Sweet but never subtle — this skirt is for the bold. With 3D rosette texture and a voluminous bubble silhouette, it’s your perfect match for bikinis, crop tops, and all things hot girl summer.",
       images: [
-        "./assets/img/WoMenFashion/Bottoms/3.1.webp",
-        "./assets/img/WoMenFashion/Bottoms/3.2.webp",
-        "./assets/img/WoMenFashion/Bottoms/3.3.webp",
+        "./assets/img/Womenfashion/Bottoms/3.1.webp",
+        "./assets/img/Womenfashion/Bottoms/3.2.webp",
+        "./assets/img/Womenfashion/Bottoms/3.3.webp",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -407,10 +407,10 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "The soft velvety effect of flocked chambray enhances the wide-legged cut of these pants, while the garment-washed treatment accentuates the versatility of this reinterpreted classic. ",
       images: [
-        "./assets/img/WoMenFashion/Bottoms/4.1.avif",
-        "./assets/img/WoMenFashion/Bottoms/4.2.avif",
-        "./assets/img/WoMenFashion/Bottoms/4.3.avif",
-        "./assets/img/WoMenFashion/Bottoms/4.4.avif",
+        "./assets/img/Womenfashion/Bottoms/4.1.avif",
+        "./assets/img/Womenfashion/Bottoms/4.2.avif",
+        "./assets/img/Womenfashion/Bottoms/4.3.avif",
+        "./assets/img/Womenfashion/Bottoms/4.4.avif",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -428,10 +428,10 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "The timeless character of denim meets Miu Miu's effortless femininity in this miniskirt. The embroidered logo on the back patch pocket adds an iconic touch to the garment while the hem with exposed pocket lining suggests a construction process that underlines the spontaneity of these actions.",
       images: [
-        "./assets/img/WoMenFashion/Bottoms/5.1.avif",
-        "./assets/img/WoMenFashion/Bottoms/5.2.avif",
-        "./assets/img/WoMenFashion/Bottoms/5.3.avif",
-        "./assets/img/WoMenFashion/Bottoms/5.4.avif",
+        "./assets/img/Womenfashion/Bottoms/5.1.avif",
+        "./assets/img/Womenfashion/Bottoms/5.2.avif",
+        "./assets/img/Womenfashion/Bottoms/5.3.avif",
+        "./assets/img/Womenfashion/Bottoms/5.4.avif",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -450,11 +450,11 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "The twinset is both modern and timeless. Crafted in a light pink cashmere knit, it is composed of a round neck tank top and cardigan showcasing star buttons. The twinset will complete a skirt from the collection for a hallmark look.",
       images: [
-        "./assets/img/WoMenFashion/Outerwear/1.1.webp",
-        "./assets/img/WoMenFashion/Outerwear/1.2.webp",
-        "./assets/img/WoMenFashion/Outerwear/1.3.webp",
-        "./assets/img/WoMenFashion/Outerwear/1.4.webp",
-        "./assets/img/WoMenFashion/Outerwear/1.5.jpg",
+        "./assets/img/Womenfashion/Outerwear/1.1.webp",
+        "./assets/img/Womenfashion/Outerwear/1.2.webp",
+        "./assets/img/Womenfashion/Outerwear/1.3.webp",
+        "./assets/img/Womenfashion/Outerwear/1.4.webp",
+        "./assets/img/Womenfashion/Outerwear/1.5.jpg",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -473,9 +473,9 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "The embroidered sweater features a multicolor Butterflies & Iris motif, showcasing a soft watercolor effect suggesting an unfinished sketch, enhanced by three-dimensional butterflies. Crafted in a white alpaca, cashmere and silk knit, it features a regular-fit silhouette embellished with the Christian Dior Paris signature on the back as well as ribbed trim. The sweater can be styled with other Butterflies & Iris creations to complete the look.",
       images: [
-        "./assets/img/WoMenFashion/Outerwear/2.1.webp",
-        "./assets/img/WoMenFashion/Outerwear/2.2.webp",
-        "./assets/img/WoMenFashion/Outerwear/2.3.jpg",
+        "./assets/img/Womenfashion/Outerwear/2.1.webp",
+        "./assets/img/Womenfashion/Outerwear/2.2.webp",
+        "./assets/img/Womenfashion/Outerwear/2.3.jpg",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -493,9 +493,9 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "Combining modernity and elegance, the jacket showcases the hallmark Macrocannage motif. Crafted in a black and white cotton-blend tweed knit with a textured effect, it features a regular-fit silhouette, elevated by a fringed hem and cuffs, as well as a button closure adorned with black CD Dior Tribales buttons, inspired by the House's iconic earring. Highlighted at the waist by large patch pockets, the jacket will pair well with the matching shorts to complete the look.",
       images: [
-        "./assets/img/WoMenFashion/Outerwear/3.1.jpg",
-        "./assets/img/WoMenFashion/Outerwear/3.2.webp",
-        "./assets/img/WoMenFashion/Outerwear/3.3.webp",
+        "./assets/img/Womenfashion/Outerwear/3.1.jpg",
+        "./assets/img/Womenfashion/Outerwear/3.2.webp",
+        "./assets/img/Womenfashion/Outerwear/3.3.webp",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -513,10 +513,10 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "The 30 Montaigne Bar jacket is an emblematic piece from the New Look collection, first created by Christian Dior in 1947. Crafted in a lightweight blend of white wool and silk, it features a notched collar and slit pockets that delicately highlight the waist. The Bar jacket will pair well with the entire Dior wardrobe for an elegant and refined silhouette.",
       images: [
-        "./assets/img/WoMenFashion/Outerwear/4.1.webp",
-        "./assets/img/WoMenFashion/Outerwear/4.2.webp",
-        "./assets/img/WoMenFashion/Outerwear/4.3.webp",
-        "./assets/img/WoMenFashion/Outerwear/4.4.webp",
+        "./assets/img/Womenfashion/Outerwear/4.1.webp",
+        "./assets/img/Womenfashion/Outerwear/4.2.webp",
+        "./assets/img/Womenfashion/Outerwear/4.3.webp",
+        "./assets/img/Womenfashion/Outerwear/4.4.webp",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -535,10 +535,10 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "The Prince of Wales check defines the sartorial character of this single-breasted jacket, while the straight fit and embroidered logo add a touch of boldness and style to this reinterpretation of a classic menswear piece.",
       images: [
-        "./assets/img/WoMenFashion/Outerwear/5.1.avif",
-        "./assets/img/WoMenFashion/Outerwear/5.2.avif",
-        "./assets/img/WoMenFashion/Outerwear/5.3.avif",
-        "./assets/img/WoMenFashion/Outerwear/5.4.avif",
+        "./assets/img/Womenfashion/Outerwear/5.1.avif",
+        "./assets/img/Womenfashion/Outerwear/5.2.avif",
+        "./assets/img/Womenfashion/Outerwear/5.3.avif",
+        "./assets/img/Womenfashion/Outerwear/5.4.avif",
       ],
       sizes: ["M", "L"],
       quantity: 11,
@@ -556,10 +556,10 @@ if (!localStorage.getItem("products")) {
       productDesc:
         "The iconic button-down poplin shirt is reinterpreted in this blouson jacket with a fresh, new essence made unique by the button detail on the back that plays with the world of men's shirts.",
       images: [
-        "./assets/img/WoMenFashion/Outerwear/6.1.avif",
-        "./assets/img/WoMenFashion/Outerwear/6.2.avif",
-        "./assets/img/WoMenFashion/Outerwear/6.3.avif",
-        "./assets/img/WoMenFashion/Outerwear/6.4.webp",
+        "./assets/img/Womenfashion/Outerwear/6.1.avif",
+        "./assets/img/Womenfashion/Outerwear/6.2.avif",
+        "./assets/img/Womenfashion/Outerwear/6.3.avif",
+        "./assets/img/Womenfashion/Outerwear/6.4.webp",
       ],
       sizes: ["M", "L"],
       quantity: 11,

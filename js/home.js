@@ -284,6 +284,7 @@ const getProcucts = () => JSON.parse(localStorage.getItem("products")) || [];
 const saveProcuts = (data) =>
   localStorage.setItem("products", JSON.stringify(data));
 
+// render moi cate 2 san pham
 function renderMen() {
   const menBox = document.querySelector(".men-box");
   menBox.innerHTML = ""; // Xóa nội dung cũ
