@@ -122,30 +122,27 @@ function filterProducts() {
   const priceRange = document.querySelector(
     `input[name="price"]:checked`
   )?.value;
-  // console.log(priceRange);
-  const color = Array.from(
-    document.querySelectorAll(`.colors input[type="checkbox"]:checked`)
-  ).map((c) => c.value);
-  const type = Array.from(
-    document.querySelectorAll(`.gender input[type="checkbox"]:checked`)
-  ).map((c) => c.value);
-  console.log(type);
+  const sizeSelected = Array.from(
+    document.querySelectorAll(`.filter-size input[type="checkbox"]:checked`)
+  ).map((i) => i.value);
+  console.log(sizeSelected);
   let result = filteredProducts.filter((p) => {
     let matchPrice = true;
-    let matchColor = true;
-    let matchType = true;
-    let price = parseFloat(p.price);
-    if (priceRange === "0-500") matchPrice = price < 500000;
-    else if (priceRange === "500-1000")
-      matchPrice = price >= 500000 && price <= 1000000;
-    else if (priceRange === "1000-2000")
-      matchPrice = price >= 1000000 && price <= 2000000;
-    else if (priceRange === "2000+") matchPrice = price > 2000000;
+    let matchSize = true;
 
-    if (type.length > 0) matchType = type.includes(p.type.toLowerCase());
-    if (color.length > 0)
-      matchColor = p.color?.some((c) => color.includes(c.toLowerCase()));
-    return matchPrice && matchColor && matchType;
+    if (sizeSelected.length > 0) {
+      matchSize = p.sizes?.some((s) => sizeSelected.includes(s));
+    }
+
+    let price = parseFloat(p.price);
+    if (priceRange === "0-1000") matchPrice = price < 1000000;
+    else if (priceRange === "1000-5000")
+      matchPrice = price >= 1000000 && price <= 2000000;
+    else if (priceRange === "5000-10000")
+      matchPrice = price >= 2000000 && price <= 3000000;
+    else if (priceRange === "10000+") matchPrice = price > 3000000;
+
+    return matchPrice && matchSize;
   });
   currentPage = 1;
   console.log(filteredProducts);
@@ -157,9 +154,13 @@ document.querySelectorAll(`input[name="price"]`).forEach((i) => {
     filterProducts();
   });
 });
-document.querySelectorAll(`.colors input[type= "checkbox"]`).forEach((i) => {
-  i.addEventListener("change", filterProducts);
-});
+document
+  .querySelectorAll(`.filter-size input[type="checkbox"]`)
+  .forEach((i) => {
+    i.addEventListener("change", () => {
+      filterProducts();
+    });
+  });
 const urlPara = new URLSearchParams(window.location.search);
 const genderPara = urlPara.get("cate");
 const subPara = urlPara.get("sub");
@@ -293,7 +294,8 @@ function addToCart(id, color = null, size = null, quantity = 1) {
       user: user.username,
       name: product.name,
       type: product.type,
-      gender: product.gender,
+      cate: product.cate,
+      collection: product.collection,
       color: selectedColor,
       size: selectedSize,
       price: product.price,
