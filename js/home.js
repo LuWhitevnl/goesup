@@ -370,3 +370,44 @@ function renderAccessories() {
 }
 
 renderAccessories();
+
+// ================ repo =====================
+const menuToggle = document.getElementById("menu-toggle");
+const menuClose = document.getElementById("menuclose");
+const repoMenu = document.getElementById("repo-menu");
+const overlayRepo = document.getElementById("menu-overlay");
+
+// 🔹 Mở menu
+menuToggle.addEventListener("click", () => {
+  repoMenu.classList.add("active");
+  overlayRepo.classList.add("active");
+});
+
+// 🔹 Đóng menu
+menuClose.addEventListener("click", closeMenu);
+overlayRepo.addEventListener("click", closeMenu);
+
+function closeMenu() {
+  repoMenu.classList.remove("active");
+  overlayRepo.classList.remove("active");
+}
+
+// 🔹 Toggle submenu
+document.querySelectorAll(".submenu-toggle").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const submenu = btn.closest("li").querySelector(".listFashion1");
+
+    // Đóng các menu khác
+    document.querySelectorAll(".listFashion1.open").forEach((openSub) => {
+      if (openSub !== submenu) {
+        openSub.classList.remove("open");
+        openSub.previousElementSibling
+          ?.querySelector(".submenu-toggle")
+          ?.classList.remove("rotate");
+      }
+    });
+
+    submenu.classList.toggle("open");
+    btn.classList.toggle("rotate");
+  });
+});

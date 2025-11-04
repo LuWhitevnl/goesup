@@ -809,25 +809,6 @@ ul.root li a i {
   pointer-events: all;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  #header {
-    grid-template-columns: 1fr auto;
-    height: auto;
-    flex-wrap: wrap;
-    padding: 10px;
-  }
-
-  ul.root {
-    display: none;
-  }
-
-  .action-bar {
-    justify-content: flex-end;
-    width: 100%;
-  }
-}
-
 .toast {
   position: fixed;
   top: 100px;
@@ -838,4 +819,210 @@ ul.root li a i {
   border-radius: 8px;
   opacity: 0.9;
   z-index: 999;
+}
+
+/* ===== RESPONSIVE ===== */
+/* Ẩn nút menu trên desktop */
+.menu-toggle {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+/* ========== Nút mở/đóng menu ========== */
+.menu-close {
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #111;
+  z-index: 1002;
+}
+.menu-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: none;
+}
+
+/* ========== Nền mờ khi mở menu ========== */
+.menu-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1001;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.menu-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* ========== MENU CHÍNH ========== */
+.repo-menu {
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  z-index: 1002;
+  /* display: none; */
+}
+.repo-ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 10px 0;
+  margin: 0;
+}
+.repo-ul li {
+  position: relative;
+}
+.repo-ul a {
+  color: #222;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 15px;
+  display: inline-block;
+  transition: color 0.3s;
+}
+.repo-ul a:hover {
+  color: #e91e63;
+}
+
+/* Submenu (desktop hover) */
+.listFashion1 {
+  list-style: none;
+  display: none;
+  background: white;
+  min-width: 180px;
+  border: 1px solid #eee;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+.repo-ul li:hover > .listFashion1 {
+  display: block;
+}
+.listFashion1 li a {
+  display: block;
+  padding: 10px 20px;
+  font-weight: 500;
+  color: #000000;
+}
+.listFashion1 li a:hover {
+  background: #f5f5f5;
+}
+
+/* ========== MOBILE MODE ========== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+  .menu-close {
+    display: block;
+  }
+
+  .repo-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    height: 100vh;
+    background: #fff;
+    padding: 70px 15px 20px;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+  }
+  .repo-menu.active {
+    left: 0;
+  }
+
+  .repo-ul {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 10px;
+  }
+
+  .submenu-toggle {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #444;
+    transition: transform 0.3s;
+  }
+  .submenu-toggle.rotate {
+    transform: rotate(180deg);
+  }
+
+  /* Submenu animation */
+  .listFashion1 {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+    border: none;
+    box-shadow: none;
+  }
+
+  .listFashion1.open {
+    max-height: 400px; /* đủ để chứa mục con */
+  }
+
+  .listFashion1 li a {
+    padding: 10px 35px;
+    color: #000000;
+  }
+}
+
+@media (max-width: 768px) {
+  #header {
+    /* grid-template-columns: 1fr auto; */
+    height: auto;
+    flex-wrap: wrap;
+    padding: 10px;
+  }
+
+  .logo {
+    width: 20px;
+  }
+
+  .search-bar {
+    width: 120px;
+  }
+  .text {
+    display: none;
+  }
+
+  #bg-video {
+    height: 50vh;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .btn-hero {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  ul.root {
+    display: none;
+  }
+  .repo-ul {
+    display: flex;
+  }
+
+  .action-bar {
+    justify-content: flex-end;
+    width: 100%;
+  }
 }

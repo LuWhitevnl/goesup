@@ -249,3 +249,31 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   loadAccountInfo();
 });
+
+// === Sidebar toggle (mobile) ===
+const sidebar = document.getElementById("accountSidebar");
+const toggleSidebar = document.getElementById("toggleSidebar");
+
+toggleSidebar.addEventListener("click", () => {
+  sidebar.classList.toggle("active");
+});
+
+// Đóng sidebar khi chọn mục (mobile UX tốt hơn)
+document.querySelectorAll(".sidebar-item[data-section]").forEach((item) => {
+  item.addEventListener("click", (e) => {
+    e.preventDefault();
+    sidebar.classList.remove("active"); // đóng khi chọn
+    document
+      .querySelectorAll(".sidebar-item")
+      .forEach((i) => i.classList.remove("active"));
+    item.classList.add("active");
+
+    const sectionId = item.getAttribute("data-section");
+    document
+      .querySelectorAll(".content-section")
+      .forEach((sec) => (sec.style.display = "none"));
+    document.getElementById(sectionId).style.display = "block";
+    document.querySelector(".mobile-header h1").textContent =
+      item.textContent.trim();
+  });
+});

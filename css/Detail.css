@@ -310,7 +310,7 @@
 }
 
 /*============================================================= Thay đổi giao diện khi thu nhỏ màn hình =============================================================*/
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 768px) {
   #container_detail {
     display: flex;
     flex-direction: column;
@@ -334,8 +334,7 @@
 
   /* Chỉnh lại chiều dài và rộng của ảnh lớn */
   .Big_img {
-    width: 700px;
-    height: 850px;
+    height: 300px;
   }
 
   /* Độ dài của danh sách ảnh nhỏ */

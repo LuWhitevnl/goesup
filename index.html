@@ -20,6 +20,10 @@
   <body>
     <section id="intro-container">
       <div id="header">
+        <!-- Nút mở menu khi trên điện thoại -->
+        <button id="menu-toggle" class="menu-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
         <a href="./index.html" id="logo">QVD82</a>
         <ul class="root">
           <li>
@@ -225,12 +229,12 @@
           <p class="txt-2"><i>QVD</i> – Keep it simple. Make it stand out.</p>
         </div>
       </div>
-      <a href="#content">
+      <a href="#content" class="btn-hero">
         <button class="shop-btn">
           <i class="fas fa-shopping-bag"></i><b>SHOP NOW</b>
         </button>
       </a>
-      <a href="#Footer">
+      <a href="#Footer" class="btn-hero">
         <button class="contact-btn">
           <i class="fas fa-paper-plane"></i>
           <b>CONTACT US</b>
@@ -246,7 +250,7 @@
             <img src="./assets/img/Ảnh phần đầu trang home/1.1.jpg" />
             <div class="btn-shop">
               <a href="./product.html?cate=collection&sub=Winter-Autumn">
-                <h3>Winter Collection</h3>
+                <h3>Spring Collection</h3>
                 <button>SHOP NOW</button>
               </a>
             </div>
@@ -255,7 +259,7 @@
             <img src="./assets/img/Ảnh phần đầu trang home/1.2.jpg" />
             <div class="btn-shop">
               <a href="./product.html?cate=collection&sub=Spring-Summer">
-                <h3>Spring Collection</h3>
+                <h3>Winter Collection</h3>
                 <button>SHOP NOW</button>
               </a>
             </div>
@@ -273,7 +277,7 @@
             <img src="./assets/img/Ảnh phần đầu trang home/1.4.jpg" />
             <div class="btn-shop">
               <a href="./product.html?cate=collection&sub=Spring-Summer">
-                <h3>Winter Collection</h3>
+                <h3>Summer Collection</h3>
                 <button>SHOP NOW</button>
               </a>
             </div>
@@ -368,6 +372,127 @@
       <p><strong>QVD82</strong></p>
     </div>
     <!-- popup -->
+
+    <!-- 🔹 Nền mờ khi mở menu -->
+    <div id="menu-overlay" class="menu-overlay"></div>
+
+    <!-- 🔹 Thanh menu chính -->
+    <nav class="repo-menu" id="repo-menu">
+      <button id="menuclose" class="menu-close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <ul class="repo-ul">
+        <li>
+          <a href="./index.html"><i class="fas fa-home"></i><b>Home</b></a>
+        </li>
+
+        <li>
+          <div class="menu-item">
+            <a href="./product.html?cate=collection">
+              <b><i class="fas fa-layer-group"></i>Collection</b>
+            </a>
+            <button class="submenu-toggle">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <ul class="listFashion1">
+            <li>
+              <a href="./product.html?cate=collection&sub=Winter-Autumn"
+                >Winter - Autumn</a
+              >
+            </li>
+            <li>
+              <a href="./product.html?cate=collection&sub=Spring-Summer"
+                >Spring - Summer</a
+              >
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <div class="menu-item">
+            <a href="./product.html?cate=men"
+              ><b><i class="fas fa-mars"></i>Man's Fashion</b></a
+            >
+            <button class="submenu-toggle">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <ul class="listFashion1">
+            <li>
+              <a href="./product.html?cate=men&sub=T-Shirts-Polos"
+                >T-Shirts & Polos</a
+              >
+            </li>
+            <li><a href="./product.html?cate=men&sub=Shirts">Shirts</a></li>
+            <li>
+              <a href="./product.html?cate=men&sub=Pants-Trousers"
+                >Pants & Trousers</a
+              >
+            </li>
+            <li><a href="./product.html?cate=men&sub=Shorts">Shorts</a></li>
+            <li>
+              <a href="./product.html?cate=men&sub=Outerwear">Outerwear</a>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <div class="menu-item">
+            <a href="./product.html?cate=women"
+              ><b><i class="fas fa-venus"></i>Women's Fashion</b></a
+            >
+            <button class="submenu-toggle">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <ul class="listFashion1">
+            <li><a href="./product.html?cate=women&sub=Dresses">Dresses</a></li>
+            <li>
+              <a href="./product.html?cate=women&sub=Tops-Blouses"
+                >Tops & Blouses</a
+              >
+            </li>
+            <li><a href="./product.html?cate=women&sub=Bottoms">Bottoms</a></li>
+            <li>
+              <a href="./product.html?cate=women&sub=Outerwear">Outerwear</a>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <div class="menu-item">
+            <a href="./product.html?cate=accessories">
+              <b><i class="fas fa-shopping-bag"></i>Accessories</b>
+            </a>
+            <button class="submenu-toggle">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <ul class="listFashion1">
+            <li>
+              <a href="./product.html?cate=accessories&sub=Bags-Purses"
+                >Bags & Purses</a
+              >
+            </li>
+            <li>
+              <a href="./product.html?cate=accessories&sub=Hats-Caps"
+                >Hats & Caps</a
+              >
+            </li>
+            <li>
+              <a href="./product.html?cate=accessories&sub=Jewelry">Jewelry</a>
+            </li>
+            <li>
+              <a href="./product.html?cate=accessories&sub=Sun-glasses"
+                >Sun Glasses</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
 
     <div class="formWapper">
       <div class="popupBox">

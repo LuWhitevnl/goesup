@@ -274,3 +274,63 @@
   background: #000;
   color: #fff;
 }
+
+/* =============repo ============== */
+.mobile-header {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+.mobile-header h1 {
+  font-size: 20px;
+  font-weight: 600;
+}
+.mobile-header button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .account-page {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .account-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1003;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  .account-sidebar.active {
+    transform: translateX(0);
+  }
+
+  .user-box {
+    display: none;
+  }
+
+  .sidebar-item {
+    flex: 1;
+    text-align: center;
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .account-content {
+    padding: 15px 20px;
+  }
+
+  .mobile-header {
+    display: flex;
+  }
+  .order-status-tabs {
+    overflow-x: auto;
+  }
+}

@@ -24,6 +24,10 @@
   </head>
   <body>
     <div id="header">
+      <!-- Nút mở menu khi trên điện thoại -->
+      <button id="menu-toggle" class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
       <a href="./index.html" id="logo">QVD82</a>
       <ul class="root">
         <li>
@@ -217,8 +221,8 @@
     </section>
     <!-- account -->
     <div class="account-page" id="account-page">
-      <!-- ===== Sidebar ===== -->
-      <aside class="account-sidebar">
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="account-sidebar" id="accountSidebar">
         <div class="user-box">
           <div class="avatar">
             <img src="./assets/user.png" alt="User" id="user-avatar" />
@@ -245,16 +249,18 @@
 
       <!-- ===== CONTENT ===== -->
       <main class="account-content">
+        <!-- MOBILE HEADER -->
+        <div class="mobile-header">
+          <button id="toggleSidebar"><i class="fas fa-bars"></i></button>
+          <h1>My Account</h1>
+        </div>
+
         <!-- MY ACCOUNT -->
         <section class="content-section" id="myaccount">
           <h2>My Account</h2>
           <p class="desc">View and update your personal information</p>
-
+          <!-- Form -->
           <form id="accountForm" class="account-form">
-            <div class="form-group-acc">
-              <label>Username</label>
-              <div id="username"></div>
-            </div>
             <div class="form-group-acc">
               <label>Full Name</label>
               <input type="text" id="fullname-acc" readonly />
@@ -272,32 +278,10 @@
               <input type="text" id="address-acc" readonly />
             </div>
             <div class="form-group-acc">
-              <div class="gender-group">
-                <label>Gender</label>
-                <label
-                  ><input
-                    type="radio"
-                    name="gender"
-                    value="men"
-                    disabled
-                  />men</label
-                >
-                <label
-                  ><input
-                    type="radio"
-                    name="gender"
-                    value="women"
-                    disabled
-                  />women</label
-                >
-              </div>
+              <label>Date</label>
+              <input type="date" readonly />
             </div>
-            <div class="form-group-acc">
-              <div class="date-acc">
-                <label>Date</label>
-                <input type="date" />
-              </div>
-            </div>
+
             <div class="form-actions">
               <button type="button" id="editBtn" class="btn edit">Edit</button>
               <button
@@ -323,11 +307,9 @@
         <!-- ORDER CHECKING -->
         <section class="content-section" id="ordercheck" style="display: none">
           <h2>Orders In Progress</h2>
-
-          <!-- Tabs trạng thái -->
           <div class="order-status-tabs">
             <button class="status-tab active" data-status="All">All</button>
-            <button class="status-tab" data-status="New">Pending</button>
+            <button class="status-tab" data-status="Pending">Pending</button>
             <button class="status-tab" data-status="Shipping">Shipping</button>
             <button class="status-tab" data-status="Completed">
               Delivered
@@ -336,53 +318,7 @@
               Cancelled
             </button>
           </div>
-
-          <div id="ordercheck-list" class="order-list">
-            <div class="order-card">
-              <div class="status-card">
-                <div class="order-id">O001</div>
-                <div class="order-status">Pending</div>
-              </div>
-              <div class="items">
-                <div class="item">
-                  <div class="item-info">
-                    <div class="item-img">
-                      <img src="./assets/ao1.avif" alt="" />
-                    </div>
-                    <div class="item-more">
-                      <h2 class="title">ao thun color</h2>
-                      <div class="info">
-                        <div class="lable"><p>classify:</p></div>
-                        <div class="type">ao thun, nau, L</div>
-                      </div>
-                      <div class="quantity">x1</div>
-                    </div>
-                  </div>
-                  <div class="item-price">200000d</div>
-                </div>
-                <div class="item">
-                  <div class="item-info">
-                    <div class="item-img">
-                      <img src="./assets/ao1.avif" alt="" />
-                    </div>
-                    <div class="item-more">
-                      <h2 class="title">ao thun color</h2>
-                      <div class="info">
-                        <div class="lable"><p>classify:</p></div>
-                        <div class="type">ao thun, nau, L</div>
-                      </div>
-                      <div class="quantity">x1</div>
-                    </div>
-                  </div>
-                  <div class="item-price">200000d</div>
-                </div>
-              </div>
-              <div class="total">
-                Total:
-                <p>200000d</p>
-              </div>
-            </div>
-          </div>
+          <div id="ordercheck-list" class="order-list"></div>
         </section>
 
         <!-- ORDER HISTORY -->
@@ -486,6 +422,127 @@
         </form>
       </div>
     </div>
+
+    <!-- 🔹 Nền mờ khi mở menu -->
+    <div id="menu-overlay" class="menu-overlay"></div>
+
+    <!-- 🔹 Thanh menu chính -->
+    <nav class="repo-menu" id="repo-menu">
+      <button id="menuclose" class="menu-close">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <ul class="repo-ul">
+        <li>
+          <a href="./index.html"><i class="fas fa-home"></i><b>Home</b></a>
+        </li>
+
+        <li>
+          <div class="menu-item">
+            <a href="./product.html?cate=collection">
+              <b><i class="fas fa-layer-group"></i>Collection</b>
+            </a>
+            <button class="submenu-toggle">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <ul class="listFashion1">
+            <li>
+              <a href="./product.html?cate=collection&sub=Winter-Autumn"
+                >Winter - Autumn</a
+              >
+            </li>
+            <li>
+              <a href="./product.html?cate=collection&sub=Spring-Summer"
+                >Spring - Summer</a
+              >
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <div class="menu-item">
+            <a href="./product.html?cate=men"
+              ><b><i class="fas fa-mars"></i>Man's Fashion</b></a
+            >
+            <button class="submenu-toggle">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <ul class="listFashion1">
+            <li>
+              <a href="./product.html?cate=men&sub=T-Shirts-Polos"
+                >T-Shirts & Polos</a
+              >
+            </li>
+            <li><a href="./product.html?cate=men&sub=Shirts">Shirts</a></li>
+            <li>
+              <a href="./product.html?cate=men&sub=Pants-Trousers"
+                >Pants & Trousers</a
+              >
+            </li>
+            <li><a href="./product.html?cate=men&sub=Shorts">Shorts</a></li>
+            <li>
+              <a href="./product.html?cate=men&sub=Outerwear">Outerwear</a>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <div class="menu-item">
+            <a href="./product.html?cate=women"
+              ><b><i class="fas fa-venus"></i>Women's Fashion</b></a
+            >
+            <button class="submenu-toggle">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <ul class="listFashion1">
+            <li><a href="./product.html?cate=women&sub=Dresses">Dresses</a></li>
+            <li>
+              <a href="./product.html?cate=women&sub=Tops-Blouses"
+                >Tops & Blouses</a
+              >
+            </li>
+            <li><a href="./product.html?cate=women&sub=Bottoms">Bottoms</a></li>
+            <li>
+              <a href="./product.html?cate=women&sub=Outerwear">Outerwear</a>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <div class="menu-item">
+            <a href="./product.html?cate=accessories">
+              <b><i class="fas fa-shopping-bag"></i>Accessories</b>
+            </a>
+            <button class="submenu-toggle">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+          <ul class="listFashion1">
+            <li>
+              <a href="./product.html?cate=accessories&sub=Bags-Purses"
+                >Bags & Purses</a
+              >
+            </li>
+            <li>
+              <a href="./product.html?cate=accessories&sub=Hats-Caps"
+                >Hats & Caps</a
+              >
+            </li>
+            <li>
+              <a href="./product.html?cate=accessories&sub=Jewelry">Jewelry</a>
+            </li>
+            <li>
+              <a href="./product.html?cate=accessories&sub=Sun-glasses"
+                >Sun Glasses</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
 
     <div class="formWapper">
       <div class="popupBox">
