@@ -301,6 +301,10 @@
   /* height: 70%; */
 }
 
+.item:hover .item-img img {
+  transform: scale(1.05);
+}
+
 .detail {
   display: flex;
   flex-direction: column;

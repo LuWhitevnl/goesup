@@ -44,6 +44,11 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
+/* check box dep */
+.choice-box {
+  margin-right: 15px;
+}
+
 .cart-item img {
   width: 180px;
   height: 180px;

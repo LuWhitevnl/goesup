@@ -135,6 +135,9 @@ function renderCart() {
         </div>
       </div>
     `;
+    div.querySelector("img").onclick = (e) => {
+      window.location.href = `product.html?id=${item.id}`;
+    };
 
     cartContainer.appendChild(div);
   });

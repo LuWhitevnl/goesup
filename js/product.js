@@ -62,11 +62,11 @@ function renderProducts(list = filteredProducts, page = 1) {
     `;
     productsList.appendChild(card);
   });
-  productsList.addEventListener("click", (e) => {
-    const btn = e.target.closest(".add-cart-btn");
-    if (btn) {
+  productsList.onclick = (e) => {
+    const addBtn = e.target.closest(".add-cart-btn");
+    if (addBtn) {
       e.stopPropagation();
-      addToCart(btn.dataset.id);
+      addToCart(addBtn.dataset.id);
       return;
     }
 
@@ -74,7 +74,7 @@ function renderProducts(list = filteredProducts, page = 1) {
     if (item) {
       openProductDetail(item.dataset.id);
     }
-  });
+  };
   renderPagination(list);
   // sortProducts();
   loadCartHeader();
@@ -137,10 +137,10 @@ function filterProducts() {
     let price = parseFloat(p.price);
     if (priceRange === "0-1000") matchPrice = price < 1000000;
     else if (priceRange === "1000-5000")
-      matchPrice = price >= 1000000 && price <= 2000000;
+      matchPrice = price >= 1000000 && price <= 5000000;
     else if (priceRange === "5000-10000")
-      matchPrice = price >= 2000000 && price <= 3000000;
-    else if (priceRange === "10000+") matchPrice = price > 3000000;
+      matchPrice = price >= 5000000 && price <= 10000000;
+    else if (priceRange === "10000+") matchPrice = price > 10000000;
 
     return matchPrice && matchSize;
   });
@@ -279,7 +279,7 @@ function addToCart(id, color = null, size = null, quantity = 1) {
   const selectedColor =
     color || (product.color && product.color[0]) || product.color || "default";
   const selectedSize =
-    size || (product.sizes && product.sizes[0]) || product.sizes || "M";
+    size || (product.sizes && product.sizes[0]) || product.sizes || "none";
   const selectedImage = (product.images && product.images[0]) || product.image;
 
   const existing = cart.find(

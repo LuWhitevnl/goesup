@@ -94,11 +94,7 @@
       <main class="main">
         <div class="admin-header">
           <div class="repo">
-            <div class="logo-box">
-              <a href="#" class="logo">
-                <img src="./assets/1760878542405.png" alt="logo" />
-              </a>
-            </div>
+            <a href="#" id="logo">QVD82</a>
             <button class="repo-menu">
               <span class="material-icons-sharp"> menu_open </span>
             </button>
@@ -523,7 +519,7 @@
                     <input type="text" id="productName" required />
                   </div>
 
-                  <div class="form-group type-cate">
+                  <div class="type-cate form-group">
                     <div>
                       <label for="productType">Type</label>
                       <select id="productType" required>
@@ -638,7 +634,7 @@
               </div>
             </div>
           </div>
-          <div class="pagination" id="pagination"></div>
+          <div class="pagination" id="pagination-store"></div>
         </section>
 
         <section id="warehouse" class="page content">
@@ -674,7 +670,7 @@
 
           <div class="actions" id="actionsKho">
             <h2 id="kho">Kho</h2>
-            <select class="filter" id="filterType">
+            <select class="filter" id="filterType-inven">
               <option value="name">Ten san pham</option>
               <option value="Áo thun">Áo thun</option>
               <option value="Quần jean">Quần jean</option>
@@ -682,7 +678,7 @@
             </select>
             <input
               type="text"
-              placeholder="Tìm kiếm phiếu nhập..."
+              placeholder="Search..."
               class="search-box"
               id="searchInven"
             />
@@ -705,6 +701,7 @@
                 <!-- Render bằng JS -->
               </tbody>
             </table>
+            <div class="pagination" id="paginationInventory"></div>
           </div>
 
           <!-- Danh sách phiếu nhập -->
