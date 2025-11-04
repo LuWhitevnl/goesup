@@ -963,3 +963,181 @@ h1 {
   opacity: 1;
   pointer-events: all;
 }
+
+/*================================================================*/
+#content {
+  width: 100%;
+  /* padding: 0 50px; */
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+.content-one {
+  width: 100%;
+  margin-top: 100px;
+}
+.text-collection {
+  font-size: 28px;
+  font-weight: 600;
+  color: #2b391f;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+.collection-box {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+#text-one {
+  margin-top: 40px;
+  color: #2b391f;
+}
+.box-one {
+  height: 600px;
+  width: calc(100% / 2);
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+}
+.box-one img {
+  width: 100%;
+  object-fit: cover; /* ảnh lấp đầy khung, không méo */
+  object-position: center;
+  display: block;
+}
+.btn-shop {
+  position: absolute;
+  bottom: 50px;
+  left: 5%;
+}
+.btn-shop h3 {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.btn-shop button {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: #ffffffda;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.content-two {
+  width: 100%;
+  white-space: nowrap; /* không cho xuống dòng */
+  overflow-x: auto; /* bật thanh cuộn ngang khi tràn */
+  padding-bottom: 0px;
+  overflow-y: hidden;
+  margin-top: 20px;
+  height: auto;
+}
+#text-two {
+  margin-top: 40px;
+  margin-left: 30px;
+  color: #2b391f;
+}
+.box-two {
+  aspect-ratio: 5 / 7;
+  width: calc(100% / 4 - 10px);
+  /* margin: 5px; */
+  margin-left: 10px;
+  display: inline-block;
+}
+.box-two:first-child {
+  margin-left: 30px;
+}
+.box-two img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover; /* ảnh lấp đầy khung, không méo */
+  object-position: center;
+  display: block;
+}
+
+.content-three {
+  width: 100%;
+  white-space: nowrap;
+  padding-bottom: 10px;
+}
+.box {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+#text-three {
+  margin-left: 30px;
+  margin-top: 40px;
+  color: #2b391f;
+}
+.box-three {
+  aspect-ratio: 5 / 7;
+  width: calc(100% / 4 - 10px);
+  /* margin: 5px; */
+  margin-left: 10px;
+  display: inline-block;
+}
+.box-three img {
+  width: 100%;
+  object-fit: cover; /* ảnh lấp đầy khung, không méo */
+  object-position: center;
+  display: block;
+}
+.box-three:first-child {
+  margin-left: 30px;
+}
+.content-four {
+  width: 100%;
+  white-space: nowrap;
+  padding-bottom: 10px;
+}
+#text-four {
+  margin-left: 30px;
+  margin-top: 40px;
+  color: #2b391f;
+}
+.box-four {
+  aspect-ratio: 5 / 7;
+  width: calc(100% / 4 - 10px);
+  height: 300px;
+  /* margin: 5px; */
+  margin-left: 10px;
+  display: inline-block;
+}
+.box-four img {
+  width: 100%;
+  object-fit: cover; /* ảnh lấp đầy khung, không méo */
+  object-position: center;
+  display: block;
+}
+.footer {
+  width: 100%;
+  background-color: #2b391f;
+}
+#text-five {
+  color: white;
+  margin: 10px;
+}
+/* Hiệu ứng zoom ảnh khi hover */
+.box-one img,
+.box-two img,
+.box-three img,
+.box-four img {
+  transition: transform 0.3s ease; /* mượt */
+}
+
+.box-one:hover img,
+.box-two:hover img,
+.box-three:hover img,
+.box-four:hover img {
+  transform: scale(1.01); /* phóng to 10% */
+}
+
+/* Nếu muốn phóng to một chút và giữ nét đẹp */
+.box-one,
+.box-two,
+.box-three,
+.box-four {
+  overflow: hidden; /* tránh ảnh tràn ra ngoài khung */
+}

@@ -33,7 +33,7 @@ const saveCart = (data) => localStorage.setItem("cart", JSON.stringify(data));
 const store = getProducts().filter((e) => !e.hidden);
 let filteredProducts = store;
 let currentPage = 1;
-const itemPerPage = 2;
+const itemPerPage = 9;
 
 function renderProducts(list = filteredProducts, page = 1) {
   const start = (page - 1) * itemPerPage;

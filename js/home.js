@@ -277,3 +277,95 @@ function loadCartHeader() {
 }
 
 loadCartHeader();
+
+//=============NHU====================
+
+const getProcucts = () => JSON.parse(localStorage.getItem("products")) || [];
+const saveProcuts = (data) =>
+  localStorage.setItem("products", JSON.stringify(data));
+
+function renderMen() {
+  const menBox = document.querySelector(".men-box");
+  menBox.innerHTML = ""; // Xóa nội dung cũ
+
+  const menproducts = getProcucts().filter((e) => e.type === "Men");
+  // console.log(menproducts);
+
+  let html = "";
+
+  for (let i = 0; i < menproducts.length && i < 8; i++) {
+    html += `
+      <div class="box-two" data-id="${menproducts[i].id}">
+        <img src="${menproducts[i].images[0]}" alt="${menproducts[i].name}">
+      </div>
+    `; // biến chuỗi
+  }
+
+  // Chèn vào HTML
+  menBox.innerHTML = html;
+  //click
+  const boxes = menBox.querySelectorAll(".box-two");
+  boxes.forEach((box) => {
+    box.addEventListener("click", () => {
+      const id = box.dataset.id;
+      window.location.href = `product.html?id=${id}`;
+    });
+  });
+}
+
+renderMen();
+
+function renderWomen() {
+  const womenbox = document.querySelector(".women-box");
+  womenbox.innerHTML = "";
+
+  const womenproducts = getProcucts().filter(
+    (e) => e.type.toLowerCase() === "women"
+  );
+  let html = "";
+  for (let i = 0; i < womenproducts.length && i < 8; i++) {
+    html += `
+      <div class="box-three" data-id="${womenproducts[i].id}">
+        <img src="${womenproducts[i].images[0]}" alt="${womenproducts[i].name}">
+      </div>
+    `;
+  }
+  womenbox.innerHTML = html;
+  //click
+  const boxes = womenbox.querySelectorAll(".box-three");
+  boxes.forEach((box) => {
+    box.addEventListener("click", () => {
+      const id = box.dataset.id;
+      window.location.href = `product.html?id=${id}`;
+    });
+  });
+}
+
+renderWomen();
+
+function renderAccessories() {
+  const accebox = document.querySelector(".acce-box");
+  accebox.innerHTML = "";
+  console.log(1);
+  const acceproducts = getProcucts().filter((e) => e.type === "Accessories");
+  console.log(acceproducts);
+  let html = "";
+  for (let i = 0; i < acceproducts.length && i < 8; i++) {
+    html += `
+      <div class="box-four" data-id="${acceproducts[i].id}">
+        <img src="${acceproducts[i].images[0]}" alt="${acceproducts[i].name}">
+      </div>
+    `;
+  }
+  accebox.innerHTML = html;
+  //click
+  const boxes = accebox.querySelectorAll(".box-four");
+  boxes.forEach((box) => {
+    box.addEventListener("click", () => {
+      const id = box.dataset.id;
+      window.location.href = `./product.html?id=${id}`;
+    });
+  });
+}
+
+renderAccessories();
