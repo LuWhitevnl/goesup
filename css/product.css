@@ -380,10 +380,17 @@
   }
 
   .filter-sidebar {
-    position: fixed;
+    position: absolute;
     top: 70px;
     left: 10px;
     width: calc(100% - 20px);
     height: auto;
+  }
+  .filter-sidebar.hide {
+    width: 0;
+    opacity: 0;
+    /* left: -100px; */
+    pointer-events: none;
+    overflow-y: auto;
   }
 }

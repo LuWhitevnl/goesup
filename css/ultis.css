@@ -821,6 +821,11 @@ ul.root li a i {
   z-index: 999;
 }
 
+#coppyright p,
+#coppyright strong {
+  color: #fff;
+}
+
 /* ===== RESPONSIVE ===== */
 /* Ẩn nút menu trên desktop */
 .menu-toggle {
@@ -877,6 +882,7 @@ ul.root li a i {
   gap: 25px;
   padding: 10px 0;
   margin: 0;
+  display: none;
 }
 .repo-ul li {
   position: relative;

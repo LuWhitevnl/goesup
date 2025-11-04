@@ -302,6 +302,7 @@ function addToCart(id, color = null, size = null, quantity = 1) {
       desc: product.productDesc,
       quantity: quantity,
       image: selectedImage,
+      checked: true,
     });
   }
 
