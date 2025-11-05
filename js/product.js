@@ -38,11 +38,12 @@ const itemPerPage = 9;
 function renderProducts(list = filteredProducts, page = 1) {
   const start = (page - 1) * itemPerPage;
   const end = start + itemPerPage;
-  const pageProducts = list.slice(start, end);
+  // const pageProducts = list.slice(start, end);
 
   item.innerHTML = `(${filteredProducts.length})`;
   productsList.innerHTML = "";
-  pageProducts.forEach((p) => {
+  for (let i = start; i < end && i < list.length; i++) {
+    const p = list[i];
     const card = document.createElement("div");
     const image = p.images[0];
     card.classList.add("item");
@@ -61,7 +62,7 @@ function renderProducts(list = filteredProducts, page = 1) {
               }">add to cart</button>
     `;
     productsList.appendChild(card);
-  });
+  }
   productsList.onclick = (e) => {
     const addBtn = e.target.closest(".add-cart-btn");
     if (addBtn) {

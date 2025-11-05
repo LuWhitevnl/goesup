@@ -467,10 +467,9 @@ function renderInventory(products = getProducts(), page = 1) {
   // ==== Cắt danh sách sản phẩm theo trang ====
   const start = (page - 1) * itemsPerPageInventory;
   const end = start + itemsPerPageInventory;
-  const paginated = products.slice(start, end);
-
-  // ==== Render từng sản phẩm ====
-  paginated.forEach((prod) => {
+  // const paginated = products.slice(start, end);
+  for (let i = start; i < end && i < products.length; i++) {
+    const prod = products[i];
     const importedQty = imports
       .filter((i) => i.productId === prod.id && i.status === "Completed")
       .reduce((sum, i) => sum + i.quantity, 0);
@@ -515,7 +514,7 @@ function renderInventory(products = getProducts(), page = 1) {
       </td>
     `;
     tbody.appendChild(tr);
-  });
+  }
 
   // ==== Gắn sự kiện nhập thêm ====
   attachAddMoreEvents();
@@ -915,19 +914,15 @@ function renderProducts(products = filteredProducts, page = 1) {
   // Giới hạn sản phẩm theo trang
   const start = (page - 1) * itemsPerPage;
   const end = start + itemsPerPage;
-  const pageItems = products.slice(start, end);
+  // const pageItems = products.slice(start, end);
 
-  if (pageItems.length === 0) {
+  if (products.length === 0) {
     productTable.innerHTML = `<p class="no-data">Không có sản phẩm nào.</p>`;
     return;
   }
 
-  pageItems.forEach((p) => {
-    const statusClass =
-      p.quantity === 0 ? "danger" : p.quantity < 5 ? "low" : "ok";
-    const statusText =
-      p.quantity === 0 ? "Hết hàng" : p.quantity < 5 ? "Sắp hết" : "Còn hàng";
-
+  for (let i = start; i < end && i < products.length; i++) {
+    const p = products[i];
     const siezhtml = p.sizes.map((s) => `<li>${s}`).join("");
     const colorhtml = (p.color || [])
       .map((c) => `<span class="color-dot" style="background: ${c}"></span>`)
@@ -959,7 +954,7 @@ function renderProducts(products = filteredProducts, page = 1) {
               </div>
     `;
     productTable.appendChild(card);
-  });
+  }
 
   renderPagination(products);
 }
@@ -1291,10 +1286,11 @@ function renderStore(products = getProducts(), page = 1) {
   // Tính phân trang
   const start = (page - 1) * itemsPerPageStore;
   const end = start + itemsPerPageStore;
-  const paginated = products.slice(start, end);
+  // const paginated = products.slice(start, end);
 
   // Render từng sản phẩm
-  paginated.forEach((p) => {
+  for (let i = start; i < end && i < products.length; i++) {
+    const p = products[i];
     const card = document.createElement("div");
     card.className = "item-card";
     card.innerHTML = `
@@ -1326,7 +1322,7 @@ function renderStore(products = getProducts(), page = 1) {
       </div>
     `;
     container.appendChild(card);
-  });
+  }
 
   renderPaginationStore(products);
 }
