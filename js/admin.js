@@ -1104,6 +1104,8 @@ function openModal(editId = null) {
   modal.style.display = "flex";
   document.body.style.overflow = "hidden";
 
+  imageInput.value = "";
+  selectedImages = [];
   // Reset ảnh preview
   previewContainer.innerHTML =
     '<span class="placeholder-text">+ Add Images</span>';
