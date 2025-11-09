@@ -11,7 +11,7 @@ const loginForm = document.querySelector("#loginForm");
 const adminPage = document.querySelector(".admin-body");
 
 const Admin = JSON.parse(localStorage.getItem("admin")) || {};
-console.log(Admin.username);
+// console.log(Admin.username);
 const logined = JSON.parse(localStorage.getItem("logined"));
 function toggleForm() {
   username.focus();
@@ -214,7 +214,7 @@ function renderDashboard() {
   const orders = getOrders();
   const products = getProducts();
   const customer = getUsers();
-  console.log(customer);
+  // console.log(customer);
   const monthlyRevenue = orders
     .filter(
       (o) =>
@@ -229,7 +229,7 @@ function renderDashboard() {
 
   // Đếm đơn hàng mới (chưa giao)
   const newOrder = orders.filter((o) => o.status === "New").length;
-  console.log(newOrder);
+  // console.log(newOrder);
   //  Tổng số sản phẩm tồn
   const totalStock = products.reduce((sum, p) => sum + (p.quantity || 0), 0);
 
@@ -317,7 +317,7 @@ function renderTypeTable(list = getTypes()) {
 
   // Mở modal thêm
   btnAdd.onclick = () => {
-    console.log(1);
+    // console.log(1);
     modalTitle.textContent = "Thêm loại sản phẩm";
     typeForm.reset();
     editIndex = -1;
@@ -353,7 +353,7 @@ function renderTypeTable(list = getTypes()) {
   // Edit
   document.querySelectorAll(".btn-edit").forEach((btn) => {
     btn.onclick = () => {
-      console.log(1);
+      // console.log(1);
       const typeList = getTypes();
       editIndex = btn.dataset.index;
       const t = typeList[editIndex];
@@ -451,6 +451,7 @@ function renderImports(list = getData("imports")) {
 /*  RENDER KHO  */
 let currentPageInventory = 1;
 const itemsPerPageInventory = 6;
+
 function renderInventory(products = getProducts(), page = 1) {
   const tbody = document.querySelector("#inventoryTable tbody");
   const imports = getKho();
@@ -482,13 +483,13 @@ function renderInventory(products = getProducts(), page = 1) {
 
     const stock = prod.quantity ?? 0;
 
-    let status = "Còn hàng",
-      statusColor = "";
+    let status = "in stock";
+    let statusColor = "";
     if (stock === 0) {
-      status = "Hết hàng";
+      status = "out stock";
       statusColor = "#ff5252";
     } else if (stock < 5) {
-      status = "Sắp hết";
+      status = "low stock";
       statusColor = "#ff9340";
     }
 
@@ -501,9 +502,9 @@ function renderInventory(products = getProducts(), page = 1) {
       <td>${exportedQty}</td>
       <td>${prod.costPrice ? prod.costPrice.toLocaleString() + "₫" : "-"}</td>
       <td class="${
-        status === "Hết hàng"
+        status === "out stock"
           ? "danger"
-          : status === "Sắp hết"
+          : status === "low stock"
           ? "warning"
           : "success"
       }">${status}</td>
@@ -602,22 +603,70 @@ function renderPaginationInventory(products) {
   );
 }
 
-function filterInventoryByType(type) {
-  const filtered = getProducts().filter((prod) => prod.cate === type);
-  renderInventory(filtered, currentPageInventory);
+// Biến lưu trạng thái bộ lọc hiện tại
+const filters = {
+  type: "all",
+  keyword: "",
+  status: "all",
+};
+
+function applyInventoryFilters() {
+  let products = getProducts();
+
+  // 1. Lọc theo loại
+  if (filters.type !== "all") {
+    products = products.filter((p) => p.cate === filters.type);
+  }
+
+  // 2. Lọc theo từ khóa
+  if (filters.keyword.trim() !== "") {
+    const kw = filters.keyword.toLowerCase();
+    products = products.filter((p) => p.name.toLowerCase().includes(kw));
+  }
+
+  // 3. Lọc theo trạng thái tồn kho
+  if (filters.status !== "all") {
+    products = products.filter((p) => {
+      const stock = p.quantity ?? 0;
+      if (filters.status === "in-stock") return stock > 5;
+      if (filters.status === "low-stock") return stock > 0 && stock <= 5;
+      if (filters.status === "out-stock") return stock === 0;
+      return true;
+    });
+  }
+
+  // 4. Render kết quả
+  renderInventory(products, currentPageInventory);
 }
 
+// --- Các event chỉ thay đổi filters và gọi lại applyInventoryFilters ---
 document.querySelector("#filterType-inven").addEventListener("change", (e) => {
-  const selectedType = e.target.value;
-  filterInventoryByType(selectedType);
+  filters.type = e.target.value;
+  applyInventoryFilters();
 });
 
 document.querySelector("#searchInven").addEventListener("input", (e) => {
-  const keyword = e.target.value.toLowerCase();
-  const filtered = getProducts().filter((prod) =>
-    prod.name.toLowerCase().includes(keyword)
-  );
-  renderInventory(filtered, currentPageInventory);
+  filters.keyword = e.target.value;
+  applyInventoryFilters();
+});
+
+document
+  .querySelector("#filterStatus-inven")
+  .addEventListener("change", (e) => {
+    filters.status = e.target.value;
+    applyInventoryFilters();
+  });
+
+document.querySelector(".resetInventory").addEventListener("click", () => {
+  filters.type = "all";
+  filters.keyword = "";
+  filters.status = "all";
+
+  document.querySelector("#filterType-inven").value = "all";
+  document.querySelector("#searchInven").value = "";
+  document.querySelector("#filterStatus-inven").value = "all";
+
+  applyInventoryFilters();
 });
 
 // ==== KHỞI TẠO ====
@@ -627,7 +676,7 @@ renderInventory(getProducts(), currentPageInventory);
 
 // mo popup order
 function closeOrderDetail() {
-  console.log(2);
+  // console.log(2);
   orderModal.style.display = "none";
   document.body.style.overflow = "auto";
   editingOrderId = null;
@@ -748,7 +797,7 @@ orderTable.addEventListener("click", (e) => {
 
 //  Đóng popup
 closeModalBtn.addEventListener("click", () => {
-  console.log(2);
+  // console.log(2);
   orderModal.style.display = "none";
   document.body.style.overflow = "auto";
   editingOrderId = null;
@@ -762,7 +811,7 @@ orderModal.addEventListener("click", (e) => {
 
 // mo popup import
 function openAddImport(productId = null) {
-  console.log(4);
+  // console.log(4);
   editingImportId = null;
   importForm.reset();
   productImportList.innerHTML = "";
@@ -784,7 +833,7 @@ function openAddImport(productId = null) {
   row.innerHTML = `
     <select class="import-product">${selectOptions}</select>
     <input type="number" placeholder="Số lượng" class="import-quantity" min="1" value="1"/>
-    <input type="number" placeholder="Giá nhập" class="import-price" min="0" value="${costPrice}"/>
+    <input type="number" placeholder="Giá nhập" class="import-price" min="1" value="${costPrice}"/>
     <button type="button" class="btn-remove">X</button>
   `;
   row
@@ -801,7 +850,7 @@ function openAddImport(productId = null) {
 }
 
 document.getElementById("openAddImport").addEventListener("click", () => {
-  console.log(3);
+  // console.log(3);
   openAddImport();
 });
 
@@ -1037,7 +1086,7 @@ productForm.addEventListener("submit", (e) => {
     .value.split(",")
     .map((c) => c.trim())
     .filter((c) => c);
-  console.log(sizes);
+  // console.log(sizes);
 
   let images = selectedImages.length
     ? [...selectedImages]
@@ -1161,7 +1210,7 @@ productTable.addEventListener("click", (e) => {
   if (!btn) return;
 
   const id = btn.dataset.id;
-  console.log(id);
+  // console.log(id);
   if (btn.classList.contains("btn-edit")) {
     openModal(id);
   } else if (btn.classList.contains("btn-delete")) {
@@ -1471,6 +1520,12 @@ document.querySelector(".item-store-list").addEventListener("click", (e) => {
     const cancelBtn = profitEl.querySelector("#cancelProfitBtn");
 
     saveBtn.addEventListener("click", () => {
+      if (isNaN(input.value) || input.value < 0) {
+        message("Invalid profit percent");
+        input.focus();
+        input.value = products[idx].profitPercent || 0;
+        return;
+      }
       const newProfit = parseFloat(input.value) || 0;
 
       // Cập nhật giá bán = giá vốn * (1 + % lợi nhuận)
@@ -1492,6 +1547,111 @@ document.querySelector(".item-store-list").addEventListener("click", (e) => {
     });
   }
 });
+// Show category profit modal
+document.querySelector(".category-profit").addEventListener("click", () => {
+  // console.log("open category profit modal");
+  document.getElementById("categoryProfitModal").classList.add("active");
+});
+
+// Close category profit modal
+document.getElementById("closeCategoryProfit").addEventListener("click", () => {
+  document.getElementById("categoryProfitModal").classList.remove("active");
+});
+
+// render category profit table
+function renderCategoryProfitTable() {
+  const tbody = document.querySelector(".category-profit-list tbody");
+  tbody.innerHTML = "";
+  const cates = getCates();
+  // table
+  cates.forEach((c) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML += `
+      <td>${c.cate}</td>
+      <td>${c.profitPercent || 0}%</td>
+      <td><button class="btn-edit-category" data-cate="${
+        c.cate
+      }">Edit</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+  // attach edit event
+}
+
+// chi cap nhat lai cac san pham co profit nho hon profit cua category
+document
+  .querySelector(".category-profit-list tbody")
+  .addEventListener("click", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+
+    const cate = btn.dataset.cate;
+    if (!cate) return;
+
+    if (btn.classList.contains("btn-edit-category")) {
+      const row = btn.closest("tr");
+      const profitCell = row?.children?.[1];
+      const actionCell = row?.children?.[2];
+      if (!profitCell || !actionCell || profitCell.querySelector("input"))
+        return;
+
+      const current = parseFloat(profitCell.textContent) || 0;
+      profitCell.innerHTML = `
+      <input type="number"
+           class="category-profit-input"
+           value="${current}"
+           min="0"
+           max="100"
+           style="width:64px;">
+      `;
+      actionCell.innerHTML = `
+      <button class="btn-small btn-save-category" data-cate="${cate}">ok</button>
+      <button class="btn-small btn-cancel-category" data-cate="${cate}">X</button>
+      `;
+      return;
+    }
+
+    if (btn.classList.contains("btn-cancel-category")) {
+      renderCategoryProfitTable();
+      return;
+    }
+    const cates = getCates();
+    const category = cates.find((c) => c.cate === cate);
+    if (!category) return;
+
+    if (btn.classList.contains("btn-save-category")) {
+      const row = btn.closest("tr");
+      const input = row?.querySelector(".category-profit-input");
+      if (!input) return;
+
+      const value = parseFloat(input.value);
+      if (isNaN(value) || value < 0) {
+        message("Invalid profit percent");
+        input.focus();
+        input.value = category.profitPercent || 0;
+        return;
+      }
+
+      category.profitPercent = value;
+      saveCates(cates);
+
+      // Cập nhật lại tất cả sản phẩm thuộc category này
+      const products = getProducts();
+      products.forEach((p) => {
+        if (p.cate === cate && (p.profitPercent || 0) < value) {
+          p.profitPercent = value;
+          p.price = Math.round(p.costPrice * (1 + value / 100));
+        }
+      });
+      saveProducts(products);
+
+      renderStore(filteredStore, currentPageStore);
+      renderCategoryProfitTable();
+      message(`Updated "${cate}" profit to ${value}%`);
+    }
+  });
+
+renderCategoryProfitTable();
 
 // ==== KHỞI TẠO ====
 renderStore(filteredStore, currentPageStore);

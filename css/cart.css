@@ -35,8 +35,15 @@
   cursor: pointer;
 }
 
+.cart-box {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
 .cart-item {
   display: flex;
+  flex: 1;
   align-items: center;
   background: #fff;
   border-radius: 12px;
@@ -44,9 +51,49 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* check box dep */
+/* custom check box */
 .choice-box {
-  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.choice-box input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.choice-box .checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #7e7e7e;
+  border-radius: 4px;
+  position: relative;
+  transition: 0.2s ease;
+}
+
+.choice-box input:checked ~ .checkmark {
+  background-color: #000;
+  border-color: #000;
+}
+
+.choice-box .checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.choice-box input:checked ~ .checkmark::after {
+  display: block;
 }
 
 .cart-item img {
@@ -62,7 +109,6 @@
   display: flex;
   align-self: start;
   gap: 3px;
-  flex-direction: column;
 }
 
 .cart-item-info h3 {
@@ -72,7 +118,8 @@
   color: #000;
 }
 
-.cart-item-info p {
+.cart-item-info p,
+.customization span {
   color: #777;
   font-size: 14px;
   margin-bottom: 5px;
@@ -171,19 +218,52 @@
 @media (max-width: 768px) {
   .cart-container {
     grid-template-columns: 1fr;
+    margin: 0;
+    padding: 20px 5px;
   }
   .cart-summary {
     margin-top: 20px;
   }
+  .cart-box {
+    width: 100%;
+    padding: 0 2px;
+    gap: 15px;
+  }
   .cart-item {
     flex-direction: column;
-    align-items: start;
-    /* text-align: center; */
+    align-items: flex-start;
   }
   .cart-item img {
-    width: 100%;
-    height: fit-content;
+    width: 100px;
+    height: 100px;
     margin-bottom: 15px;
+  }
+  .cart-item-info {
+    gap: 5px;
+  }
+  .cart-item-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cart-item-details h3 {
+    font-size: 12px;
+  }
+  .cart-item-details .customization {
+    display: flex;
+    gap: 10px;
+  }
+  .cart-item-details .customization p {
+    display: flex;
+    font-size: 9 px;
+    margin-bottom: 0;
+  }
+  .customization span {
+    display: none;
+  }
+  .cart-item-actions button {
+    width: 30px;
+    height: 30px;
   }
 }
 

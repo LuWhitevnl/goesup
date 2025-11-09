@@ -10,12 +10,12 @@ document.getElementById("loginForm").addEventListener("submit", (e) => {
   const found = users.find(
     (u) => u.username === username && u.password === password
   );
-  if (found.locked) {
+  if (found && found.locked) {
     message("account your locked! khen admin dep trai de mo khoa");
     return;
   }
   if (!found) {
-    console.log("sai ten dang nhap hoac mk");
+    message("sai ten dang nhap hoac mk");
     passwordInput.classList.add("error");
     usernameInput.classList.add("error");
     usernameInput.value = "";
@@ -31,7 +31,7 @@ document.getElementById("loginForm").addEventListener("submit", (e) => {
     usernameInput.focus();
     return;
   }
-  console.log("da dang nhap");
+  // console.log("da dang nhap");
   message("logined! hú hú");
   localStorage.setItem("logined", true);
   localStorage.setItem("currentUser", JSON.stringify(found));
@@ -54,19 +54,36 @@ function saveCurrentUser(user) {
   localStorage.setItem("logined", true);
 }
 
+const hoInput = document.getElementById("Ho");
+const tenInput = document.getElementById("ten");
+const emailInput = document.getElementById("Email");
+const passwordInput = document.getElementById("res-pass");
+
 document
   .getElementById("registerForm")
   .addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const ho = document.getElementById("Ho").value.trim();
-    const ten = document.getElementById("ten").value.trim();
-    const email = document.getElementById("Email").value.trim().toLowerCase();
-    const password = document.getElementById("res-pass").value.trim();
+    const ho = hoInput.value.trim();
+    const ten = tenInput.value.trim();
+    const email = emailInput.value.trim().toLowerCase();
+    const password = passwordInput.value.trim();
 
     if (!ho || !ten || !email || !password) {
       message("Please fill out all required fields!");
-      console.log({ password });
+      // console.log({ password });
+      return;
+    }
+
+    const hoTenRegex = /^[a-zA-ZÀ-ỹ\s]+$/;
+    const emailRegex = /^[\w.-]+@[\w.-]+\.\w+$/;
+    if (!hoTenRegex.test(ho) || !hoTenRegex.test(ten)) {
+      validate(tenInput, "Name contains invalid characters!");
+      validate(hoInput, "Name contains invalid characters!");
+      return;
+    }
+    if (!emailRegex.test(email)) {
+      validate(emailInput, "Email is not valid!");
       return;
     }
 
@@ -76,9 +93,8 @@ document
     // Kiểm tra trùng email
     const exists = users.some((u) => u.email === email);
     if (exists) {
-      message("This email is already registered!");
-      document.getElementById("Email").focus();
-      return;
+      validate(emailInput, "Email is already registered!");
+      valid = false;
     }
 
     // Tạo user mới
@@ -107,6 +123,16 @@ document
       window.location.href = "index.html"; // hoặc "index.html"
     }, 1000);
   });
+
+function validate(input, errorMsg) {
+  message(errorMsg);
+  input.value = "";
+  input.classList.add("error");
+  setTimeout(() => {
+    input.classList.remove("error");
+  }, 3000);
+  input.focus();
+}
 
 function message(text) {
   const msg = document.createElement("div");

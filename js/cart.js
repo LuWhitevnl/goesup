@@ -78,62 +78,69 @@ function renderCart() {
 
     // --- Render item ---
     const div = document.createElement("div");
-    div.className = "cart-item";
+    div.className = "cart-box";
     div.setAttribute("data-id", item.id);
     div.innerHTML = `
-      <div class="choice-box">
+      <div class="cart-item">
+        <div class ="cart-item-info">
+          <img src="${item.image}" alt="${item.name}">
+          <div class="cart-item-details">
+            <h3>${item.name}</h3>
+            <div class="customization">
+              <p>${item.type}</p>
+      
+              <p>
+                <span>Color:</span>
+                <select class="color-select" 
+                        data-id="${item.id}" 
+                        data-size="${item.size}" 
+                        data-color="${item.color}">
+                  ${colorOptions}
+                </select>
+              </p>
+      
+              <p>
+                <span>Size:</span>
+                <select class="size-select" 
+                        data-id="${item.id}" 
+                        data-size="${item.size}" 
+                        data-color="${item.color}">
+                  ${sizeOptions}
+                </select>
+              </p>
+            </div>
+    
+            <p><b>${item.price.toLocaleString("vi-VN")}₫</b></p>
+          </div>
+        </div>
+  
+        <div class="cart-item-actions">
+          <button class="remove-btn" 
+                  data-id="${item.id}" 
+                  data-size="${item.size}" 
+                  data-color="${item.color}" 
+                  title="Remove">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
+          <div class="quantity-control">
+            <button class="decrease" 
+                    data-id="${item.id}" 
+                    data-size="${item.size}" 
+                    data-color="${item.color}">-</button>
+            <span class="quantity">${item.quantity}</span>
+            <button class="increase" 
+                    data-id="${item.id}" 
+                    data-size="${item.size}" 
+                    data-color="${item.color}">+</button>
+          </div>
+        </div>
+      </div>
+      <label class="choice-box">
         <input type="checkbox" class="item-choice" ${
           item.checked ? "checked" : ""
         }>
-      </div>
-      <img src="${item.image}" alt="${item.name}">
-      <div class="cart-item-info">
-        <h3>${item.name}</h3>
-        <p>${item.type}</p>
-
-        <p>
-          Color:
-          <select class="color-select" 
-                  data-id="${item.id}" 
-                  data-size="${item.size}" 
-                  data-color="${item.color}">
-            ${colorOptions}
-          </select>
-        </p>
-
-        <p>
-          Size:
-          <select class="size-select" 
-                  data-id="${item.id}" 
-                  data-size="${item.size}" 
-                  data-color="${item.color}">
-            ${sizeOptions}
-          </select>
-        </p>
-
-        <p><b>${item.price.toLocaleString("vi-VN")}₫</b></p>
-      </div>
-
-      <div class="cart-item-actions">
-        <button class="remove-btn" 
-                data-id="${item.id}" 
-                data-size="${item.size}" 
-                data-color="${item.color}" 
-                title="Remove">
-          <span class="material-symbols-outlined">delete</span>
-        </button>
-        <div class="quantity-control">
-          <button class="decrease" 
-                  data-id="${item.id}" 
-                  data-size="${item.size}" 
-                  data-color="${item.color}">-</button>
-          <span class="quantity">${item.quantity}</span>
-          <button class="increase" 
-                  data-id="${item.id}" 
-                  data-size="${item.size}" 
-                  data-color="${item.color}">+</button>
-        </div>
-      </div>
+        <span class="checkmark"></span>
+      </label>
     `;
     div.querySelector("img").onclick = (e) => {
       window.location.href = `product.html?id=${item.id}`;

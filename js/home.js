@@ -265,9 +265,10 @@ const getCart = () => JSON.parse(localStorage.getItem("cart")) || [];
 const saveCart = (data) => localStorage.setItem("cart", JSON.stringify(data));
 
 function loadCartHeader() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const user = JSON.parse(localStorage.getItem("currentUser"));
+  const cart = getCart();
+  const user = JSON.parse(localStorage.getItem("currentUser")) || {};
   const carts = cart.filter((c) => c.user === user.username);
+  console.log("1");
   if (carts.length !== 0) {
     document.querySelector(".product-cart").classList.add("empty");
     document.querySelector(".product-cart").textContent = carts.length;
@@ -279,7 +280,6 @@ function loadCartHeader() {
 loadCartHeader();
 
 //=============NHU====================
-
 const getProcucts = () => JSON.parse(localStorage.getItem("products")) || [];
 const saveProcuts = (data) =>
   localStorage.setItem("products", JSON.stringify(data));

@@ -1394,6 +1394,85 @@ b {
   width: 50px;
 }
 
+.category-profit {
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  color: #000;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.category-profit:hover {
+  background-color: #e0e0e0;
+}
+
+#categoryProfitModal .modal {
+  min-width: 35%;
+  width: auto;
+}
+
+#closeCategoryProfit {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #000;
+}
+
+#closeCategoryProfit:hover {
+  color: #ff5252;
+}
+
+.category-profit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.category-profit-list thead th,
+.category-profit-list tbody td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+  transition: 0.3s ease;
+}
+
+.category-profit-list tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.category-profit-list tbody tr:hover td {
+  background: #f0f0f0;
+}
+
+.category-profit-list .btn-edit-category {
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  background: #f0f0f0;
+  color: #000;
+  transition: 0.2s ease;
+}
+
+.category-profit-list .btn-edit-category:hover {
+  background: #000;
+  color: #fff;
+}
+
+.store-actions {
+  /* flex-direction: column; */
+}
+
 .inventory-container {
   margin-bottom: 20px;
 }
@@ -1757,6 +1836,9 @@ td:last-child {
 @media (max-width: 768px) {
   .admin-header {
     display: block;
+  }
+  .popupBox {
+    width: calc(100% - 10px);
   }
   .repo {
     display: flex;

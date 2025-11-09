@@ -1,4 +1,4 @@
-const app_version = "1.0.102";
+const app_version = "1.1.102";
 
 const savedVersion = localStorage.getItem("appversion");
 if (savedVersion !== app_version) {
@@ -56,21 +56,21 @@ if (!localStorage.getItem("productTypes")) {
 
 if (!localStorage.getItem("category")) {
   const category = [
-    { type: "Women", cate: "Dresses" },
-    { type: "Women", cate: "Tops-Blouses" },
-    { type: "Women", cate: "Bottoms" },
-    { type: "Women", cate: "Outerwear" },
-    { type: "Men", cate: "T-shirts-polos" },
-    { type: "Men", cate: "Shirts" },
-    { type: "Men", cate: "Pants-Trousers" },
-    { type: "Men", cate: "Shorts" },
-    { type: "Men", cate: "Outerwear" },
-    { type: "Accessories", cate: "Sunglasses " },
-    { type: "Accessories", cate: "Bags-Purses" },
-    { type: "Accessories", cate: "Jewelry " },
-    { type: "Accessories", cate: "Hats-Caps  " },
-    { type: "Collection", cate: "Summer-Autumn" },
-    { type: "Collection", cate: "Spring-Winter" },
+    { type: "Women", cate: "Dresses", profitPercent: 50 },
+    { type: "Women", cate: "Tops-Blouses", profitPercent: 50 },
+    { type: "Women", cate: "Bottoms", profitPercent: 50 },
+    { type: "Women", cate: "Outerwear", profitPercent: 50 },
+    { type: "Men", cate: "T-shirts-polos", profitPercent: 40 },
+    { type: "Men", cate: "Shirts", profitPercent: 40 },
+    { type: "Men", cate: "Pants-Trousers", profitPercent: 40 },
+    { type: "Men", cate: "Shorts", profitPercent: 40 },
+    { type: "Men", cate: "Outerwear", profitPercent: 40 },
+    { type: "Accessories", cate: "Sunglasses", profitPercent: 30 },
+    { type: "Accessories", cate: "Bags-Purses", profitPercent: 30 },
+    { type: "Accessories", cate: "Jewelry", profitPercent: 30 },
+    { type: "Accessories", cate: "Hats-Caps", profitPercent: 30 },
+    { type: "Collection", cate: "Summer-Autumn", profitPercent: 60 },
+    { type: "Collection", cate: "Spring-Winter", profitPercent: 60 },
   ];
   localStorage.setItem("category", JSON.stringify(category));
 }

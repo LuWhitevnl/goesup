@@ -585,6 +585,7 @@
                 <h2>Store</h2>
                 <p>Manage your product in store</p>
               </div>
+              <button class="category-profit">Category Profit</button>
             </div>
             <!-- <h1>Quản lý sản phẩm</h1> -->
             <div class="actions">
@@ -637,6 +638,28 @@
           <div class="pagination" id="pagination-store"></div>
         </section>
 
+        <!-- popup category profit -->
+        <div id="categoryProfitModal" class="modal-overlay">
+          <div class="modal">
+            <button id="closeCategoryProfit" class="btn-close-modal">×</button>
+            <div class="modal-title">
+              <h2>Category Profit Analysis</h2>
+            </div>
+            <div class="category-profit-list">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Category</th>
+                    <th>Profit Margin (%)</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
         <section id="warehouse" class="page content">
           <div class="content-header">
             <div class="header-top">
@@ -676,12 +699,23 @@
               <option value="Quần jean">Quần jean</option>
               <option value="Phụ kiện">Phụ kiện</option>
             </select>
+            <!-- select status -->
+            <select class="filter" id="filterStatus-inven">
+              <option value="all">All</option>
+              <option value="in-stock">in stock</option>
+              <option value="low-stock">low stock</option>
+              <option value="out-stock">out stock</option>
+            </select>
             <input
               type="text"
               placeholder="Search..."
               class="search-box"
               id="searchInven"
             />
+
+            <button class="refresh resetInventory">
+              <span class="material-symbols-outlined"> refresh </span>
+            </button>
           </div>
           <div class="inventory-container product-list">
             <table id="inventoryTable">

@@ -469,7 +469,7 @@ ul.root li a i {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -150%) scale(0.2);
-  width: 40%;
+  min-width: 40%;
   background: rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(10px) saturate(180%);
   -webkit-backdrop-filter: blur(10px) saturate(180%);
@@ -986,6 +986,9 @@ ul.root li a i {
   .listFashion1 li a {
     padding: 10px 35px;
     color: #000000;
+  }
+  .popupBox {
+    width: 100%;
   }
 }
 
