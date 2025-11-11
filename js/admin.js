@@ -1,8 +1,4 @@
-// ==================== SIDEBAR ====================
-const sidebar = document.querySelector(".sidebar");
-const toggle = document.querySelector(".toggle");
-// const dropdownMenus = document.querySelectorAll(".menu-item.has-dropdown");
-
+// ==================== LOGIN FORM ====================
 const username = document.querySelector("#username");
 const passwordInput = document.querySelector("#loginPass");
 const loginOverlay = document.querySelector(".formWapper");
@@ -10,17 +6,21 @@ const popup = document.querySelector(".popupBox");
 const loginForm = document.querySelector("#loginForm");
 const adminPage = document.querySelector(".admin-body");
 
-const Admin = JSON.parse(localStorage.getItem("admin")) || {};
-// console.log(Admin.username);
-const logined = JSON.parse(localStorage.getItem("logined"));
-function toggleForm() {
-  username.focus();
-  loginOverlay.classList.toggle("active");
-  popup.classList.toggle("active");
-  adminPage.classList.toggle("active");
+const Admin = JSON.parse(localStorage.getItem("admin")) || null;
+function toggleForm(showAdmin) {
+  if (showAdmin) {
+    loginOverlay.classList.remove("active");
+    popup.classList.remove("active");
+    adminPage.classList.add("active");
+  } else {
+    username.focus();
+    loginOverlay.classList.add("active");
+    popup.classList.add("active");
+    adminPage.classList.remove("active");
+  }
 }
-if (logined) {
-  toggleForm();
+if (localStorage.getItem("loggedInAdmin") === "true") {
+  toggleForm(true);
 }
 loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -28,8 +28,8 @@ loginForm.addEventListener("submit", (e) => {
     username.value === Admin.username &&
     passwordInput.value === Admin.password
   ) {
-    toggleForm();
-    localStorage.setItem("logined", true);
+    localStorage.setItem("loggedInAdmin", "true");
+    toggleForm(true);
   } else {
     loginForm.reset();
     username.focus();
@@ -46,9 +46,14 @@ loginForm.addEventListener("submit", (e) => {
   }
 });
 document.querySelector(".log-out").addEventListener("click", () => {
-  localStorage.setItem("logined", false);
-  toggleForm();
+  localStorage.removeItem("loggedInAdmin");
+  toggleForm(false);
 });
+// ========================================================================
+
+// ==================== SIDEBAR ====================
+const sidebar = document.querySelector(".sidebar");
+const toggle = document.querySelector(".toggle");
 
 toggle.addEventListener("click", () => {
   const collapsed = sidebar.classList.toggle("collapsed");
@@ -74,138 +79,12 @@ document.querySelectorAll(".logo-box").forEach((b) => {
   });
 });
 
-// ==================== QUẢN LÝ LOẠI SẢN PHẨM ====================
-
-// ============== DOM Dashboard =================
+// =========================== Dashboard ===========================
 const cardrevenue = document.querySelector(".revenue p");
 const CardnewOrder = document.querySelector(".newOrder p");
 const client = document.querySelector(".client p");
 const Cardinven = document.querySelector(".invento p");
 
-// ===================== DOM user ==================
-const userTableBody = document.querySelector("#userTable tbody");
-const searchUserInput = document.getElementById("searchUser");
-const filteruser = document.getElementById("filterUser");
-
-const confirmModal = document.getElementById("confirmModal");
-const confirmTitle = document.getElementById("confirmTitle");
-const confirmMessage = document.getElementById("confirmMessage");
-const confirmCancel = document.getElementById("confirmCancel");
-const confirmOk = document.getElementById("confirmOk");
-
-const userModal = document.getElementById("userModal");
-const userForm = document.getElementById("userForm");
-const userCancel = document.getElementById("userCancel");
-
-// ============== DOM type products =================
-const typeModal = document.getElementById("typeModal");
-const typeForm = document.getElementById("typeForm");
-const typeTable = document.querySelector("#typeTable tbody");
-const btnAdd = document.getElementById("openAddType");
-const btnCancel = document.getElementById("typeCancel");
-const modalTitle = document.getElementById("typeModalTitle");
-const searchBox = document.getElementById("searchType");
-
-let editIndex = -1;
-
-// =================== DOM Products ======================
-const productTable = document.querySelector(".item-list");
-const productModal = document.querySelector("#productModal");
-const openAddBtn = document.querySelector("#openAddProduct");
-const cancelModalBtn = document.querySelector("#cancelModal");
-const productForm = document.querySelector("#productForm");
-const picPreview = document.querySelector("#previewContainer");
-const imageInput = document.querySelector("#productImage");
-const typeSelect = document.querySelector("#productType");
-const cateSelect = document.querySelector("#cate");
-const filterProductsType = document.getElementById("filterType");
-
-let editingId = null;
-
-// ======== DOM orders ========
-const orderTable = document.querySelector("#orderTable tbody");
-const orderModal = document.getElementById("orderModal");
-const orderDetails = document.getElementById("order-details__box");
-const orderStatusSelect = document.getElementById("orderStatus");
-const closeModalBtn = document.getElementById("closeOrderModal");
-const updateStatusBtn = document.getElementById("updateOrderStatus");
-
-let editingOrderId = null;
-
-// ============= DOM imports ================
-const importTable = document.querySelector("#importTable tbody");
-const importModal = document.getElementById("importModal");
-const importForm = document.getElementById("importForm");
-const importModalTitle = document.getElementById("importModalTitle");
-const addImportProductBtn = document.getElementById("addImportProduct");
-const productImportList = document.getElementById("productImportList");
-
-let editingImportId = null;
-
-// state for confirm action
-let confirmCallback = null;
-let editUsername = null;
-
-// Helpers: open/close modals
-function openConfirm(title, message, onOk) {
-  confirmTitle.textContent = title;
-  confirmMessage.textContent = message;
-  confirmModal.style.display = "flex";
-  confirmCallback = onOk;
-}
-function closeConfirm() {
-  confirmModal.style.display = "none";
-  confirmCallback = null;
-}
-
-// EVENTS: confirm modal
-confirmCancel.addEventListener("click", closeConfirm);
-confirmOk.addEventListener("click", () => {
-  if (typeof confirmCallback === "function") confirmCallback();
-  closeConfirm();
-});
-
-// =========== get set ================
-// type
-const getTypes = () => JSON.parse(localStorage.getItem("productTypes")) || [];
-const saveTypes = (data) =>
-  localStorage.setItem("productTypes", JSON.stringify(data));
-const getCates = () => JSON.parse(localStorage.getItem("category")) || [];
-const saveCates = (data) =>
-  localStorage.setItem("category", JSON.stringify(data));
-
-// products
-const getProducts = () => JSON.parse(localStorage.getItem("products")) || [];
-const saveProducts = (data) =>
-  localStorage.setItem("products", JSON.stringify(data));
-
-// order
-const getOrders = () => JSON.parse(localStorage.getItem("orders")) || [];
-const saveOrders = (data) =>
-  localStorage.setItem("orders", JSON.stringify(data));
-
-// imports
-const getData = (key) => JSON.parse(localStorage.getItem(key)) || [];
-const setData = (key, data) => localStorage.setItem(key, JSON.stringify(data));
-
-const getUsers = (key) => JSON.parse(localStorage.getItem("users")) || [];
-
-const saveUsers = (list) => localStorage.setItem("users", JSON.stringify(list));
-
-// kho
-function getKho() {
-  return JSON.parse(localStorage.getItem("imports")) || [];
-}
-
-function saveKho(imports) {
-  localStorage.setItem("imports", JSON.stringify(imports));
-}
-
-// ============== render ===============
-
-// dashboard
-
-// --- Hàm render toàn bộ số liệu ---
 function renderDashboard() {
   // Tính doanh thu tháng này
   const now = new Date();
@@ -252,50 +131,16 @@ function renderDashboard() {
   });
 }
 
-// RENDER USERS
-function renderUsers(filter = "", select = "all") {
-  const users = getUsers();
-  const filtered = users.filter((u) => {
-    const f = filter.toLowerCase();
-    const searchtext =
-      (u.username || "").toLowerCase().includes(f) ||
-      (u.name || "").toLowerCase().includes(f) ||
-      (u.email || "").toLowerCase().includes(f) ||
-      (u.phoneNumber || "").toLowerCase().includes(f);
-    const status =
-      select === "all" ? true : select === "active" ? !u.locked : u.locked;
-    return searchtext && status;
-  });
+// ==================== QUẢN LÝ LOẠI SẢN PHẨM ====================
+const typeModal = document.getElementById("typeModal");
+const typeForm = document.getElementById("typeForm");
+const typeTable = document.querySelector("#typeTable tbody");
+const btnAdd = document.getElementById("openAddType");
+const btnCancel = document.getElementById("typeCancel");
+const modalTitle = document.getElementById("typeModalTitle");
+const searchBox = document.getElementById("searchType");
 
-  userTableBody.innerHTML = filtered
-    .map((u) => {
-      const statusHtml = u.locked
-        ? `<span class="status-locked"style="color: red;">Đã khoá</span>`
-        : `<span class="status-active" style="color: green;">Hoạt động</span>`;
-      return `
-      <tr data-username="${u.username}">
-        <td>${u.username}</td>
-        <td>${u.name || "-"}</td>
-        <td>${u.email || "-"}</td>
-        <td>${u.phoneNumber || "-"}</td>
-        <td>${statusHtml}</td>
-        <td class="btn-box">
-          <button class="btn-edit" data-username="${u.username}">Edit</button>
-          <div>
-          <button class="btn-reset btn" data-username="${
-            u.username
-          }">Reset</button>
-          <button class="btn-toggle-lock btn" data-username="${u.username}">${
-        u.locked ? "Mở khoá" : "Khoá"
-      }</button>
-          </div>
-        </td>
-      </tr>
-    `;
-    })
-    .join("");
-}
-
+let editIndex = -1;
 // type
 function renderTypeTable(list = getTypes()) {
   typeTable.innerHTML = "";
@@ -399,6 +244,226 @@ function renderfilter(filter) {
     types.map((t) => `<option value="${t.cate}">${t.cate}</option>`).join("");
 }
 
+// Tìm kiếm realtime
+searchBox.addEventListener("input", () => {
+  const keyword = searchBox.value.toLowerCase();
+  const typeList = getTypes();
+  const filtered = typeList.filter(
+    (t) =>
+      t.name.toLowerCase().includes(keyword) ||
+      t.code.toLowerCase().includes(keyword)
+  );
+  renderTypeTable(filtered);
+});
+
+// ================================ User =================================
+const userTableBody = document.querySelector("#userTable tbody");
+const searchUserInput = document.getElementById("searchUser");
+const filteruser = document.getElementById("filterUser");
+
+const confirmModal = document.getElementById("confirmModal");
+const confirmTitle = document.getElementById("confirmTitle");
+const confirmMessage = document.getElementById("confirmMessage");
+const confirmCancel = document.getElementById("confirmCancel");
+const confirmOk = document.getElementById("confirmOk");
+
+const userModal = document.getElementById("userModal");
+const userForm = document.getElementById("userForm");
+const userCancel = document.getElementById("userCancel");
+
+function renderUsers(filter = "", select = "all") {
+  const users = getUsers();
+  const filtered = users.filter((u) => {
+    const f = filter.toLowerCase();
+    const searchtext =
+      (u.username || "").toLowerCase().includes(f) ||
+      (u.name || "").toLowerCase().includes(f) ||
+      (u.email || "").toLowerCase().includes(f) ||
+      (u.phoneNumber || "").toLowerCase().includes(f);
+    const status =
+      select === "all" ? true : select === "active" ? !u.locked : u.locked;
+    return searchtext && status;
+  });
+
+  userTableBody.innerHTML = filtered
+    .map((u) => {
+      const statusHtml = u.locked
+        ? `<span class="status-locked"style="color: red;">Đã khoá</span>`
+        : `<span class="status-active" style="color: green;">Hoạt động</span>`;
+      return `
+      <tr data-username="${u.username}">
+        <td>${u.username}</td>
+        <td>${u.name || "-"}</td>
+        <td>${u.email || "-"}</td>
+        <td>${u.phoneNumber || "-"}</td>
+        <td>${statusHtml}</td>
+        <td class="btn-box">
+          <button class="btn-edit" data-username="${u.username}">Edit</button>
+          <div>
+          <button class="btn-reset btn" data-username="${
+            u.username
+          }">Reset</button>
+          <button class="btn-toggle-lock btn" data-username="${u.username}">${
+        u.locked ? "Mở khoá" : "Khoá"
+      }</button>
+          </div>
+        </td>
+      </tr>
+    `;
+    })
+    .join("");
+}
+
+function openUserModal(user = null) {
+  userModal.style.display = "flex";
+  if (user) {
+    document.getElementById("u_username").value = user.username;
+    document.getElementById("u_username").disabled = true; // không Edit username
+    document.getElementById("u_name").value = user.name || "";
+    document.getElementById("u_email").value = user.email || "";
+    document.getElementById("u_phone").value = user.phoneNumber || "";
+    document.getElementById("u_role").value = user.role || "user";
+    editUsername = user.username;
+  }
+}
+function closeUserModal() {
+  userModal.style.display = "none";
+  editUsername = null;
+  userForm.reset();
+}
+
+// EVENT: search
+if (searchUserInput && filteruser) {
+  searchUserInput.addEventListener("input", () => {
+    renderUsers(searchUserInput.value, filteruser.value);
+  });
+  filteruser.addEventListener("change", () => {
+    renderUsers(searchUserInput.value, filteruser.value);
+  });
+}
+
+userCancel.addEventListener("click", () => closeUserModal());
+
+// EVENT: user form submit
+userForm.addEventListener("submit", (ev) => {
+  ev.preventDefault();
+  const username = document.getElementById("u_username").value.trim();
+  const name = document.getElementById("u_name").value.trim();
+  const email = document.getElementById("u_email").value.trim();
+  const phone = document.getElementById("u_phone").value.trim();
+  const role = document.getElementById("u_role").value;
+
+  const users = getUsers();
+
+  if (editUsername) {
+    // edit existing
+    const idx = users.findIndex((u) => u.username === editUsername);
+    if (idx === -1) {
+      message("Người dùng không tồn tại");
+      closeUserModal();
+      return;
+    }
+    users[idx] = { ...users[idx], name, email, phoneNumber: phone, role };
+    saveUsers(users);
+    renderUsers(searchUserInput.value);
+    closeUserModal();
+    return;
+  }
+
+  // add new: kiểm tra trùng username
+  if (users.some((u) => u.username === username)) {
+    return message("Username đã tồn tại, chọn username khác.");
+  }
+  // password mặc định '123' (bạn có thể đặt khác)
+  users.push({
+    username,
+    password: "123",
+    role,
+    name,
+    email,
+    phoneNumber: phone,
+    locked: false,
+  });
+  saveUsers(users);
+  renderUsers(searchUserInput.value);
+  closeUserModal();
+});
+
+// Delegation: xử lý các nút trong bảng user
+userTableBody.addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+  const username = btn.dataset.username;
+  if (!username) return;
+
+  const users = getUsers();
+  const idx = users.findIndex((u) => u.username === username);
+  if (idx === -1) {
+    message("Người dùng không tồn tại");
+    return;
+  }
+
+  if (btn.classList.contains("btn-reset")) {
+    openConfirm(
+      "Reset mật khẩu",
+      `Đặt lại mật khẩu của ${username} về '123'?`,
+      () => {
+        users[idx].password = "123";
+        saveUsers(users);
+        message(`Đã reset mật khẩu ${username} -> 123`);
+        renderUsers(searchUserInput.value);
+      }
+    );
+  } else if (btn.classList.contains("btn-toggle-lock")) {
+    const locking = !users[idx].locked;
+    openConfirm(
+      locking ? "Khoá tài khoản" : "Mở khoá tài khoản",
+      `${locking ? "Khoá" : "Mở khoá"} tài khoản ${username}?`,
+      () => {
+        users[idx].locked = locking;
+        saveUsers(users);
+        renderUsers(searchUserInput.value);
+      }
+    );
+  } else if (btn.classList.contains("btn-edit")) {
+    openUserModal(users[idx]);
+  } else if (btn.classList.contains("btn-delUser")) {
+    openConfirm(
+      "Delete người dùng",
+      `Bạn có chắc muốn Delete ${username}?`,
+      () => {
+        users.splice(idx, 1);
+        saveUsers(users);
+        renderUsers(searchUserInput.value);
+      }
+    );
+  }
+});
+
+// ==================== QUẢN LÝ SẢN PHẨM ====================
+const productTable = document.querySelector(".item-list");
+const productModal = document.querySelector("#productModal");
+const openAddBtn = document.querySelector("#openAddProduct");
+const cancelModalBtn = document.querySelector("#cancelModal");
+const productForm = document.querySelector("#productForm");
+const picPreview = document.querySelector("#previewContainer");
+const imageInput = document.querySelector("#productImage");
+const typeSelect = document.querySelector("#productType");
+const cateSelect = document.querySelector("#cate");
+const filterProductsType = document.getElementById("filterType");
+
+let editingId = null;
+
+// ==================== QUẢN LÝ ĐƠN HÀNG ====================
+const orderTable = document.querySelector("#orderTable tbody");
+const orderModal = document.getElementById("orderModal");
+const orderDetails = document.getElementById("order-details__box");
+const orderStatusSelect = document.getElementById("orderStatus");
+const closeModalBtn = document.getElementById("closeOrderModal");
+const updateStatusBtn = document.getElementById("updateOrderStatus");
+
+let editingOrderId = null;
+
 function renderOrders(list = getOrders()) {
   orderTable.innerHTML = "";
   list.forEach((order) => {
@@ -423,7 +488,220 @@ function renderOrders(list = getOrders()) {
   });
 }
 
-// HIỂN THỊ DANH SÁCH PHIẾU NHẬP
+updateStatusBtn.addEventListener("click", () => {
+  if (!editingOrderId) return;
+
+  const newStatus = orderStatusSelect.value;
+  const orders = getOrders();
+  const order = orders.find(
+    (o) => o.id.toString() === editingOrderId.toString()
+  );
+  if (!order) return;
+  // Nếu chuyển sang "Completed" và chưa trừ kho
+  if (order.status !== "Completed" && newStatus === "Completed") {
+    const products = getProducts();
+    const ware = getKho();
+    order.items.forEach((item) => {
+      const prod = products.find((p) => p.productId === item.id);
+      // console.log(prod);
+      if (prod) {
+        prod.quantity -= item.quantity;
+        if (prod.quantity < 0) prod.quantity = 0;
+      }
+    });
+
+    saveProducts(products);
+    renderProducts(); // Cập nhật bảng sản phẩm
+    renderImports();
+    renderInventory();
+  }
+
+  order.status = newStatus;
+  saveOrders(orders);
+  renderOrders();
+
+  orderModal.style.display = "none";
+  document.body.style.overflow = "auto";
+  editingOrderId = null;
+});
+
+// ======== Lọc và tìm kiếm ========
+function filterOrders() {
+  const from = document.getElementById("fromDate").value;
+  const to = document.getElementById("toDate").value;
+  const status = document.getElementById("statusFilter").value;
+  const keyword = document.getElementById("searchOrder").value.toLowerCase();
+
+  const filtered = getOrders().filter((order) => {
+    const matchDate =
+      (!from || order.date >= from) && (!to || order.date <= to);
+    const matchStatus = status ? order.status === status : true;
+    const matchKeyword =
+      order.customer.toLowerCase().includes(keyword) ||
+      order.items.some((i) => i.name.toLowerCase().includes(keyword));
+    return matchDate && matchStatus && matchKeyword;
+  });
+
+  renderOrders(filtered);
+}
+
+document.getElementById("fromDate").addEventListener("change", filterOrders);
+document.getElementById("toDate").addEventListener("change", filterOrders);
+document
+  .getElementById("statusFilter")
+  .addEventListener("change", filterOrders);
+document.getElementById("searchOrder").addEventListener("input", filterOrders);
+
+document.querySelector(".resetorder").addEventListener("click", () => {
+  document.getElementById("fromDate").value = "";
+  document.getElementById("toDate").value = "";
+  document.getElementById("statusFilter").value = "";
+  document.getElementById("searchOrder").value = "";
+
+  renderOrders(getOrders());
+});
+
+function closeOrderDetail() {
+  // console.log(2);
+  orderModal.style.display = "none";
+  document.body.style.overflow = "auto";
+  editingOrderId = null;
+}
+orderTable.addEventListener("click", (e) => {
+  if (!e.target.classList.contains("btn-view")) return;
+
+  const id = e.target.dataset.id;
+  const order = getOrders().find((o) => o.id.toString() === id.toString());
+  if (!order) return;
+
+  // Không cho xem nếu Completed (tuỳ mục đích bạn)
+  if (order.status === "Completed") return;
+
+  editingOrderId = id;
+
+  let itemsHTML = "";
+
+  order.items.forEach((item) => {
+    const total = order.items.reduce((sum, i) => sum + i.price * i.quantity, 0);
+    itemsHTML += `
+      <tr>
+        <td>${item.name}</td>
+        <td>${item.quantity}</td>
+        <td>${item.price.toLocaleString("vi-VN")} ₫</td>
+        <td>${total.toLocaleString("vi-VN")} ₫</td>
+      </tr>
+    `;
+  });
+
+  const ship = order.shipFee || 0;
+  const tax = order.tax || 0;
+  const total = order.total + ship + tax;
+
+  orderDetails.innerHTML = `
+              <div class="order-detail__title">
+                <div>
+                  <h2>Order Details</h2>
+                  <p>${order.id}</p>
+                </div>
+                <button  onclick="closeOrderDetail()">X</button>
+              </div>
+
+    <div class="order-status">
+      <div>
+        <h2>Trạng thái</h2>
+        <span>${order.status}</span>
+      </div>
+      <div class="order-s__date">
+        <h2>Ngày đặt</h2>
+        <span>${order.date}</span>
+      </div>
+    </div>
+
+    <div class="customer-info">
+      <h3>Thông tin khách hàng</h3>
+      <div class="info-box">
+        <div class="info-box_content">
+          <p>Tên</p>
+          <span>${order.customer}</span>
+        </div>
+        <div class="info-box_content">
+          <p>SĐT</p>
+          <span>${order.customerPhone}</span>
+        </div>
+        <div class="info-box_content">
+          <p>Địa chỉ giao</p>
+          <span>${order.customerAddress}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="order-items">
+      <h3>Sản phẩm trong đơn</h3>
+      <table class="order-item_table">
+        <thead>
+          <tr>
+            <th>Sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+            <th>Tổng</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${itemsHTML}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="order-total__price">
+      <div class="total-box info-box_content">
+        <p>Tạm tính</p>
+        <span>${order.total.toLocaleString("vi-VN")} ₫</span>
+      </div>
+      <div class="total-box info-box_content">
+        <p>Phí ship</p>
+        <span>${ship.toLocaleString("vi-VN")} ₫</span>
+      </div>
+      <div class="total-box info-box_content">
+        <p>Thuế</p>
+        <span>${tax.toLocaleString("vi-VN")} ₫</span>
+      </div>
+      <div class="total-box info-box_content total">
+        <p>Tổng cộng</p>
+        <span>${total.toLocaleString("vi-VN")} ₫</span>
+      </div>
+    </div>
+  `;
+
+  orderStatusSelect.value = order.status;
+
+  orderModal.style.display = "flex";
+  document.body.style.overflow = "hidden";
+});
+
+//  Đóng popup
+closeModalBtn.addEventListener("click", () => {
+  // console.log(2);
+  orderModal.style.display = "none";
+  document.body.style.overflow = "auto";
+  editingOrderId = null;
+});
+
+orderModal.addEventListener("click", (e) => {
+  if (e.target === orderModal) {
+    closeOrderDetail();
+  }
+});
+
+// ============= DOM imports ================
+const importTable = document.querySelector("#importTable tbody");
+const importModal = document.getElementById("importModal");
+const importForm = document.getElementById("importForm");
+const importModalTitle = document.getElementById("importModalTitle");
+const addImportProductBtn = document.getElementById("addImportProduct");
+const productImportList = document.getElementById("productImportList");
+
+let editingImportId = null;
+
 function renderImports(list = getData("imports")) {
   importTable.innerHTML = list
     .map(
@@ -448,10 +726,58 @@ function renderImports(list = getData("imports")) {
     .join("");
 }
 
-/*  RENDER KHO  */
+// mo popup import
+function openAddImport(productId = null) {
+  // console.log(4);
+  editingImportId = null;
+  importForm.reset();
+  productImportList.innerHTML = "";
+
+  const products = getData("products");
+  const product = products.find((i) => i.id === productId);
+  const selectOptions = products
+    .map(
+      (p) =>
+        `<option value="${p.id}" ${p.id == productId ? "selected" : ""}>${
+          p.name
+        } (${p.type})</option>`
+    )
+    .join("");
+  const costPrice = product ? product.costPrice : 0;
+
+  const row = document.createElement("div");
+  row.classList.add("import-product-item");
+  row.innerHTML = `
+    <select class="import-product">${selectOptions}</select>
+    <input type="number" placeholder="Số lượng" class="import-quantity" min="1" value="1"/>
+    <input type="number" placeholder="Giá nhập" class="import-price" min="1" value="${costPrice}"/>
+    <button type="button" class="btn-remove">X</button>
+  `;
+  row
+    .querySelector(".btn-remove")
+    .addEventListener("click", () => row.remove());
+  productImportList.appendChild(row);
+
+  document.getElementById("importDate").value = new Date()
+    .toISOString()
+    .split("T")[0];
+
+  importModalTitle.textContent = "Thêm phiếu nhập";
+  importModal.style.display = "flex";
+}
+
+document.getElementById("openAddImport").addEventListener("click", () => {
+  // console.log(3);
+  openAddImport();
+});
+
+//  HỦY
+document.getElementById("cancelImport").addEventListener("click", () => {
+  importModal.style.display = "none";
+});
+
 let currentPageInventory = 1;
 const itemsPerPageInventory = 6;
-
 function renderInventory(products = getProducts(), page = 1) {
   const tbody = document.querySelector("#inventoryTable tbody");
   const imports = getKho();
@@ -465,10 +791,8 @@ function renderInventory(products = getProducts(), page = 1) {
     return;
   }
 
-  // ==== Cắt danh sách sản phẩm theo trang ====
   const start = (page - 1) * itemsPerPageInventory;
   const end = start + itemsPerPageInventory;
-  // const paginated = products.slice(start, end);
   for (let i = start; i < end && i < products.length; i++) {
     const prod = products[i];
     const importedQty = imports
@@ -615,7 +939,9 @@ function applyInventoryFilters() {
 
   // 1. Lọc theo loại
   if (filters.type !== "all") {
-    products = products.filter((p) => p.cate === filters.type);
+    products = products.filter(
+      (p) => p.cate.toUpperCase() === filters.type.toUpperCase()
+    );
   }
 
   // 2. Lọc theo từ khóa
@@ -668,198 +994,6 @@ document.querySelector(".resetInventory").addEventListener("click", () => {
 
   applyInventoryFilters();
 });
-
-// ==== KHỞI TẠO ====
-renderInventory(getProducts(), currentPageInventory);
-
-// =============== open close popup =================
-
-// mo popup order
-function closeOrderDetail() {
-  // console.log(2);
-  orderModal.style.display = "none";
-  document.body.style.overflow = "auto";
-  editingOrderId = null;
-}
-orderTable.addEventListener("click", (e) => {
-  if (!e.target.classList.contains("btn-view")) return;
-
-  const id = e.target.dataset.id;
-  const order = getOrders().find((o) => o.id.toString() === id.toString());
-  if (!order) return;
-
-  // Không cho xem nếu Completed (tuỳ mục đích bạn)
-  if (order.status === "Completed") return;
-
-  editingOrderId = id;
-
-  // ✅ Render danh sách sản phẩm trong đơn
-  let itemsHTML = "";
-
-  order.items.forEach((item) => {
-    const total = order.items.reduce((sum, i) => sum + i.price * i.quantity, 0);
-    itemsHTML += `
-      <tr>
-        <td>${item.name}</td>
-        <td>${item.quantity}</td>
-        <td>${item.price.toLocaleString("vi-VN")} ₫</td>
-        <td>${total.toLocaleString("vi-VN")} ₫</td>
-      </tr>
-    `;
-  });
-
-  // ✅ Tính các phần còn lại (ship, thuế, tổng)
-  const ship = order.shipFee || 0;
-  const tax = order.tax || 0;
-  const total = order.total + ship + tax;
-
-  // ✅ Render toàn bộ modal
-  orderDetails.innerHTML = `
-              <div class="order-detail__title">
-                <div>
-                  <h2>Order Details</h2>
-                  <p>${order.id}</p>
-                </div>
-                <button  onclick="closeOrderDetail()">X</button>
-              </div>
-
-    <div class="order-status">
-      <div>
-        <h2>Trạng thái</h2>
-        <span>${order.status}</span>
-      </div>
-      <div class="order-s__date">
-        <h2>Ngày đặt</h2>
-        <span>${order.date}</span>
-      </div>
-    </div>
-
-    <div class="customer-info">
-      <h3>Thông tin khách hàng</h3>
-      <div class="info-box">
-        <div class="info-box_content">
-          <p>Tên</p>
-          <span>${order.customer}</span>
-        </div>
-        <div class="info-box_content">
-          <p>SĐT</p>
-          <span>${order.customerPhone}</span>
-        </div>
-        <div class="info-box_content">
-          <p>Địa chỉ giao</p>
-          <span>${order.customerAddress}</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="order-items">
-      <h3>Sản phẩm trong đơn</h3>
-      <table class="order-item_table">
-        <thead>
-          <tr>
-            <th>Sản phẩm</th>
-            <th>Số lượng</th>
-            <th>Giá</th>
-            <th>Tổng</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${itemsHTML}
-        </tbody>
-      </table>
-    </div>
-
-    <div class="order-total__price">
-      <div class="total-box info-box_content">
-        <p>Tạm tính</p>
-        <span>${order.total.toLocaleString("vi-VN")} ₫</span>
-      </div>
-      <div class="total-box info-box_content">
-        <p>Phí ship</p>
-        <span>${ship.toLocaleString("vi-VN")} ₫</span>
-      </div>
-      <div class="total-box info-box_content">
-        <p>Thuế</p>
-        <span>${tax.toLocaleString("vi-VN")} ₫</span>
-      </div>
-      <div class="total-box info-box_content total">
-        <p>Tổng cộng</p>
-        <span>${total.toLocaleString("vi-VN")} ₫</span>
-      </div>
-    </div>
-  `;
-
-  orderStatusSelect.value = order.status;
-
-  orderModal.style.display = "flex";
-  document.body.style.overflow = "hidden";
-});
-
-//  Đóng popup
-closeModalBtn.addEventListener("click", () => {
-  // console.log(2);
-  orderModal.style.display = "none";
-  document.body.style.overflow = "auto";
-  editingOrderId = null;
-});
-
-orderModal.addEventListener("click", (e) => {
-  if (e.target === orderModal) {
-    closeOrderDetail();
-  }
-});
-
-// mo popup import
-function openAddImport(productId = null) {
-  // console.log(4);
-  editingImportId = null;
-  importForm.reset();
-  productImportList.innerHTML = "";
-
-  const products = getData("products");
-  const product = products.find((i) => i.id === productId);
-  const selectOptions = products
-    .map(
-      (p) =>
-        `<option value="${p.id}" ${p.id == productId ? "selected" : ""}>${
-          p.name
-        } (${p.type})</option>`
-    )
-    .join("");
-  const costPrice = product ? product.costPrice : 0;
-
-  const row = document.createElement("div");
-  row.classList.add("import-product-item");
-  row.innerHTML = `
-    <select class="import-product">${selectOptions}</select>
-    <input type="number" placeholder="Số lượng" class="import-quantity" min="1" value="1"/>
-    <input type="number" placeholder="Giá nhập" class="import-price" min="1" value="${costPrice}"/>
-    <button type="button" class="btn-remove">X</button>
-  `;
-  row
-    .querySelector(".btn-remove")
-    .addEventListener("click", () => row.remove());
-  productImportList.appendChild(row);
-
-  document.getElementById("importDate").value = new Date()
-    .toISOString()
-    .split("T")[0];
-
-  importModalTitle.textContent = "Thêm phiếu nhập";
-  importModal.style.display = "flex";
-}
-
-document.getElementById("openAddImport").addEventListener("click", () => {
-  // console.log(3);
-  openAddImport();
-});
-
-//  HỦY
-document.getElementById("cancelImport").addEventListener("click", () => {
-  importModal.style.display = "none";
-});
-
-// ================= luu sua xoa ==================
 
 // luu import
 importForm.addEventListener("submit", (e) => {
@@ -938,17 +1072,70 @@ function completeImport(id) {
   updateSummary();
 }
 
-// Tìm kiếm realtime
-searchBox.addEventListener("input", () => {
-  const keyword = searchBox.value.toLowerCase();
-  const typeList = getTypes();
-  const filtered = typeList.filter(
-    (t) =>
-      t.name.toLowerCase().includes(keyword) ||
-      t.code.toLowerCase().includes(keyword)
-  );
-  renderTypeTable(filtered);
+// ================ CONFIRM MODAL =================
+// state for confirm action
+let confirmCallback = null;
+let editUsername = null;
+
+// Helpers: open/close modals
+function openConfirm(title, message, onOk) {
+  confirmTitle.textContent = title;
+  confirmMessage.textContent = message;
+  confirmModal.style.display = "flex";
+  confirmCallback = onOk;
+}
+function closeConfirm() {
+  confirmModal.style.display = "none";
+  confirmCallback = null;
+}
+
+// EVENTS: confirm modal
+confirmCancel.addEventListener("click", closeConfirm);
+confirmOk.addEventListener("click", () => {
+  if (typeof confirmCallback === "function") confirmCallback();
+  closeConfirm();
 });
+
+// =========== get set ================
+// type
+const getTypes = () => JSON.parse(localStorage.getItem("productTypes")) || [];
+const saveTypes = (data) =>
+  localStorage.setItem("productTypes", JSON.stringify(data));
+const getCates = () => JSON.parse(localStorage.getItem("category")) || [];
+const saveCates = (data) =>
+  localStorage.setItem("category", JSON.stringify(data));
+
+// products
+const getProducts = () => JSON.parse(localStorage.getItem("products")) || [];
+const saveProducts = (data) =>
+  localStorage.setItem("products", JSON.stringify(data));
+
+// order
+const getOrders = () => JSON.parse(localStorage.getItem("orders")) || [];
+const saveOrders = (data) =>
+  localStorage.setItem("orders", JSON.stringify(data));
+
+// imports
+const getData = (key) => JSON.parse(localStorage.getItem(key)) || [];
+const setData = (key, data) => localStorage.setItem(key, JSON.stringify(data));
+
+const getUsers = (key) => JSON.parse(localStorage.getItem("users")) || [];
+
+const saveUsers = (list) => localStorage.setItem("users", JSON.stringify(list));
+
+// kho
+function getKho() {
+  return JSON.parse(localStorage.getItem("imports")) || [];
+}
+
+function saveKho(imports) {
+  localStorage.setItem("imports", JSON.stringify(imports));
+}
+
+// ==================== QUẢN LÝ KHO ====================
+
+// ==== KHỞI TẠO ====
+renderInventory(getProducts(), currentPageInventory);
 
 // ==================== QUẢN LÝ SẢN PHẨM ====================
 let currentPage = 1;
@@ -1276,7 +1463,9 @@ function filterProducts() {
   }
 
   if (type && type !== "all") {
-    products = products.filter((p) => p.cate === type);
+    products = products.filter(
+      (p) => p.cate.toUpperCase() === type.toUpperCase()
+    );
   }
 
   filteredProducts = products; // Cập nhật danh sách sau khi lọc
@@ -1316,7 +1505,6 @@ function loadTypeOptions() {
 }
 
 // ====================== store ================
-// ==== CẤU HÌNH PHÂN TRANG ====
 let currentPageStore = 1;
 const itemsPerPageStore = 6; // số sản phẩm mỗi trang
 let filteredStore = getProducts();
@@ -1444,20 +1632,27 @@ function renderPaginationStore(products) {
 // ==== BỘ LỌC ====
 
 function applyFilter() {
-  const filterType = document.getElementById("filterStore").value;
+  const filterType = document.getElementById("store-filterType").value;
+  const filterPrice = document.getElementById("filterStore").value;
   const inputs = document.querySelectorAll(".input-store");
   const from = Number(inputs[0].value) || 0;
   const to = Number(inputs[1].value) || Infinity;
 
   let list = getProducts();
 
-  if (filterType === "cost") {
+  // Lọc theo loại
+  if (filterType !== "all") {
+    list = list.filter(
+      (p) => p.cate.toUpperCase() === filterType.toUpperCase()
+    );
+  }
+  if (filterPrice === "cost") {
     list = list.filter((p) => p.costPrice >= from && p.costPrice <= to);
-  } else if (filterType === "profit") {
+  } else if (filterPrice === "profit") {
     list = list.filter(
       (p) => (p.profitPercent ?? 0) >= from && (p.profitPercent ?? 0) <= to
     );
-  } else if (filterType === "price") {
+  } else if (filterPrice === "price") {
     list = list.filter((p) => p.price >= from && p.price <= to);
   }
 
@@ -1466,6 +1661,10 @@ function applyFilter() {
   renderStore(filteredStore, currentPageStore);
 }
 
+document
+  .getElementById("store-filterType")
+  .addEventListener("change", applyFilter);
+
 document.getElementById("filterStore").addEventListener("change", applyFilter);
 document.querySelectorAll(".input-store").forEach((i) => {
   i.addEventListener("input", applyFilter);
@@ -1473,6 +1672,7 @@ document.querySelectorAll(".input-store").forEach((i) => {
 
 // Nút reset
 document.querySelector(".resetStore").addEventListener("click", () => {
+  document.getElementById("store-filterType").value = "all";
   document.querySelectorAll(".input-store").forEach((i) => (i.value = ""));
   document.getElementById("filterStore").value = "all";
   filteredStore = getProducts();
@@ -1597,13 +1797,7 @@ document
 
       const current = parseFloat(profitCell.textContent) || 0;
       profitCell.innerHTML = `
-      <input type="number"
-           class="category-profit-input"
-           value="${current}"
-           min="0"
-           max="100"
-           style="width:64px;">
-      `;
+      <input type="number" class="category-profit-input" value="${current}" min="0" style="width:64px;">`;
       actionCell.innerHTML = `
       <button class="btn-small btn-save-category" data-cate="${cate}">ok</button>
       <button class="btn-small btn-cancel-category" data-cate="${cate}">X</button>
@@ -1638,7 +1832,10 @@ document
       // Cập nhật lại tất cả sản phẩm thuộc category này
       const products = getProducts();
       products.forEach((p) => {
-        if (p.cate === cate && (p.profitPercent || 0) < value) {
+        if (
+          p.cate.toUpperCase() === cate.toUpperCase() &&
+          (p.profitPercent || 0) < value
+        ) {
           p.profitPercent = value;
           p.price = Math.round(p.costPrice * (1 + value / 100));
         }
@@ -1670,80 +1867,6 @@ function updateSummary() {
   document.querySelector("#outStock").textContent = `${out} sản phẩm`;
 }
 
-// ======== Cập nhật trạng thái đơn ========
-updateStatusBtn.addEventListener("click", () => {
-  if (!editingOrderId) return;
-
-  const newStatus = orderStatusSelect.value;
-  const orders = getOrders();
-  const order = orders.find(
-    (o) => o.id.toString() === editingOrderId.toString()
-  );
-  if (!order) return;
-  // Nếu chuyển sang "Completed" và chưa trừ kho
-  if (order.status !== "Completed" && newStatus === "Completed") {
-    const products = getProducts();
-    const ware = getKho();
-    order.items.forEach((item) => {
-      const prod = products.find((p) => p.productId === item.id);
-      // console.log(prod);
-      if (prod) {
-        prod.quantity -= item.quantity;
-        if (prod.quantity < 0) prod.quantity = 0;
-      }
-    });
-
-    saveProducts(products);
-    renderProducts(); // Cập nhật bảng sản phẩm
-    renderImports();
-    renderInventory();
-  }
-
-  order.status = newStatus;
-  saveOrders(orders);
-  renderOrders();
-
-  orderModal.style.display = "none";
-  document.body.style.overflow = "auto";
-  editingOrderId = null;
-});
-
-// ======== Lọc và tìm kiếm ========
-function filterOrders() {
-  const from = document.getElementById("fromDate").value;
-  const to = document.getElementById("toDate").value;
-  const status = document.getElementById("statusFilter").value;
-  const keyword = document.getElementById("searchOrder").value.toLowerCase();
-
-  const filtered = getOrders().filter((order) => {
-    const matchDate =
-      (!from || order.date >= from) && (!to || order.date <= to);
-    const matchStatus = status ? order.status === status : true;
-    const matchKeyword =
-      order.customer.toLowerCase().includes(keyword) ||
-      order.items.some((i) => i.name.toLowerCase().includes(keyword));
-    return matchDate && matchStatus && matchKeyword;
-  });
-
-  renderOrders(filtered);
-}
-
-document.getElementById("fromDate").addEventListener("change", filterOrders);
-document.getElementById("toDate").addEventListener("change", filterOrders);
-document
-  .getElementById("statusFilter")
-  .addEventListener("change", filterOrders);
-document.getElementById("searchOrder").addEventListener("input", filterOrders);
-
-document.querySelector(".resetorder").addEventListener("click", () => {
-  document.getElementById("fromDate").value = "";
-  document.getElementById("toDate").value = "";
-  document.getElementById("statusFilter").value = "";
-  document.getElementById("searchOrder").value = "";
-
-  renderOrders(getOrders());
-});
-
 // ====== TÌM KIẾM REALTIME ======
 document.getElementById("searchImport").addEventListener("input", () => {
   const keyword = document.getElementById("searchImport").value.toLowerCase();
@@ -1767,134 +1890,6 @@ function attachAddMoreEvents() {
     });
   });
 }
-
-// USERS MANAGEMENT JS
-
-function openUserModal(user = null) {
-  userModal.style.display = "flex";
-  if (user) {
-    document.getElementById("u_username").value = user.username;
-    document.getElementById("u_username").disabled = true; // không Edit username
-    document.getElementById("u_name").value = user.name || "";
-    document.getElementById("u_email").value = user.email || "";
-    document.getElementById("u_phone").value = user.phoneNumber || "";
-    document.getElementById("u_role").value = user.role || "user";
-    editUsername = user.username;
-  }
-}
-function closeUserModal() {
-  userModal.style.display = "none";
-  editUsername = null;
-  userForm.reset();
-}
-
-// EVENT: search
-if (searchUserInput && filteruser) {
-  searchUserInput.addEventListener("input", () => {
-    renderUsers(searchUserInput.value, filteruser.value);
-  });
-  filteruser.addEventListener("change", () => {
-    renderUsers(searchUserInput.value, filteruser.value);
-  });
-}
-
-userCancel.addEventListener("click", () => closeUserModal());
-
-// EVENT: user form submit
-userForm.addEventListener("submit", (ev) => {
-  ev.preventDefault();
-  const username = document.getElementById("u_username").value.trim();
-  const name = document.getElementById("u_name").value.trim();
-  const email = document.getElementById("u_email").value.trim();
-  const phone = document.getElementById("u_phone").value.trim();
-  const role = document.getElementById("u_role").value;
-
-  const users = getUsers();
-
-  if (editUsername) {
-    // edit existing
-    const idx = users.findIndex((u) => u.username === editUsername);
-    if (idx === -1) {
-      message("Người dùng không tồn tại");
-      closeUserModal();
-      return;
-    }
-    users[idx] = { ...users[idx], name, email, phoneNumber: phone, role };
-    saveUsers(users);
-    renderUsers(searchUserInput.value);
-    closeUserModal();
-    return;
-  }
-
-  // add new: kiểm tra trùng username
-  if (users.some((u) => u.username === username)) {
-    return message("Username đã tồn tại, chọn username khác.");
-  }
-  // password mặc định '123' (bạn có thể đặt khác)
-  users.push({
-    username,
-    password: "123",
-    role,
-    name,
-    email,
-    phoneNumber: phone,
-    locked: false,
-  });
-  saveUsers(users);
-  renderUsers(searchUserInput.value);
-  closeUserModal();
-});
-
-// Delegation: xử lý các nút trong bảng user
-userTableBody.addEventListener("click", (e) => {
-  const btn = e.target.closest("button");
-  if (!btn) return;
-  const username = btn.dataset.username;
-  if (!username) return;
-
-  const users = getUsers();
-  const idx = users.findIndex((u) => u.username === username);
-  if (idx === -1) {
-    message("Người dùng không tồn tại");
-    return;
-  }
-
-  if (btn.classList.contains("btn-reset")) {
-    openConfirm(
-      "Reset mật khẩu",
-      `Đặt lại mật khẩu của ${username} về '123'?`,
-      () => {
-        users[idx].password = "123";
-        saveUsers(users);
-        message(`Đã reset mật khẩu ${username} -> 123`);
-        renderUsers(searchUserInput.value);
-      }
-    );
-  } else if (btn.classList.contains("btn-toggle-lock")) {
-    const locking = !users[idx].locked;
-    openConfirm(
-      locking ? "Khoá tài khoản" : "Mở khoá tài khoản",
-      `${locking ? "Khoá" : "Mở khoá"} tài khoản ${username}?`,
-      () => {
-        users[idx].locked = locking;
-        saveUsers(users);
-        renderUsers(searchUserInput.value);
-      }
-    );
-  } else if (btn.classList.contains("btn-edit")) {
-    openUserModal(users[idx]);
-  } else if (btn.classList.contains("btn-delUser")) {
-    openConfirm(
-      "Delete người dùng",
-      `Bạn có chắc muốn Delete ${username}?`,
-      () => {
-        users.splice(idx, 1);
-        saveUsers(users);
-        renderUsers(searchUserInput.value);
-      }
-    );
-  }
-});
 
 function close_repo() {
   document.querySelector(".sidebar").classList.toggle("open");
@@ -1928,6 +1923,7 @@ loadTypeOptions();
 renderProducts();
 renderfilter(filterProductsType);
 renderfilter(document.getElementById("filterType-inven"));
+renderfilter(document.getElementById("store-filterType"));
 renderOrders();
 renderImports();
 renderInventory();

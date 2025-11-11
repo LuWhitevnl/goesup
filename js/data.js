@@ -1,4 +1,4 @@
-const app_version = "1.1.105";
+const app_version = "1.1.101";
 
 const savedVersion = localStorage.getItem("appversion");
 if (savedVersion !== app_version) {
@@ -60,7 +60,7 @@ if (!localStorage.getItem("category")) {
     { type: "Women", cate: "Tops-Blouses", profitPercent: 50 },
     { type: "Women", cate: "Bottoms", profitPercent: 50 },
     { type: "Women", cate: "Outerwear", profitPercent: 50 },
-    { type: "Men", cate: "T-shirts-polos", profitPercent: 40 },
+    { type: "Men", cate: "T-Shirts-Polos", profitPercent: 40 },
     { type: "Men", cate: "Shirts", profitPercent: 40 },
     { type: "Men", cate: "Pants-Trousers", profitPercent: 40 },
     { type: "Men", cate: "Shorts", profitPercent: 40 },
