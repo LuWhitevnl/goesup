@@ -394,7 +394,8 @@ ul.root li a i {
 }
 
 #suggestList {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
   gap: 10px;
   flex-wrap: wrap;
   margin-bottom: 20px;

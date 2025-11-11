@@ -60,7 +60,7 @@ openBtn?.addEventListener("click", () => {
   toggleActive(searchBox, true);
   toggleActive(closeBtn, true);
   toggleActive(overlay, true);
-  setTimeout(() => focusInput("search-input"), 100);
+  focusInput("search-input");
 });
 
 closeBtn?.addEventListener("click", () => {
@@ -126,7 +126,8 @@ searchInput.addEventListener("input", (e) => {
       p.name.toLowerCase().includes(keyword) ||
       p.cate.toLowerCase().includes(keyword) ||
       p.type.toLowerCase().includes(keyword) ||
-      p.collection?.toLowerCase().includes(keyword)
+      p.collection?.toLowerCase().includes(keyword) ||
+      p.price.toString().includes(keyword)
   );
 
   if (matches.length === 0) {

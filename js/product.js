@@ -1,8 +1,7 @@
 // Ẩn/hiện từng dropdown
-document.querySelectorAll(".filter-group").forEach((toggle) => {
+document.querySelectorAll(".filter-toggle").forEach((toggle) => {
   toggle.addEventListener("click", () => {
-    // console.log(1);
-    toggle.classList.toggle("active");
+    toggle.closest(".filter-group").classList.toggle("active");
   });
 });
 
@@ -126,7 +125,12 @@ function filterProducts() {
   const sizeSelected = Array.from(
     document.querySelectorAll(`.filter-size input[type="checkbox"]:checked`)
   ).map((i) => i.value);
-  console.log(sizeSelected);
+  const minPriceInput = document.getElementById("min-price");
+  const maxPriceInput = document.getElementById("max-price");
+  const minPrice = parseFloat(minPriceInput.value) || 0;
+  const maxPrice = parseFloat(maxPriceInput.value) || Infinity;
+
+  // console.log(sizeSelected);
   let result = filteredProducts.filter((p) => {
     let matchPrice = true;
     let matchSize = true;
@@ -143,10 +147,14 @@ function filterProducts() {
       matchPrice = price >= 5000000 && price <= 10000000;
     else if (priceRange === "10000+") matchPrice = price > 10000000;
 
+    if (minPrice || maxPrice !== Infinity) {
+      matchPrice = matchPrice && price >= minPrice && price <= maxPrice;
+    }
+
     return matchPrice && matchSize;
   });
   currentPage = 1;
-  console.log(filteredProducts);
+  // console.log(filteredProducts);
   renderProducts(result, currentPage);
 }
 
@@ -162,6 +170,23 @@ document
       filterProducts();
     });
   });
+
+document.getElementById("apply-price").addEventListener("click", () => {
+  const minPrice = document.getElementById("min-price").value;
+  const maxPrice = document.getElementById("max-price").value;
+  if (minPrice && maxPrice && parseFloat(minPrice) > parseFloat(maxPrice)) {
+    message("Minimum price cannot be greater than maximum price.");
+    document.getElementById("min-price").focus();
+    return;
+  }
+  if (minPrice < 0 || maxPrice < 0) {
+    message("Price cannot be negative.");
+    document.getElementById("min-price").focus();
+    return;
+  }
+  filterProducts();
+});
+
 const urlPara = new URLSearchParams(window.location.search);
 const genderPara = urlPara.get("cate");
 const subPara = urlPara.get("sub");
@@ -257,6 +282,7 @@ function sortProducts(option) {
 document.querySelector(".reset-filter").addEventListener("click", () => {
   document.querySelectorAll(".filter-options input").forEach((el) => {
     el.checked = false;
+    el.value = "";
   });
   // filteredProducts = store;
   currentPage = 1;
@@ -482,4 +508,14 @@ function openProductDetail(productId) {
   document.querySelector(".product-detail-page").style.display = "block";
 
   renderProductDetail(product);
+}
+
+function message(text) {
+  const msg = document.createElement("div");
+  msg.textContent = text;
+  msg.classList.add("toast");
+  msg.style.cssText =
+    "position:fixed;top:100px;right:20px;background:#000;color:#fff;padding:8px 16px;border-radius:8px;opacity:0.9;z-index:9999;";
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 1500);
 }

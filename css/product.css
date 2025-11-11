@@ -189,32 +189,30 @@
   margin-right: 6px;
 }
 
-.colors .color-box {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  margin-right: 6px;
+.custom-price {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.custom-price input {
+  width: 100%;
+  padding: 6px 8px;
   border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
 }
-.black {
+
+.custom-price button {
+  padding: 6px 12px;
+  border: none;
+  outline: none;
   background: #000;
-}
-.white {
-  background: #fff;
-  border: 1px solid #aaa;
-}
-.red {
-  background: #e53935;
-}
-.blue {
-  background: #1e88e5;
-}
-.green {
-  background: #43a047;
-}
-.gray {
-  background: #9e9e9e;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 .reset-filter {

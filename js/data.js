@@ -1,4 +1,4 @@
-const app_version = "1.1.102";
+const app_version = "1.1.105";
 
 const savedVersion = localStorage.getItem("appversion");
 if (savedVersion !== app_version) {
@@ -1937,13 +1937,15 @@ if (!localStorage.getItem("orders")) {
       items: [
         {
           productId: "P001",
-          name: "Blue Cotton T-shirt",
-          type: "Men",
-          color: "blue",
+          name: "Tiered Gown with Graphic Ribbon Print",
+          type: "Women",
+          cate: "Dresses",
+          collection: "none",
+          price: 850000,
+          color: "black",
+          image: "./assets/img/Womenfashion/Dresses/1.1.webp",
           size: "M",
           quantity: 1,
-          image: "./assets/20240827_99qstqYiE1.png",
-          price: 250000,
         },
       ],
       total: 250000,
