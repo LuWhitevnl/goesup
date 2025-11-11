@@ -79,6 +79,42 @@ document.querySelectorAll(".logo-box").forEach((b) => {
   });
 });
 
+// =========== get set ================
+// type
+const getTypes = () => JSON.parse(localStorage.getItem("productTypes")) || [];
+const saveTypes = (data) =>
+  localStorage.setItem("productTypes", JSON.stringify(data));
+const getCates = () => JSON.parse(localStorage.getItem("category")) || [];
+const saveCates = (data) =>
+  localStorage.setItem("category", JSON.stringify(data));
+
+// products
+const getProducts = () => JSON.parse(localStorage.getItem("products")) || [];
+const saveProducts = (data) =>
+  localStorage.setItem("products", JSON.stringify(data));
+
+// order
+const getOrders = () => JSON.parse(localStorage.getItem("orders")) || [];
+const saveOrders = (data) =>
+  localStorage.setItem("orders", JSON.stringify(data));
+
+// imports
+const getData = (key) => JSON.parse(localStorage.getItem(key)) || [];
+const setData = (key, data) => localStorage.setItem(key, JSON.stringify(data));
+
+const getUsers = (key) => JSON.parse(localStorage.getItem("users")) || [];
+
+const saveUsers = (list) => localStorage.setItem("users", JSON.stringify(list));
+
+// kho
+function getKho() {
+  return JSON.parse(localStorage.getItem("imports")) || [];
+}
+
+function saveKho(imports) {
+  localStorage.setItem("imports", JSON.stringify(imports));
+}
+
 // =========================== Dashboard ===========================
 const cardrevenue = document.querySelector(".revenue p");
 const CardnewOrder = document.querySelector(".newOrder p");
@@ -692,7 +728,7 @@ orderModal.addEventListener("click", (e) => {
   }
 });
 
-// ============= DOM imports ================
+// ==================== QUẢN LÝ NHẬP KHO ====================
 const importTable = document.querySelector("#importTable tbody");
 const importModal = document.getElementById("importModal");
 const importForm = document.getElementById("importForm");
@@ -775,6 +811,56 @@ document.getElementById("openAddImport").addEventListener("click", () => {
 document.getElementById("cancelImport").addEventListener("click", () => {
   importModal.style.display = "none";
 });
+
+function filterImports() {
+  const from = document.getElementById("importFromDate").value;
+  const to = document.getElementById("importToDate").value;
+  const status = document.getElementById("importStatusFilter").value;
+  const keyword = document.getElementById("searchImport").value.toLowerCase();
+  const filtered = getData("imports").filter((imp) => {
+    const matchDate = (!from || imp.date >= from) && (!to || imp.date <= to);
+    const matchStatus = status === "all" ? true : imp.status === status;
+    const matchKeyword = imp.productName.toLowerCase().includes(keyword);
+    return matchDate && matchStatus && matchKeyword;
+  });
+  renderImports(filtered);
+}
+
+// Add event listeners for filtering inputs
+document
+  .getElementById("importFromDate")
+  .addEventListener("change", filterImports);
+document
+  .getElementById("importToDate")
+  .addEventListener("change", filterImports);
+document
+  .getElementById("importStatusFilter")
+  .addEventListener("change", filterImports);
+document
+  .getElementById("searchImport")
+  .addEventListener("input", filterImports);
+document.querySelector(".resetImport").addEventListener("click", () => {
+  document.getElementById("importFromDate").value = "";
+  document.getElementById("importToDate").value = "";
+  document.getElementById("importStatusFilter").value = "all";
+  document.getElementById("searchImport").value = "";
+  filterImports();
+});
+
+/* ====== SỰ KIỆN NHẬP THÊM ====== */
+function attachAddMoreEvents() {
+  document.querySelectorAll(".btn-addmore").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const productId = btn.dataset.id;
+      const products = getProducts();
+      const product = products.find((p) => p.id === productId);
+      if (!product) return message("Không tìm thấy sản phẩm");
+
+      openAddImport(productId);
+      renderInventory();
+    });
+  });
+}
 
 let currentPageInventory = 1;
 const itemsPerPageInventory = 6;
@@ -1095,44 +1181,6 @@ confirmOk.addEventListener("click", () => {
   if (typeof confirmCallback === "function") confirmCallback();
   closeConfirm();
 });
-
-// =========== get set ================
-// type
-const getTypes = () => JSON.parse(localStorage.getItem("productTypes")) || [];
-const saveTypes = (data) =>
-  localStorage.setItem("productTypes", JSON.stringify(data));
-const getCates = () => JSON.parse(localStorage.getItem("category")) || [];
-const saveCates = (data) =>
-  localStorage.setItem("category", JSON.stringify(data));
-
-// products
-const getProducts = () => JSON.parse(localStorage.getItem("products")) || [];
-const saveProducts = (data) =>
-  localStorage.setItem("products", JSON.stringify(data));
-
-// order
-const getOrders = () => JSON.parse(localStorage.getItem("orders")) || [];
-const saveOrders = (data) =>
-  localStorage.setItem("orders", JSON.stringify(data));
-
-// imports
-const getData = (key) => JSON.parse(localStorage.getItem(key)) || [];
-const setData = (key, data) => localStorage.setItem(key, JSON.stringify(data));
-
-const getUsers = (key) => JSON.parse(localStorage.getItem("users")) || [];
-
-const saveUsers = (list) => localStorage.setItem("users", JSON.stringify(list));
-
-// kho
-function getKho() {
-  return JSON.parse(localStorage.getItem("imports")) || [];
-}
-
-function saveKho(imports) {
-  localStorage.setItem("imports", JSON.stringify(imports));
-}
-
-// ==================== QUẢN LÝ KHO ====================
 
 // ==== KHỞI TẠO ====
 renderInventory(getProducts(), currentPageInventory);
@@ -1868,28 +1916,6 @@ function updateSummary() {
 }
 
 // ====== TÌM KIẾM REALTIME ======
-document.getElementById("searchImport").addEventListener("input", () => {
-  const keyword = document.getElementById("searchImport").value.toLowerCase();
-  const filtered = getData("imports").filter((i) =>
-    i.productName.toLowerCase().includes(keyword)
-  );
-  renderImports(filtered);
-});
-
-/* ====== SỰ KIỆN NHẬP THÊM ====== */
-function attachAddMoreEvents() {
-  document.querySelectorAll(".btn-addmore").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const productId = btn.dataset.id;
-      const products = getProducts();
-      const product = products.find((p) => p.id === productId);
-      if (!product) return message("Không tìm thấy sản phẩm");
-
-      openAddImport(productId);
-      renderInventory();
-    });
-  });
-}
 
 function close_repo() {
   document.querySelector(".sidebar").classList.toggle("open");

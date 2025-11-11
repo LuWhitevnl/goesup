@@ -24,7 +24,7 @@
 * {
   font-family: "Nunito Sans", sans-serif;
   box-sizing: border-box;
-  font-size: 62.5%;
+  /* font-size: 62.5%; */
 }
 
 html,
@@ -83,8 +83,7 @@ body {
   gap: 10px;
   padding: 10px 15px;
   border-radius: 15px;
-  /* background: var(--color-hover); */
-  /* box-shadow: var(--color-shadow); */
+  cursor: pointer;
 }
 
 /* --- COLLAPSED SIDEBAR --- */
@@ -1491,6 +1490,15 @@ b {
 
 #actionHis {
   margin: 10px 0;
+}
+
+.import-date input {
+  border: 1px solid #00000026;
+  background: #f3f3f5;
+  color: #000;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 1rem;
 }
 
 .btn-addmore {

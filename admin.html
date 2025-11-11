@@ -740,14 +740,30 @@
           </div>
 
           <!-- Danh sách phiếu nhập -->
+          <h2 class="his">Lich Su Nhap</h2>
           <div class="actions" id="actionHis">
-            <h2 class="his">Lich Su Nhap</h2>
             <input
               type="text"
               placeholder="Tìm kiếm phiếu nhập..."
               class="search-box"
               id="searchImport"
             />
+            <!-- trang thai -->
+            <select class="filter" id="importStatusFilter">
+              <option value="all">Tất cả trạng thái</option>
+              <option value="Completed">Completed</option>
+              <option value="Pending">Pending</option>
+            </select>
+            <!-- ngay nhap -->
+            <div class="import-date">
+              <input type="date" id="importFromDate" />
+            </div>
+            <div class="import-date">
+              <input type="date" id="importToDate" />
+            </div>
+            <button class="refresh resetImport">
+              <span class="material-symbols-outlined"> refresh </span>
+            </button>
           </div>
           <section class="import-list product-list">
             <table id="importTable">
